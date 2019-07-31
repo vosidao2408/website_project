@@ -13,7 +13,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth'=>'verified']);
+        $this->middleware(['auth' => 'verified']);
     }
 
     /**
@@ -23,9 +23,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $role = User::value('role');
-        dd($role);
         return view('home');
-
     }
 }

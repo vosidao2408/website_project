@@ -17,6 +17,14 @@ Route::get('/', function () {
 
 Auth::routes(['verify' => true]);
 
+Route::get('/admin','HomeController@index')->middleware('admin');
 
+Route::get('/home', 'HomeController@index');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::middleware('auth')->group(function(){
+    Route::get('home/user/','UserController@index');
+    Route::get('home/user/edit','UserController@edit');
+    Route::put('home/user/','UserController@update');
+});
+
+Route::resource('/admin/users', 'AdminUserController')->middleware('admin');

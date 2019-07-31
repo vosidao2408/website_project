@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('button')
+<a class="dropdown-item" href="{{asset('home/user/')}}">Information</a>
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
