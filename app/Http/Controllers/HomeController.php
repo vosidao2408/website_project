@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+
 class HomeController extends Controller
 {
     /**
@@ -23,9 +24,12 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $users = User::paginate(10);
         $role = User::value('role');
-        dd($role);
-        return view('home');
-
+        if ($role == 0) {
+            return view('admin.users.index', ['users' => $users]);
+        } else {
+            return view('home');
+        }
     }
 }
