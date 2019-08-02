@@ -61,26 +61,3 @@
 .Font--custom {
     font-family: "Playfair Display", Georgia, "Times New Roman", serif;
 }
-
-.showTable {
-    table-layout: fixed;
-    width: 100%;
-}
-
-.showTable .row-ID {
-    width: 5%;
-}
-
-.showTable .row-name {
-    width: 15%;
-}
-
-.showTable .row-email {
-    width: 20%;
-}
-
-#td-pass {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis
-}

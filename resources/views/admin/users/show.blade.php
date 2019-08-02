@@ -11,12 +11,12 @@
   <section class="content">
     <div class="row">
       <div class="col-md-12">
-        <table class="table table-hover table-bordered showTable">
+          <table class="table table-hover table-bordered">
             <thead>
                 <tr class="text-center">
-                    <th scope="col" class="row-ID">#</th>
-                    <th scope="col" class="row-name">Name</th>
-                    <th scope="col" class="row-email">Email</th>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
                     <th scope="col">Password</th>
                     <th scope="col">Created Date</th>
                     <th scope="col">Updated Date</th>
@@ -25,10 +25,10 @@
             </thead>
             <tbody>
                 <tr class="text-center">
-                    <th>{{$user->id}}</th>
+                    <th scope="row">{{$user->id}}</th>
                     <td>{{$user->name}}</td>
                     <td>{{$user->email}}</td>
-                    <td id="td-pass">{{$user->password}}</td>
+                    <td>{{$user->password}}</td>
                     <td>{{$user->created_at}}</td>
                     <td>{{$user->updated_at}}</td>
                     <td class="d-flex justify-content-around align-items-center">
@@ -40,7 +40,7 @@
                         </td>
                     </tr>
             </tbody>
-        </table>
+          </table>
       </div>
     </div>
   </section>

@@ -1,7 +1,7 @@
 <div class="container-fluid Header--height bg-light">
     <div class="row h-100 border-bottom d-flex align-items-center">
         <div class="col-md-2 d-none d-md-flex text-muted justify-content-center">
-            <h6 class="font-weight-normal">Admin Page</h6>
+            <h6 class="font-weight-normal"><a class="text-decoration-none" href="{{route('user.index')}}"> Admin Page</a></h6>
         </div>
         <div class="col-md-10 col-12 d-flex justify-content-center">
             <h1><a class="Font--custom font-weight-bold text-dark" style="text-decoration: none;" href=""> Bantro</a></h1>

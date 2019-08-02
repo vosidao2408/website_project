@@ -18,6 +18,8 @@ class UsersTableSeeder extends Seeder
                 'name' => $faker->name,
                 'email' => $faker->email,
                 'password' => $faker->password,
+                'phone' => $faker->tollFreePhoneNumber,
+                'image_path' => $faker->imageUrl($width = 640, $height = 480)
             ]);
         }
     }

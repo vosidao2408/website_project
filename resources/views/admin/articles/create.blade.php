@@ -1,5 +1,9 @@
 @extends('admin.layouts.app')
 
+@section('headcripts')
+    <script src="{{asset('ckeditor/ckeditor.js')}}"></script>
+    <script src="{{asset('ckfinder/ckfinder.js')}}"></script>
+@endsection
 @section('main-content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -44,4 +48,13 @@
     </div>
   </section>
 </div>
+@endsection
+
+@section('ckeditor')
+<script>
+    CKEDITOR.replace('editor', {
+        filebrowserBrowseUrl: "{{asset('/ckfinder/ckfinder.html')}}",
+        filebrowserUploadUrl: "{{asset('/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files')}}"
+    });
+</script>
 @endsection

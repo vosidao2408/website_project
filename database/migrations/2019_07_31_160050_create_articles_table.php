@@ -21,6 +21,10 @@ class CreateArticlesTable extends Migration
             $table->string('contact');
             $table->string('status')->default('Empty');
             $table->string('image_path');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('district_id');
+            $table->foreign('district_id')->references('id')->on('districts')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -22,4 +22,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['namespace' => 'Admin'], function () {
     Route::resource('admin/user', 'UserController');
     Route::resource('admin/article', 'ArticleController');
+    Route::resource('admin/district', 'DistrictController');
 });

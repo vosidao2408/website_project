@@ -13,11 +13,14 @@
                 <p class="text-muted">Created_at: {{$article->created_at}}</p>
             @endif
             <hr>
-            <h6 class="">Address: </h6><p class="font-italic font-weight-bold">{{$article->address}}</p>
-            <h6 class="">Contact: </h6><p class="font-italic font-weight-bold">{{$article->contact}}</p>
+            <h6>Address: </h6><p class="font-italic font-weight-bold">{{$article->address}}</p>
+            <h6>District: </h6><p class="font-italic font-weight-bold">{{$article->district->name}}</p>
+            <h6>Contact: </h6><p class="font-italic font-weight-bold">{{$article->contact}}</p>
             <hr>
             <p class="font-weight-bolder">{{$article->content}}</p>
             {{--  {!!$article->content!!}  --}}
+            <hr>
+            <p class="text-muted font-italic">Posted by: {{$article->user->name}}</p>
       </div>
     </div>
     <div class="row mt-5">

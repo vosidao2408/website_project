@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Article;
+use App\District;
 
 class ArticleController extends Controller
 {
@@ -38,7 +39,8 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $article = New Article;
+        $article->title = $request->title;
     }
 
     /**
@@ -49,8 +51,8 @@ class ArticleController extends Controller
      */
     public function show($id)
     {
-        $article = Article::where('id', $id)->get();
-        return view('admin.articles.show', ['article' => $article[0]]);
+        $article = Article::find($id);
+        return view('admin.articles.show', ['article' => $article]);
     }
 
     /**
