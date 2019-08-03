@@ -22,9 +22,11 @@ Route::get('/admin','HomeController@index')->middleware('admin');
 Route::get('/home', 'HomeController@index');
 
 Route::middleware('auth')->group(function(){
-    Route::get('home/user/','UserController@index');
-    Route::get('home/user/edit','UserController@edit');
-    Route::put('home/user/','UserController@update');
+    Route::get('home/user/','AuthorUserController@index');
+    Route::get('home/user/edit/','AuthorUserController@edit');
+    Route::put('home/user/','AuthorUserController@update');
 });
+
+Route::resource('home/posts','AuthorPostController')->middleware('auth');
 
 Route::resource('/admin/users', 'AdminUserController')->middleware('admin');

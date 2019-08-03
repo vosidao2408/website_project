@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
+@section('nav-button')
+@auth
+<a  href="{{asset('/home/posts')}}">Show post</a>
+@endauth
+@endsection
+
 @section('button')
 <a class="dropdown-item" href="{{asset('home/user/')}}">Information</a>
 @endsection

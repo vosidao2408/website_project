@@ -39,6 +39,6 @@ class DeleteUnverifiedUsers extends Command
      */
     public function handle()
     {
-        $user = User::where('email_verified_at',null)->where('created_at','<',Carbon::now()->subMinutes(7))->delete();
+        $user = User::where('email_verified_at',null)->where('created_at','<',Carbon::now()->subMinutes(60))->delete();
     }
 }
