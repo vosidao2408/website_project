@@ -21,6 +21,7 @@ class CreateArticlesTable extends Migration
             $table->string('address');
             $table->string('contact');
             $table->string('price');
+            $table->string('status')->default('Con Trong');
             $table->string('image_path');
             $table->integer('id_user')->unsigned();
             $table->integer('id_district')->unsigned();

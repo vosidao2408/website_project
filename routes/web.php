@@ -20,3 +20,5 @@ Auth::routes(['verify' => true]);
 
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/index','SearchController@index')->name('index');
+Route::get('/index/search','SearchController@search')->name('search');
