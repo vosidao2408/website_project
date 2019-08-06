@@ -11,7 +11,40 @@
 <script src="{{asset('ckfinder/ckfinder.js')}}"></script>
 @endsection
 
+@section('button')
+<a class="dropdown-item" href="{{asset('home/user/')}}" data-toggle="modal" data-target="#information">Information</a>
+<a class="dropdown-item" href="{{asset('home/user/editpass')}}">Change Password</a>
+@endsection
+
 @section('content')
+<div class="modal fade" id="information" tabindex="-1" role="dialog" aria-labelledby="informationLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="informationLabel">Information</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body d-flex">
+            <div>
+                <img src="" alt="No picture here">
+            </div>
+            <div class="ml-2">
+            <p><b>Name: </b>{{$user->name}}</p>
+            <p><b>Email: </b>{{$user->email}}</p>
+            <p><b>Phone Number: </b>{{$user->phone}}</p>
+            </div>
+        </div>
+        <div class="modal-footer d-flex justify-content-between">
+          <form method="GET" action="{{asset('home/user/edit')}}">
+            <button type="submit" class="btn btn-primary">Update Information</button>
+          </form>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 <div class="container">
     <form method="POST" action="{{asset('home/posts/')}}">
         {{ csrf_field() }}
@@ -20,9 +53,13 @@
                 <label for="">Title</label>
                 <input class="form-control" type="text" name="title">
             </div>
-            <div class="form-group col-12">
+            <div class="form-group col-md-8">
                 <label for="">Contact</label>
                 <input class="form-control" type="text" name="contact">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="">Price</label>
+                <input class="form-control" type="text" name="price">
             </div>
             <div class="form-group col-md-8">
                 <label for="">Address</label>

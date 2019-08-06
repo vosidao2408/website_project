@@ -29,21 +29,21 @@
         @method('PUT')
         @csrf
         <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Name</label>
+            <label class="col-sm-2 col-form-label">Old Password</label>
             <div class="col-sm-10">
-                <input type="text" name="name" class="form-control" value="{{$user->name}}">
+                <input type="password" name="oldPassword" class="form-control">
             </div>
         </div>
         <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Email</label>
+            <label class="col-sm-2 col-form-label">New Password</label>
             <div class="col-sm-10">
-                <input type="email" name="email" class="form-control" value="{{$user->email}}">
+                <input type="password" name="password" class="form-control">
             </div>
         </div>
         <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Phone Number</label>
+            <label class="col-sm-2 col-form-label">Confirm New Password</label>
             <div class="col-sm-10">
-                <input type="text" name="phone" class="form-control">
+                <input type="password" name="confirmPassword" class="form-control">
             </div>
         </div>
         <button type="submit" class="col btn btn-primary">Submit</button>

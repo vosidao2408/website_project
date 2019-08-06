@@ -25,6 +25,7 @@ class ArticlesTableSeeder extends Seeder
                 'content' => $faker->paragraph,
                 'address' => $faker->address,
                 'contact' => $faker->randomNumber($nbDigits = NULL, $strict = false),
+                'price' => $faker->ean8,
                 'status' => 'Còn Trống',
                 'image_path' => $faker->image($dir = null, $width = 640, $height = 480, 'cats', false),
                 'id_district'=>$districtIdRand,

@@ -4,17 +4,23 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Auth;
 use App\User;
 
 class AuthorUserController extends Controller
 {
+    // public static function checkValidate($request)
+    // {
+    //     $request->validate([
+    //         'name' =>'required',
+    //         'email' => 'required|unique:users',
+
+    //     ]);
+    // }
+
+
     public function index()
     {
         //
-        $email = Auth::user()->email;
-        $user = User::where('email',$email)->first();
-        return view('users.show',['user'=>$user]);
     }
 
     /**
@@ -25,8 +31,7 @@ class AuthorUserController extends Controller
      */
     public function edit()
     {
-        $email = Auth::user()->email;
-        $user = User::where('email',$email)->first();
+        $user = User::authUser();
         return view('users.edit',['user'=>$user]);
     }
 
@@ -40,24 +45,50 @@ class AuthorUserController extends Controller
     public function update(Request $request)
     {
         //
-        $email = Auth::user()->email;
-        $user = User::where('email',$email)->first();
+        
+        $user = User::authUser();
         if ($user->email == $request->email) {
-            $user->name = $request->name;
-            $user->password = Hash::make($request->password);
-            $user->save();
-            return view('users.show',['user'=>$user]);
+        $user->name = $request->name;
+        $user->phone = $request->phone;
+        $user->picture = $request->picture;
+        $user->save();
+        return redirect('home/');
+            // return view('users.show',['user'=>$user]);
         } else {
-            $exist = User::where('email',$request->email)->exists();
-            if (!$exist) {
-                $user->name = $request->name;
-                $user->email = $request->email;
-                $user->password = Hash::make($request->password);
-                $user->save();
-                return view('users.show',['user'=>$user]);
-            }
-            return back()->with('status', 'Email ready exist! Please enter another Email!');
+        $exist = User::where('email',$request->email)->exists();
+        if (!$exist) {
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->phone = $request->phone;
+            $user->picture = $request->picture;
+            $user->save();
+            return redirect('home/');
+            // return view('users.show',['user'=>$user]);
         }
+        return back()->with('status', 'Email ready exist! Please enter another Email!');
+        }
+    }
+
+    public function editPassword()
+    {
+        return view('users.editPassword');
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $user = User::authUser();
+        if ($request->newPassword == $request->confirmPassword) {
+            if (Hash::check($request->password, $user->password)) {
+                if (!Hash::check($request->newPassword, $user->password)) {
+                    $user->password = Hash::make($request->newPassword);
+                    $user->save();
+                    return redirect('home/');
+                }
+                return back()->with('status','The new password cannot be identical to the old password!!');
+            }
+            return back()->with('status','Password is wrong!!');
+        }
+        return back()->with('status','Confirm password is wrong!!');
     }
 
 }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Article;
 use App\District;
+use App\User;
 
 class AuthorPostController extends Controller
 {
@@ -18,9 +19,9 @@ class AuthorPostController extends Controller
     public function index()
     {
         //
-        $id = Auth::user()->id;
-        $posts = Article::where('id_user',$id)->get();
-        return view('articles.index',['posts'=>$posts]);
+        $user = User::authUser(); 
+        $posts = Article::where('id_user',$user->id)->orderBy('status','asc')->get();
+        return view('articles.index',['posts'=>$posts,'user'=>$user]);
     }
 
     /**
@@ -30,8 +31,9 @@ class AuthorPostController extends Controller
      */
     public function create()
     {
+        $user = User::authUser(); 
         $districts = District::all();
-        return view('articles.create',['districts'=>$districts]);
+        return view('articles.create',['districts'=>$districts,'user'=>$user]);
     }
 
     /**
@@ -43,34 +45,21 @@ class AuthorPostController extends Controller
     public function store(Request $request)
     {
         $slug = $request->title;
-        $slug = preg_replace("/(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/", 'a', $slug);
-		$slug = preg_replace("/(è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ)/", 'e', $slug);
-		$slug = preg_replace("/(ì|í|ị|ỉ|ĩ)/", 'i', $slug);
-		$slug = preg_replace("/(ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ)/", 'o', $slug);
-		$slug = preg_replace("/(ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ)/", 'u', $slug);
-		$slug = preg_replace("/(ỳ|ý|ỵ|ỷ|ỹ)/", 'y', $slug);
-		$slug = preg_replace("/(đ)/", 'd', $slug);
-		$slug = preg_replace("/(À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ)/", 'A', $slug);
-		$slug = preg_replace("/(È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ)/", 'E', $slug);
-		$slug = preg_replace("/(Ì|Í|Ị|Ỉ|Ĩ)/", 'I', $slug);
-		$slug = preg_replace("/(Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ)/", 'O', $slug);
-		$slug = preg_replace("/(Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ)/", 'U', $slug);
-		$slug = preg_replace("/(Ỳ|Ý|Ỵ|Ỷ|Ỹ)/", 'Y', $slug);
-		$slug = preg_replace("/(Đ)/", 'D', $slug);
-		$slug = preg_replace("/(\“|\”|\‘|\’|\,|\!|\&|\;|\@|\#|\%|\~|\`|\=|\_|\'|\]|\[|\}|\{|\)|\(|\+|\^)/", '-', $slug);
-        $slug = preg_replace("/( )/", '-', $slug);
+        $slug = Article::slugConverter($slug);
         //save post
+        $user = User::authUser();
         $post = new Article;
         $post->title = $request->title;
         $post->slug = $slug;
         $post->content = $request->content;
         $post->contact = $request->contact;
         $post->address = $request->address;
+        $post->price = $request->price;
         $post->image_path = "something";
         $post->id_user = Auth::user()->id;
         $post->id_district = $request->district;
         $post->save();
-        return redirect()->route('posts.index',[$post]);
+        return redirect()->route('posts.index',[$post,$user]);
     }
 
     /**
@@ -82,10 +71,10 @@ class AuthorPostController extends Controller
     public function show($slug)
     {
         //
+        $user = User::authUser();
         $post = Article::where('slug',$slug)->first();
-        if ($post->id_user == Auth::user()->id) {
-            $district = District::where('id',$post->id_district)->first();
-            return view('articles.show',['post'=>$post,'district'=>$district]);
+        if ($post->id_user == $user->id) {
+            return view('articles.show',['post'=>$post,'user'=>$user]);
         }
         return back();
     }
@@ -96,12 +85,25 @@ class AuthorPostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function status(Request $request, $slug) 
+    {
+        $user = User::authUser();
+        $post = Article::where('slug',$slug)->first();
+        if ($post->id_user == $user->id) {
+            $post->status = $request->status;
+            $post->save();
+            return redirect('/home/posts');
+        }
+        return back();
+    }
+
     public function edit($slug)
     {
+        $user = User::authUser();
         $post = Article::where('slug',$slug)->first();
-        if ($post->id_user == Auth::user()->id) {
+        if ($post->id_user == $user->id) {
             $districts = District::all();
-            return view('articles.edit',['post'=>$post,'districts'=>$districts]);
+            return view('articles.edit',['post'=>$post,'districts'=>$districts,'user'=>$user]);
         }
         return back();
     }
@@ -116,33 +118,19 @@ class AuthorPostController extends Controller
     public function update(Request $request, $slug)
     {
         $slug = $request->title;
-        $slug = preg_replace("/(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/", 'a', $slug);
-		$slug = preg_replace("/(è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ)/", 'e', $slug);
-		$slug = preg_replace("/(ì|í|ị|ỉ|ĩ)/", 'i', $slug);
-		$slug = preg_replace("/(ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ)/", 'o', $slug);
-		$slug = preg_replace("/(ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ)/", 'u', $slug);
-		$slug = preg_replace("/(ỳ|ý|ỵ|ỷ|ỹ)/", 'y', $slug);
-		$slug = preg_replace("/(đ)/", 'd', $slug);
-		$slug = preg_replace("/(À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ)/", 'A', $slug);
-		$slug = preg_replace("/(È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ)/", 'E', $slug);
-		$slug = preg_replace("/(Ì|Í|Ị|Ỉ|Ĩ)/", 'I', $slug);
-		$slug = preg_replace("/(Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ)/", 'O', $slug);
-		$slug = preg_replace("/(Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ)/", 'U', $slug);
-		$slug = preg_replace("/(Ỳ|Ý|Ỵ|Ỷ|Ỹ)/", 'Y', $slug);
-		$slug = preg_replace("/(Đ)/", 'D', $slug);
-		$slug = preg_replace("/(\“|\”|\‘|\’|\,|\!|\&|\;|\@|\#|\%|\~|\`|\=|\_|\'|\]|\[|\}|\{|\)|\(|\+|\^)/", '-', $slug);
-        $slug = preg_replace("/( )/", '-', $slug);
+        $slug = Article::slugConverter($slug);
         //save post
+        $user = User::authUser();
         $post = Article::where('slug',$slug)->first();
         $post->title = $request->title;
         $post->slug = $slug;
         $post->content = $request->content;
         $post->contact = $request->contact;
         $post->address = $request->address;
+        $post->status = "Còn Trống";
         $post->id_district = $request->district;
         $post->save();
-        $district = District::where('id',$post->id_district)->first();
-        return view('articles.show',['post'=>$post,'district'=>$district]);
+        return view('articles.show',['post'=>$post,'user'=>$user]);
     }
 
     /**

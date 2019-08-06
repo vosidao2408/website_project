@@ -22,11 +22,15 @@ Route::get('/admin','HomeController@index')->middleware('admin');
 Route::get('/home', 'HomeController@index');
 
 Route::middleware('auth')->group(function(){
-    Route::get('home/user/','AuthorUserController@index');
     Route::get('home/user/edit/','AuthorUserController@edit');
-    Route::put('home/user/','AuthorUserController@update');
+    Route::put('home/','AuthorUserController@update');
+    Route::get('home/user/editpass','AuthorUserController@editPassword');
+    Route::put('home/','AuthorUserController@updatePassword');
 });
 
 Route::resource('home/posts','AuthorPostController')->middleware('auth');
+
+Route::put('home/posts/{slug}/status','AuthorPostController@status')->middleware('auth');
+// Route::put('home/posts/','AuthorPostController@status')->middleware('auth')->name('status');
 
 Route::resource('/admin/users', 'AdminUserController')->middleware('admin');
