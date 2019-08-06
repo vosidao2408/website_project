@@ -14,16 +14,17 @@ class CreateArticlesTable extends Migration
     public function up()
     {
         Schema::create('articles', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('title')->unique();
-            $table->string('slug')->unique();
+            $table->increments('id');
+            $table->string('title');
+            $table->string('slug');
             $table->longText('content');
             $table->string('address');
-            $table->integer('contact');
+            $table->string('contact');
             $table->string('status')->default('Còn Trống');
+            $table->string('price');
             $table->string('image_path');
-            $table->bigInteger('id_user')->unsigned();
-            $table->bigInteger('id_district')->unsigned();
+            $table->integer('id_user')->unsigned();
+            $table->integer('id_district')->unsigned();
             $table->foreign('id_user')->references('id')->on('users');
             $table->foreign('id_district')->references('id')->on('districts');
             $table->timestamps();
