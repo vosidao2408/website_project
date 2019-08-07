@@ -25,8 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $email = Auth::user()->email;
-        $user = User::where('email',$email)->first();
+        $user = User::authUser();
         return view('home',['user'=>$user]);
     }
 }

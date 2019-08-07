@@ -8,14 +8,16 @@ use App\User;
 
 class AuthorUserController extends Controller
 {
-    // public static function checkValidate($request)
-    // {
-    //     $request->validate([
-    //         'name' =>'required',
-    //         'email' => 'required|unique:users',
-
-    //     ]);
-    // }
+    public static function checkValidate($request)
+    {
+        $validator = Validator::make($request->all(), [
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required|email',
+            'address' => 'required',
+        ]);
+        return $validator;
+    }
 
 
     public function index()
@@ -45,6 +47,11 @@ class AuthorUserController extends Controller
     public function update(Request $request)
     {
         //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required|email',
+            'address' => 'required',
+        ]);
         
         $user = User::authUser();
         if ($user->email == $request->email) {

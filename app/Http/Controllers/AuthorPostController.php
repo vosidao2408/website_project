@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Auth;
 use App\Article;
 use App\District;
 use App\User;
@@ -56,7 +55,7 @@ class AuthorPostController extends Controller
         $post->address = $request->address;
         $post->price = $request->price;
         $post->image_path = "something";
-        $post->id_user = Auth::user()->id;
+        $post->id_user = $user->id;
         $post->id_district = $request->district;
         $post->save();
         return redirect()->route('posts.index',[$post,$user]);

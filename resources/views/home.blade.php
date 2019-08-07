@@ -4,15 +4,9 @@
 
 @endsection
 
-@section('nav-button')
-@auth
-<a  href="{{asset('/home/posts')}}">Show post</a>
-@endauth
-@endsection
-
 @section('button')
-<a class="dropdown-item" href="{{asset('home/user/')}}" data-toggle="modal" data-target="#exampleModal">Information</a>
-<a class="dropdown-item" href="{{asset('home/user/editpass')}}">Change Password</a>
+<a class="dropdown-item" href="{{asset('home/user/')}}" data-toggle="modal" data-target="#information">Thông tin cá nhân</a>
+<a class="dropdown-item" href="{{asset('home/user/editpass')}}">Đổi mật khẩu</a>
 @endsection
 
 @section('content')
@@ -48,17 +42,19 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Dashboard</div>
+                <div class="card-header">Thông báo</div>
 
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
                     <h3 class="text-center">Bạn Đã Đăng Nhập Thành Công!</h3>
-                      <p class="text-center mt-3">Bây giờ bạn đã có thể <a href="{{asset('home/posts/create')}}">Tạo Mới Bài Viết</a> hoặc <a href="{{asset('home/posts')}}">Xem bài viết</a></p>
+                    <p class="text-center mt-3">Bạn có thể cần làm những điều dưới đây:</p>
+                    <div class="d-flex justify-content-center">
+                      <form method="GET" action="{{asset('home/posts/create')}}">
+                        <button class="mr-1 btn btn-primary" type="submit">Tạo Bài Viết</button>
+                      </form>
+                      <form method="GET" action="{{asset('home/user/edit')}}">
+                        <button class="ml-1 btn btn-success" type="submit">Bổ Sung Thông Tin Cá Nhân</button>
+                      </form>
+                    </div>
                 </div>
             </div>
         </div>

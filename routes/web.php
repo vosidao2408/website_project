@@ -28,7 +28,7 @@ Route::middleware('auth')->group(function(){
     Route::put('home/','AuthorUserController@updatePassword');
 });
 
-Route::resource('home/posts','AuthorPostController')->middleware('auth');
+Route::resource('home/posts','AuthorPostController')->middleware('auth','auth.standard');
 
 Route::put('home/posts/{slug}/status','AuthorPostController@status')->middleware('auth');
 // Route::put('home/posts/','AuthorPostController@status')->middleware('auth')->name('status');

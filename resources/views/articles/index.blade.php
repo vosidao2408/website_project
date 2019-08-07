@@ -15,12 +15,11 @@
 @endsection
 
 @section('nav-button')
-<a href="{{asset('/home/posts/create')}}">Create Post</a>
 @endsection
 
 @section('button')
-<a class="dropdown-item" href="{{asset('home/user/')}}" data-toggle="modal" data-target="#information">Information</a>
-<a class="dropdown-item" href="{{asset('home/user/editpass')}}">Change Password</a>
+<a class="dropdown-item" href="{{asset('home/user/')}}" data-toggle="modal" data-target="#information">Thông tin cá nhân</a>
+<a class="dropdown-item" href="{{asset('home/user/editpass')}}">Đổi mật khẩu</a>
 @endsection
 
 @section('content')
