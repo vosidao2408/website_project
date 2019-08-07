@@ -23,10 +23,10 @@ class CreateArticlesTable extends Migration
             $table->string('price');
             $table->string('status')->default('Con Trong');
             $table->string('image_path');
-            $table->integer('id_user')->unsigned();
-            $table->integer('id_district')->unsigned();
-            $table->foreign('id_user')->references('id')->on('users');
-            $table->foreign('id_district')->references('id')->on('districts');
+            $table->integer('user_id')->unsigned();
+            $table->integer('district_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('district_id')->references('id')->on('districts');
             $table->timestamps();
         });
     }

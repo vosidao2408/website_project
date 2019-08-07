@@ -26,13 +26,12 @@ class SearchController extends Controller
         } 
         else {
             $check = Article::where('address', 'like', '%' . $query . '%');
-            $g = District::where('name', 'like', '%' . $query . '%')->first();
-            if (strval($check->get()) != '[]') {
+            $g = District::where('name', 'like', '%' . $query . '%');
+            if ($check->get()->isNotEmpty()) {
                 $data = $check->paginate(10);
             } else {
-                if (strval($g) != '') {
-                    // dd($g);
-                    $data = $g->articles()->paginate(10);
+                if ($g->get()->isNotEmpty()) {
+                    $data = $g->first()->articles()->paginate(10);
                 }
                 else{
                     return back()->with('status', 'Data Not Found!');
