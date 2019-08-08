@@ -12,10 +12,10 @@ class Article extends Model
         'title', 'slug', 'content', 'address', 'contact', 'status', 'image_path'
     ];
     public function district(){
-        return $this->belongsTo('App\District');
+        return $this->belongsTo(District::class);
     }
     public function user(){
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class);
     }
 
     public static function slugConverter($string) 
