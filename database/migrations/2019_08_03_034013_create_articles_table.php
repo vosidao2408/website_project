@@ -16,17 +16,17 @@ class CreateArticlesTable extends Migration
         Schema::create('articles', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->longText('content');
             $table->string('address');
             $table->string('contact');
             $table->string('status')->default('Còn Trống');
             $table->string('price');
             $table->string('image_path');
-            $table->integer('id_user')->unsigned();
-            $table->integer('id_district')->unsigned();
-            $table->foreign('id_user')->references('id')->on('users');
-            $table->foreign('id_district')->references('id')->on('districts');
+            $table->integer('user_id')->unsigned();
+            $table->integer('district_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('district_id')->references('id')->on('districts');
             $table->timestamps();
         });
     }

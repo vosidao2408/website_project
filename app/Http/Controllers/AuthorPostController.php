@@ -50,13 +50,13 @@ class AuthorPostController extends Controller
         $post = new Article;
         $post->title = $request->title;
         $post->slug = $slug;
-        $post->content = $request->content;
+        $post->content = Article::cutImg($request->content);
         $post->contact = $request->contact;
         $post->address = $request->address;
         $post->price = $request->price;
-        $post->image_path = "something";
+        $post->image_path = Article::getSrc($request->content);
         $post->id_user = $user->id;
-        $post->id_district = $request->district;
+        $post->district_id = $request->district;
         $post->save();
         return redirect()->route('posts.index',[$post,$user]);
     }
@@ -121,13 +121,25 @@ class AuthorPostController extends Controller
         //save post
         $user = User::authUser();
         $post = Article::where('slug',$slug)->first();
+        if (Article::getSrc($request->content) == null) {
+            $post->title = $request->title;
+            $post->slug = $slug;
+            $post->content = Article::cutImg($request->content);
+            $post->contact = $request->contact;
+            $post->address = $request->address;
+            $post->status = "Còn Trống";
+            $post->district_id = $request->district;
+            $post->save();
+            return view('articles.show',['post'=>$post,'user'=>$user]);
+        }
         $post->title = $request->title;
         $post->slug = $slug;
-        $post->content = $request->content;
+        $post->content = Article::cutImg($request->content);
         $post->contact = $request->contact;
         $post->address = $request->address;
         $post->status = "Còn Trống";
-        $post->id_district = $request->district;
+        $post->image_path = Article::getSrc($request->content);
+        $post->district_id = $request->district;
         $post->save();
         return view('articles.show',['post'=>$post,'user'=>$user]);
     }

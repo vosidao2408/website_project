@@ -18,7 +18,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="informationLabel">Information</h5>
+                <h5 class="modal-title" id="informationLabel">Thông tin cá nhân</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -28,16 +28,16 @@
                     <img src="" alt="No picture here">
                 </div>
                 <div class="ml-2">
-                    <p><b>Name: </b>{{$user->name}}</p>
+                    <p><b>Tên: </b>{{$user->name}}</p>
                     <p><b>Email: </b>{{$user->email}}</p>
-                    <p><b>Phone Number: </b>{{$user->phone}}</p>
+                    <p><b>Số điện thoại: </b>{{$user->phone}}</p>
                 </div>
             </div>
             <div class="modal-footer d-flex justify-content-between">
                 <form method="GET" action="{{asset('home/user/edit')}}">
-                    <button type="submit" class="btn btn-primary">Update Information</button>
+                    <button type="submit" class="btn btn-primary">Cập nhật thông tin</button>
                 </form>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
             </div>
         </div>
     </div>
@@ -46,21 +46,22 @@
     <h2>{{$post->title}} <span class="badge
         @if ($post->status == " Còn Trống") badge-primary @else badge-warning @endif">{{$post->status}}</span></h2>
     <div class="d-flex">
-        <p>{{$post->address}}</p>
-        <p class="ml-1 mr-auto">{{$post->districts->name}}</p>
-        <p>{{$post->contact}}</p>
+        <p><b>{{$post->address}},</b></p>
+        <p class="ml-1 mr-auto"><b>{{$post->district->name}}</b></p>
+        <p><b>{{$post->contact}}</b></p>
     </div>
     {!!$post->content!!}
+    <hr>
     <div class="d-flex mt-3">
         <form class="mr-1" method="GET" action="{{asset('home/posts/'.$post->slug.'/edit')}}">
-            <button type="submit" class="btn btn-warning">Edit post</button>
+            <button type="submit" class="btn btn-warning"><b>Chỉnh sửa <i class="fas fa-edit fa-lg"></i></b></button>
         </form>
         <form class="mr-1" method="GET" action="{{asset('home/posts/')}}">
-            <button type="submit" class="btn btn-primary">Come back</button>
+            <button type="submit" class="btn btn-primary"><b>Trở lại <i class="fas fa-arrow-left fa-lg"></i></b></button>
         </form>
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deletePost">
-            Delete Post
+           <b>Xóa bài <i class="fas fa-ban fa-lg"></i></b>
         </button>
 
         <!-- Modal -->
@@ -81,9 +82,9 @@
                         <form method="POST" action="{{asset('home/posts/'.$post->slug)}}">
                           @method('DELETE')
                           {{ csrf_field() }}
-                          <button type="submit" class="btn btn-danger">Delete Now</button>
+                          <button type="submit" class="btn btn-danger">Xóa ngay</button>
                           </form>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Just  Mistake</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
                     </div>
                 </div>
             </div>

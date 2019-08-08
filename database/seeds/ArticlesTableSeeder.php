@@ -28,8 +28,8 @@ class ArticlesTableSeeder extends Seeder
                 'price' => $faker->ean8,
                 'status' => 'Còn Trống',
                 'image_path' => $faker->image($dir = null, $width = 640, $height = 480, 'cats', false),
-                'id_district'=>$districtIdRand,
-                'id_user' => $faker->numberBetween($min = 1, $max = 5),
+                'district_id'=>$districtIdRand,
+                'user_id' => $faker->numberBetween($min = 1, $max = 5),
             ]);
         }
     }

@@ -11,11 +11,11 @@ class Article extends Model
     protected $fillable = [
         'title', 'slug', 'content', 'address', 'contact', 'status', 'image_path'
     ];
-    public function districts(){
-        return $this->belongsTo('App\District','id_district');
+    public function district(){
+        return $this->belongsTo('App\District');
     }
-    public function users(){
-        return $this->belongsTo('App\User','id_user');
+    public function user(){
+        return $this->belongsTo('App\User');
     }
 
     public static function slugConverter($string) 
@@ -37,5 +37,38 @@ class Article extends Model
 		$string = preg_replace("/(\“|\”|\‘|\’|\,|\!|\&|\;|\@|\#|\%|\~|\`|\=|\_|\'|\]|\[|\}|\{|\)|\(|\+|\^)/", '-', $string);
         $string = preg_replace("/( )/", '-', $string);
         return $string;
+    }
+
+    public static function cutImg($rawContent)
+    {
+        $time = substr_count($rawContent, 'img');
+        $content = $rawContent;
+        for ($i=0; $i < $time; $i++) {
+            $imgTabFirst = strstr($content, '<img');
+            $imgTabLast = strstr($imgTabFirst,'>', true);
+            $imgTab = $imgTabLast.'>';
+            $content = str_replace($imgTab,'', $content);
+        }
+        return $content;
+    }
+
+    public static function getSrc($content)
+    {
+        $contentExplope = explode(' ', $content);
+        $find = array();
+        $j = 0;
+        for ($i=0; $i < count($contentExplope); $i++) {
+            $src = 'src';
+            $check = strpos($contentExplope[$i], $src);
+            if ($check !== false) {
+            $find[$j] = $contentExplope[$i];
+            $j = $j + 1;
+            }
+        }
+        $srcImg = ['src="','"'];
+        $blank = ['',''];
+        $raw = str_replace($srcImg, $blank, $find);
+        $image = implode(' ', $raw);
+        return $image;
     }
 }

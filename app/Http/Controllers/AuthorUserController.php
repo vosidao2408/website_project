@@ -8,17 +8,6 @@ use App\User;
 
 class AuthorUserController extends Controller
 {
-    public static function checkValidate($request)
-    {
-        $validator = Validator::make($request->all(), [
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'email' => 'required|email',
-            'address' => 'required',
-        ]);
-        return $validator;
-    }
-
 
     public function index()
     {
@@ -47,12 +36,13 @@ class AuthorUserController extends Controller
     public function update(Request $request)
     {
         //
-        $validator = Validator::make($request->all(), [
+        $validator = $request->validate([
             'name' => 'required',
-            'email' => 'required|email',
-            'address' => 'required',
+            'email' => 'required|email|unique:users',
         ]);
-        
+        if ($validator->fails()) {
+            return back()->withErrors($validator);
+        }
         $user = User::authUser();
         if ($user->email == $request->email) {
         $user->name = $request->name;
@@ -78,11 +68,20 @@ class AuthorUserController extends Controller
 
     public function editPassword()
     {
-        return view('users.editPassword');
+        $user = User::authUser();
+        return view('users.editPassword',['user'=>$user]);
     }
 
     public function updatePassword(Request $request)
     {
+        $validatorPass = $request->validate([
+            'password' => 'required|min:6',
+            'oldPassword' => 'required|min:6',
+            'confirmPassword' => 'required|min:6'
+        ]);
+        if ($validatorPass->fails()) {
+            return back()->withErrors($validatorPass);
+        }
         $user = User::authUser();
         if ($request->newPassword == $request->confirmPassword) {
             if (Hash::check($request->password, $user->password)) {

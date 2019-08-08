@@ -21,7 +21,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="informationLabel">Information</h5>
+          <h5 class="modal-title" id="informationLabel">Thông tin cá nhân</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -31,16 +31,16 @@
                 <img src="" alt="No picture here">
             </div>
             <div class="ml-2">
-            <p><b>Name: </b>{{$user->name}}</p>
-            <p><b>Email: </b>{{$user->email}}</p>
-            <p><b>Phone Number: </b>{{$user->phone}}</p>
+                <p><b>Tên: </b>{{$user->name}}</p>
+                <p><b>Email: </b>{{$user->email}}</p>
+                <p><b>Số điện thoại: </b>{{$user->phone}}</p>
             </div>
         </div>
         <div class="modal-footer d-flex justify-content-between">
           <form method="GET" action="{{asset('home/user/edit')}}">
-            <button type="submit" class="btn btn-primary">Update Information</button>
+            <button type="submit" class="btn btn-primary">Cập nhật thông tin</button>
           </form>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
         </div>
       </div>
     </div>
@@ -50,23 +50,23 @@
         {{ csrf_field() }}
         <div class="row">
             <div class="form-group col-12">
-                <label for="">Title</label>
+                <label for="">Tiêu đề</label>
                 <input class="form-control" type="text" name="title">
             </div>
             <div class="form-group col-md-8">
-                <label for="">Contact</label>
+                <label for="">Số điện thoại</label>
                 <input class="form-control" type="text" name="contact">
             </div>
             <div class="form-group col-md-4">
-                <label for="">Price</label>
+                <label for="">Giá</label>
                 <input class="form-control" type="text" name="price">
             </div>
             <div class="form-group col-md-8">
-                <label for="">Address</label>
+                <label for="">Đia chỉ</label>
                 <input class="form-control" type="text" name="address">
             </div>
             <div class="form-group col-md-4">
-                <label for="">District</label>
+                <label for="">Quận</label>
                 <select class="form-control js-example-basic-single" name="district">
                     @foreach($districts as $district)
                     <option value="{{$district->id}}">{{$district->name}}</option>
@@ -77,10 +77,10 @@
         <body>
             <textarea name="content" id="editor">Nhập bài viết ở đây...</textarea>
         </body>
-        <button type="submit" class="col mt-2 btn btn-sm btn-success">Submit</button>
+        <button type="submit" class="col mt-2 btn btn-sm btn-success">Xác nhận</button>
     </form>
     <form class="my-2" method="GET" action="{{asset('home/posts/')}}">
-        <button class="col btn btn-sm btn-primary">Cancel</button>
+        <button class="col btn btn-sm btn-primary">Hủy bỏ</button>
     </form>
 </div>
 @endsection
