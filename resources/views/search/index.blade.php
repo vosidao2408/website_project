@@ -33,16 +33,14 @@
                   <div class="col-12">
                     @foreach($articles as $row)
                     <div class="box-sizing border my-3 bg-light">
-                      {{-- @foreach ($users as $item) --}}
+                      <a class="" href="#" style="text-decoration: none">
                       <div class="m-2 d-flex">
                       <img src="{{$row->user->image_path}}" class="rounded-circle bg-primary" alt="" style="width:30px;height:30px ">
                       <span class="mx-2 mt-1 text-capitalize text-primary"><strong>{{$row->user->name}}</strong></span>
-                      </div>    
-                      {{-- @endforeach       --}}
-                            <a class="" href="#" style="text-decoration: none">
+                      </div>                              
                             <div class="ml-4 text-dark overflow-hidden">{!!$row->content!!}</div>
-                            </a>
                           <p class="ml-4 text-muted"><small>Address: {{$row->address}}</small></p>
+                        </a>
                      </div>
                     @endforeach
                     @if (session('status'))
