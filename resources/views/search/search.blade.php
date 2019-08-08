@@ -20,12 +20,10 @@
                       
                     @foreach($articles as $row)
                     <div class="box-sizing border my-3 bg-light">
-                      @foreach ($users as $item)
                       <div class="m-2 d-flex">
-                          <img src="{{$item->image_path}}" class="rounded-circle bg-primary" alt="" style="width:30px;height:30px ">
-                          <span class="mx-2 mt-1 text-capitalize text-primary"><strong>{{$item->name}}</strong></span>
-                          </div>    
-                      @endforeach      
+                          <img src="{{$row->user->image_path}}" class="rounded-circle bg-primary" alt="" style="width:30px;height:30px ">
+                          <span class="mx-2 mt-1 text-capitalize text-primary"><strong>{{$row->user->name}}</strong></span>
+                          </div>          
                             <a class="" href="#" style="text-decoration: none">
                             <div class="ml-4 text-dark overflow-hidden">{!!$row->content!!}</div>
                             </a>
