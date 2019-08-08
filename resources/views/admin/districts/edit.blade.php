@@ -1,27 +1,27 @@
-@extends('admin.layouts.app')
+@extends('layouts.app')
 
-@section('main-content')
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-  <section class="content-header d-flex justify-content-between align-items-center">
-    <h1>Districts</h1>
-  </section>
-
-  <!-- Main content -->
-  <section class="content">
+@section('content')
+<div class="container-fluid">
     <div class="row">
-        <div class="col-md-4">
-            <form action="{{route('district.update', $district->id)}}" method="post">
-                @method('put')
-                @csrf
-                <div class="form-group">
-                    <label for="name">Name:</label>
-                    <input type="text" name="name" id="name" class="form-control" placeholder="" value="{{$district->name}}">
+        <div class="col-md-2 d-block">
+            @include('admin.layouts.sidebar')
+        </div>
+        <div class="col-md-10 col-12">
+            <h1>Districts</h1>
+            <div class="row">
+                <div class="col-md-4">
+                    <form action="{{route('district.update', $district->id)}}" method="post">
+                        @method('put')
+                        @csrf
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" name="name" id="name" class="form-control" placeholder="" value="{{$district->name}}">
+                        </div>
+                        <button type="submit" class="btn btn-sm btn-primary btn-block">Save Changes</button>
+                    </form>
                 </div>
-                <button type="submit" class="btn btn-sm btn-primary btn-block">Save Changes</button>
-            </form>
+            </div>
         </div>
     </div>
-  </section>
 </div>
 @endsection

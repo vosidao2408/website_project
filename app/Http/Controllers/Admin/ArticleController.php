@@ -64,7 +64,6 @@ class ArticleController extends Controller
             $find = array();
             $j = 0;
             for ($i=0; $i < $c; $i++) {
-                $e = '';
                 $d = 'src';
                 $check = strpos($b[$i], $d);
                 if ($check !== false) {
@@ -93,6 +92,9 @@ class ArticleController extends Controller
         $a = $request->content;
         $article->content = cutImg($a);
 
+        $b = getSrc($a);
+        $srcs = explode(' ', $b);
+
         $article->image_path = getSrc($a);
 
         $article->district_id = $request->district;
@@ -100,7 +102,7 @@ class ArticleController extends Controller
 
         $article->save();
 
-        return view('admin.articles.show', ['article' => $article]);
+        return view('admin.articles.show', ['article' => $article, 'srcs' => $srcs]);
     }
 
     /**
@@ -112,7 +114,9 @@ class ArticleController extends Controller
     public function show($slug)
     {
         $article = Article::where('slug', $slug)->first();
-        return view('admin.articles.show', ['article' => $article]);
+        $temp = $article->image_path;
+        $srcs = explode(' ', $temp);
+        return view('admin.articles.show', ['article' => $article, 'srcs' => $srcs]);
     }
 
     /**

@@ -30,7 +30,7 @@
                                 <tr class="text-center">
                                     <th>{{$article->id}}</th>
                                     <td>{{$article->title}}</td>
-                                    <td>{{$article->content}}</td>
+                                    <td>{!!$article->content!!}</td>
                                     <td>{{$article->status}}</td>
                                     <td class="d-flex justify-content-between align-items-center">
                                         <form action="{{route('article.show', $article->slug)}}" method="get">
