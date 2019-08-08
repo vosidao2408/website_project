@@ -22,9 +22,11 @@ class ArticlesTableSeeder extends Seeder
             if (!$checkExists) {
                 DB::table('articles')->insert([
                     'title' => $faker->sentence,
+                    'slug' => $faker->slug,
                     'content' => $faker->text,
                     'address' => $faker->address,
                     'contact' => $faker->phoneNumber,
+                    'price' => $faker->randomNumber(2),
                     'image_path' => $faker->imageUrl($width = 640, $height = 480),
                     'user_id' => $userIDRand,
                     'district_id' => $districtIDRand

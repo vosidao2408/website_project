@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Article;
@@ -28,7 +30,8 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        return view('admin.articles.create');
+        $districts = District::all();
+        return view('admin.articles.create', ['districts' => $districts]);
     }
 
     /**
@@ -39,8 +42,65 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request);
+        function cutImg($a)
+        {
+            $time = substr_count($a, 'img');
+            $find = strstr($a, '<img');
+            $f = $a;
+            for ($i=0; $i < $time; $i++) {
+                $k = strstr($f, '<img');
+                $last = strstr($k,'>', true);
+                $z = $last.'>';
+                $f = str_replace($z,'', $f);
+            }
+            return $f;
+        }
+
+        function getSrc($a)
+        {
+            $b = explode(' ', $a);
+            $c = count($b);
+            $find = array();
+            $j = 0;
+            for ($i=0; $i < $c; $i++) {
+                $e = '';
+                $d = 'src';
+                $check = strpos($b[$i], $d);
+                if ($check !== false) {
+                $find[$j] = $b[$i];
+                $j = $j + 1;
+                }
+            }
+            $u = ['src="','"'];
+            $f = ['',''];
+            $g = str_replace($u, $f, $find);
+            $image = implode(' ', $g);
+            return $image;
+        }
+
         $article = New Article;
-        $article->title = $request->title;
+        $title = $request->title;
+        $article->title = $title;
+
+        $slug = Str::slug($title,'-');
+        $article->slug = $slug;
+
+        $article->address = $request->address;
+        $article->contact = $request->contact;
+        $article->price = $request->price;
+
+        $a = $request->content;
+        $article->content = cutImg($a);
+
+        $article->image_path = getSrc($a);
+
+        $article->district_id = $request->district;
+        $article->user_id = Auth::user()->id;
+
+        $article->save();
+
+        return view('admin.articles.show', ['article' => $article]);
     }
 
     /**
@@ -49,9 +109,9 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        $article = Article::find($id);
+        $article = Article::where('slug', $slug)->first();
         return view('admin.articles.show', ['article' => $article]);
     }
 
@@ -89,4 +149,5 @@ class ArticleController extends Controller
         Article::where('id', $id)->delete();
         return redirect()->route('article.index');
     }
+
 }
