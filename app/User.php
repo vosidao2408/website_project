@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -36,4 +37,15 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function articles()
+    {
+        return $this->hasMany('App\Article');
+    }
+
+    public static function authUser() 
+    {
+        $email = Auth::user()->email;
+        $user = User::where('email',$email)->first();
+        return $user;
+    }
 }
