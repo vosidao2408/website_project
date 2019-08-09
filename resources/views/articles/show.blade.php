@@ -8,7 +8,8 @@
 @endsection
 
 @section('button')
-<a class="dropdown-item" href="{{asset('home/user/')}}" data-toggle="modal" data-target="#information">Thông tin cá nhân</a>
+<a class="dropdown-item" href="{{asset('home/user/')}}" data-toggle="modal" data-target="#information">Thông tin cá
+    nhân</a>
 <a class="dropdown-item" href="{{asset('home/user/editpass')}}">Đổi mật khẩu</a>
 @endsection
 
@@ -51,17 +52,36 @@
         <p><b>{{$post->contact}}</b></p>
     </div>
     {!!$post->content!!}
+    <div id="carouselExampleControls" class="carousel slide
+    " data-ride="carousel">
+        <div class="carousel-inner">
+            @foreach ($srcs as $src)
+            <div class="carousel-item @if ($loop->first) active @endif">
+                <img src="{{$src}}" class="d-block w-100" alt="...">
+            </div>
+            @endforeach
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
     <hr>
     <div class="d-flex mt-3">
         <form class="mr-1" method="GET" action="{{asset('home/posts/'.$post->slug.'/edit')}}">
             <button type="submit" class="btn btn-warning"><b>Chỉnh sửa <i class="fas fa-edit fa-lg"></i></b></button>
         </form>
         <form class="mr-1" method="GET" action="{{asset('home/posts/')}}">
-            <button type="submit" class="btn btn-primary"><b>Trở lại <i class="fas fa-arrow-left fa-lg"></i></b></button>
+            <button type="submit" class="btn btn-primary"><b>Trở lại <i
+                        class="fas fa-arrow-left fa-lg"></i></b></button>
         </form>
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deletePost">
-           <b>Xóa bài <i class="fas fa-ban fa-lg"></i></b>
+            <b>Xóa bài <i class="fas fa-ban fa-lg"></i></b>
         </button>
 
         <!-- Modal -->
@@ -80,10 +100,10 @@
                     </div>
                     <div class="modal-footer justify-content-around">
                         <form method="POST" action="{{asset('home/posts/'.$post->slug)}}">
-                          @method('DELETE')
-                          {{ csrf_field() }}
-                          <button type="submit" class="btn btn-danger">Xóa ngay</button>
-                          </form>
+                            @method('DELETE')
+                            {{ csrf_field() }}
+                            <button type="submit" class="btn btn-danger">Xóa ngay</button>
+                        </form>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
                     </div>
                 </div>

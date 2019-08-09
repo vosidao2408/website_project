@@ -6,7 +6,7 @@
 <script src="{{asset('js/bootstrap4-toggle.js')}}"></script>
 <style>
     .opacity {
-        opacity: 0.5;
+        opacity: 0.8;
     }
     .font-fira {
       font-family: 'Fira Sans Condensed', sans-serif;
@@ -62,10 +62,10 @@
     </div>
     <div class="row">
         @foreach($posts as $post)
-        <div class="mt-1 col-12">
+        <div class="mt-1 col-12
+        @if ($post->status == "Đã Thuê") opacity @endif">
             <div class="card">
-                <div class="card-body
-                @if ($post->status == " Đã Thuê") opacity @endif ">
+                <div class="card-body">
                     <div class=" d-flex">
                     <h4 class="mr-auto card-title"><strong>{{$post->title}}</strong></h4>
                     <form method="POST" action="{{asset('home/posts/'.$post->slug.'/status')}}">
@@ -73,10 +73,10 @@
                         {{ csrf_field() }}
                         @if ($post->status == "Còn Trống")
                         <input class="d-none" type="text" name="status" value="Đã Thuê">
-                        <button type="submit" class="btn btn-sm btn-primary btn-opacity">Còn Trống</button>
+                        <button type="submit" class="btn btn-sm btn-primary">Còn Trống</button>
                         @else
                         <input class="d-none" type="text" name="status" value="Còn Trống">
-                        <button type="submit" class="btn btn-sm btn-warning btn-opacity">Đã Thuê</button>
+                        <button type="submit" class="btn btn-sm btn-warning">Đã Thuê</button>
                         @endif
                         </button>
                     </form>

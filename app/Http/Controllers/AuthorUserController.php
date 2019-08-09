@@ -36,13 +36,13 @@ class AuthorUserController extends Controller
     public function update(Request $request)
     {
         //
-        $validator = $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-        ]);
-        if ($validator->fails()) {
-            return back()->withErrors($validator);
-        }
+        // $validator = $request->validate([
+        //     'name' => 'required',
+        //     'email' => 'required|email|unique:users',
+        // ]);
+        // if ($validator->fails()) {
+        //     return back()->withErrors($validator);
+        // }
         $user = User::authUser();
         if ($user->email == $request->email) {
         $user->name = $request->name;
@@ -74,14 +74,14 @@ class AuthorUserController extends Controller
 
     public function updatePassword(Request $request)
     {
-        $validatorPass = $request->validate([
-            'password' => 'required|min:6',
-            'oldPassword' => 'required|min:6',
-            'confirmPassword' => 'required|min:6'
-        ]);
-        if ($validatorPass->fails()) {
-            return back()->withErrors($validatorPass);
-        }
+        // $validatorPass = $request->validate([
+        //     'password' => 'required|min:6',
+        //     'oldPassword' => 'required|min:6',
+        //     'confirmPassword' => 'required|min:6'
+        // ]);
+        // if ($validatorPass->fails()) {
+        //     return back()->withErrors($validatorPass);
+        // }
         $user = User::authUser();
         if ($request->newPassword == $request->confirmPassword) {
             if (Hash::check($request->password, $user->password)) {

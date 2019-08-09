@@ -3,19 +3,7 @@
 @section('title','Edit user')
 
 @section('css')
-<link rel="stylesheet" href="{{asset('css/app.css')}}">
 <script src="{{asset('js/jquery.min.js')}}"></script>
-@endsection
-
-@section('btn-post')
-<ul class="navbar-nav mr-auto">
-    <li class="nav-item">
-        <a class="nav-link" href="{{asset('')}}">Home</a>
-    </li>
-    <li class="nav-item active">
-        <a class="nav-link" href="{{asset('users/')}}">User</a>
-    </li>
-</ul>
 @endsection
 
 @section('button')
@@ -58,7 +46,6 @@
     {{ session('status') }}
 </div>
 @endif
-<div class="alert alert-danger" style="display:none"></div>
 <div class="my-2 container">
     <form method="POST" action="{{asset('home/')}}">
         @method('PUT')

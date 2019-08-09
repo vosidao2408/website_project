@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
 use App\Article;
 use App\District;
-use Illuminate\Pagination\LengthAwarePaginator;
 
 class SearchController extends Controller
 {

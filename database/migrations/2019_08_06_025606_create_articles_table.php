@@ -20,9 +20,9 @@ class CreateArticlesTable extends Migration
             $table->longText('content');
             $table->string('address');
             $table->string('contact');
+            $table->string('status')->default('Còn Trống');
             $table->string('price');
-            $table->string('status')->default('Con Trong');
-            $table->string('image_path');
+            $table->longText('image_path');
             $table->integer('user_id')->unsigned();
             $table->integer('district_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');

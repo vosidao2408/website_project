@@ -19,7 +19,7 @@ class AuthorPostController extends Controller
     {
         //
         $user = User::authUser(); 
-        $posts = Article::where('id_user',$user->id)->orderBy('status','asc')->get();
+        $posts = Article::where('user_id',$user->id)->orderBy('status','asc')->get();
         return view('articles.index',['posts'=>$posts,'user'=>$user]);
     }
 
@@ -55,7 +55,7 @@ class AuthorPostController extends Controller
         $post->address = $request->address;
         $post->price = $request->price;
         $post->image_path = Article::getSrc($request->content);
-        $post->id_user = $user->id;
+        $post->user_id = $user->id;
         $post->district_id = $request->district;
         $post->save();
         return redirect()->route('posts.index',[$post,$user]);
@@ -71,9 +71,13 @@ class AuthorPostController extends Controller
     {
         //
         $user = User::authUser();
-        $post = Article::where('slug',$slug)->first();
-        if ($post->id_user == $user->id) {
-            return view('articles.show',['post'=>$post,'user'=>$user]);
+        $postCheck = Article::where('slug',$slug)->where('user_id',$user->id)->exists();
+        if ($postCheck) {
+            $post = Article::where('slug',$slug)->first();
+            $temp = $post->image_path;
+            $srcs = explode(' ', $temp);
+            dd($srcs);
+            return view('articles.show',['post'=>$post,'user'=>$user,'srcs'=>$srcs]);
         }
         return back();
     }
@@ -87,8 +91,9 @@ class AuthorPostController extends Controller
     public function status(Request $request, $slug) 
     {
         $user = User::authUser();
-        $post = Article::where('slug',$slug)->first();
-        if ($post->id_user == $user->id) {
+        $postCheck = Article::where('slug',$slug)->where('user_id',$user->id)->exists();
+        if ($postCheck) {
+            $post = Article::where('slug',$slug)->first();
             $post->status = $request->status;
             $post->save();
             return redirect('/home/posts');
@@ -99,8 +104,9 @@ class AuthorPostController extends Controller
     public function edit($slug)
     {
         $user = User::authUser();
-        $post = Article::where('slug',$slug)->first();
-        if ($post->id_user == $user->id) {
+        $postCheck = Article::where('slug',$slug)->where('user_id',$user->id)->exists();
+        if ($postCheck) {
+            $post = Article::where('slug',$slug)->first();
             $districts = District::all();
             return view('articles.edit',['post'=>$post,'districts'=>$districts,'user'=>$user]);
         }
@@ -141,7 +147,9 @@ class AuthorPostController extends Controller
         $post->image_path = Article::getSrc($request->content);
         $post->district_id = $request->district;
         $post->save();
-        return view('articles.show',['post'=>$post,'user'=>$user]);
+        $temp = $post->image_path;
+        $srcs = explode(' ', $temp);
+        return view('articles.show',['post'=>$post,'user'=>$user,'srcs'=>$srcs]);
     }
 
     /**
