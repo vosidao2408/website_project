@@ -23,7 +23,7 @@
                     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner">
                             @foreach ($srcs as $key => $src)
-                                <div class="carousel-item {{$key == 0 ? 'active' : '' }}">
+                                <div class="carousel-item {{$key == 0 ? 'active' : '' }}" style="height: 400px;">
                                     <img src="{{$src}}" class="d-block w-100" alt="...">
                                 </div>
                             @endforeach

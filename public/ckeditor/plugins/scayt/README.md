@@ -1,11 +1,4 @@
 CKEditor SCAYT Plugin
-=====================
-
-This plugin brings Spell Check As You Type (SCAYT) into up to CKEditor 4+.
-
-SCAYT is a "installation-less", using the web-services of [WebSpellChecker.net](http://www.webspellchecker.net/). It's an out of the box solution.
-
-Installation
 ------------
 
 1. Clone/copy this repository contents in a new "plugins/scayt" folder in your CKEditor installation.

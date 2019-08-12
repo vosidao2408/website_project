@@ -17,8 +17,27 @@ Route::get('/', function () {
 
 Auth::routes(['verify' => true]);
 
+Route::get('/admin','HomeController@index')->middleware('admin');
+
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/index','SearchController@index')->name('index');
+Route::get('/index/search','SearchController@search')->name('search');
+Route::get('/index/{slug}','SearchController@show')->name('show');
+
+Route::middleware('auth')->group(function(){
+    Route::get('home/user/edit/','AuthorUserController@edit');
+    Route::put('home/','AuthorUserController@update');
+    Route::get('home/user/editpass','AuthorUserController@editPassword');
+    Route::put('home/','AuthorUserController@updatePassword');
+});
+
+Route::resource('home/posts','AuthorPostController')->middleware('auth','auth.standard');
+
+Route::put('home/posts/{slug}/status','AuthorPostController@status')->middleware('auth');
+// Route::put('home/posts/','AuthorPostController@status')->middleware('auth')->name('status');
+
+Route::resource('/admin/users', 'AdminUserController')->middleware('admin');
 Route::group(['namespace' => 'Admin'], function () {
     Route::resource('admin/user', 'UserController');
     Route::resource('admin/article', 'ArticleController');
