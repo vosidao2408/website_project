@@ -8,5 +8,7 @@
 @endsection
 
 @section('content')
-
+    {{$article->title}}
+    {!!$article->content!!}
+    {{$article->image_path}}
 @endsection

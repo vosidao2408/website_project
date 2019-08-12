@@ -39,6 +39,9 @@ class SearchController extends Controller
         ]);
     }
     public function show($slug){
-        return view('search.show');
+        $article = Article::where('slug',$slug)->first();
+        return view('search.show',[
+            'article' => $article
+        ]);
     }
 }
