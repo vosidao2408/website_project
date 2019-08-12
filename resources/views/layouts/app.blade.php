@@ -31,6 +31,7 @@
             background-size: cover;
             background-attachment: fixed;
         }
+
         .opacity-nav {
             opacity: 0.8;
         }
@@ -40,12 +41,11 @@
 <body class="img-background">
     <nav class="navbar sticky-top navbar-expand navbar-dark shadow-sm opacity-nav" style="background-color: #00e600;op">
         <div class="container-fluid">
-            <a class="navbar-brand" style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif"
-                href="{{ url('/home') }}">
+            <a class="navbar-brand" style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif" href="{{ url('/home') }}">
                 <strong>BẠN TRỌ WEBSITE</strong>
             </a>
             <!-- Left Side Of Navbar -->
-                @yield('search')
+            @yield('search')
             <!-- Right Side Of Navbar -->
             <div class="navbar-nav d-flex">
                 <!-- Authentication Links -->
@@ -60,8 +60,7 @@
                 @endif
                 @else
                 <div class="nav-item dropdown">
-                    <a id="navbarDropdown" class="nav-link dropdown-toggle text-light" href="#" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         <i class="fas fa-user-circle fa-lg"></i> {{ Auth::user()->name }} <span class="caret"></span>
                     </a>
 
@@ -80,6 +79,7 @@
     </nav>
     <main class="py-4">
         @yield('content')
+        @include('layouts.footer')
     </main>
     @stack('javascript')
 </body>
