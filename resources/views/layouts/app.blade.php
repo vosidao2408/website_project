@@ -31,9 +31,11 @@
             background-size: cover;
             background-attachment: fixed;
         }
+
         .opacity-nav {
             opacity: 0.8;
         }
+
     </style>
 </head>
 
@@ -41,11 +43,14 @@
     <nav class="navbar sticky-top navbar-expand navbar-dark shadow-sm opacity-nav" style="background-color: #00e600;op">
         <div class="container-fluid">
             <a class="navbar-brand" style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif"
-                href="{{ url('/home') }}">
+                @auth
+                href="{{ url('/home') }}"
+                @endauth
+                href="{{ url('/index') }}">
                 <strong>BẠN TRỌ WEBSITE</strong>
             </a>
             <!-- Left Side Of Navbar -->
-                @yield('search')
+            @yield('search')
             <!-- Right Side Of Navbar -->
             <div class="navbar-nav d-flex">
                 <!-- Authentication Links -->
@@ -67,10 +72,8 @@
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                         @yield('button')
-                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefadivt();
-                                        document.getElementById('logout-form').submit();">
-                            Đăng xuất
-                        </a>
+                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">Đăng xuất</a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>

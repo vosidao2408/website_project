@@ -22,12 +22,18 @@ Route::get('/admin','HomeController@index')->middleware('admin');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/index','SearchController@index')->name('index');
 Route::get('/index/search','SearchController@search')->name('search');
+Route::get('/index/{slug}','SearchController@show')->name('show');
+
+
 
 Route::middleware('auth')->group(function(){
     Route::get('home/user/edit/','AuthorUserController@edit');
-    Route::put('home/','AuthorUserController@update');
+    Route::patch('home/{id}/edited','AuthorUserController@update');
     Route::get('home/user/editpass','AuthorUserController@editPassword');
-    Route::put('home/','AuthorUserController@updatePassword');
+    Route::put('home/{id}/pass-edited','AuthorUserController@updatePassword');
+    Route::get('home/index','SearchController@index')->name('index');
+    Route::get('home/index/search','SearchController@search')->name('search');
+    Route::get('home/index/{slug}','SearchController@show')->name('show');
 });
 
 Route::resource('home/posts','AuthorPostController')->middleware('auth','auth.standard');

@@ -69,8 +69,8 @@
 </div>
 @endif
 <div class="my-2 container">
-    <form method="POST" action="{{asset('home/')}}">
-        @method('PUT')
+    <form method="POST" action="{{asset('home/'.$user->id.'/edited')}}">
+        @method('PATCH')
         @csrf
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Tên</label>

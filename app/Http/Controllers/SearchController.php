@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Article;
 use App\District;
+use App\User;
+use Auth;
 
 class SearchController extends Controller
 {
@@ -37,5 +39,20 @@ class SearchController extends Controller
         return view('search.search',[
             'articles' => $data
         ]);
+    }
+
+    public function show($slug)
+    {
+        if (Auth::check()) {
+            $user = User::authUser();
+            $post = Article::where('slug',$slug)->first();
+            $temp = $post->image_path;
+            $srcs = explode(' ', $temp);
+            return view('search.show',['post'=>$post,'user'=>$user,'srcs'=>$srcs]);
+        }
+        $post = Article::where('slug',$slug)->first();
+        $temp = $post->image_path;
+        $srcs = explode(' ', $temp);
+        return view('search.show',['post'=>$post,'srcs'=>$srcs]);       
     }
 }
