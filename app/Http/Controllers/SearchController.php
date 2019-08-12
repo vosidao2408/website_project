@@ -40,8 +40,12 @@ class SearchController extends Controller
     }
     public function show($slug){
         $article = Article::where('slug',$slug)->first();
+            $temp = $article->image_path;
+            $srcs = explode(' ', $temp);
         return view('search.show',[
-            'article' => $article
+            'article' => $article,
+            'srcs' => $srcs
         ]);
     }
+   
 }
