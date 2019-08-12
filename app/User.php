@@ -42,7 +42,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany('App\Article');
     }
 
-    public static function authUser() 
+    public static function authUser()
     {
         $email = Auth::user()->email;
         $user = User::where('email',$email)->first();

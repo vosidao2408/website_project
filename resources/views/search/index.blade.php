@@ -19,9 +19,6 @@
     <div class="input-group">
         <input id="search" type="search" name="search" class="form-control"
             placeholder="Input Address Or District To Search" />
-        {{-- <span class="input-group-prepend">
-                <button type="submit" class="btn btn-primary">Click To Search</button>
-            </span> --}}
     </div>
 </form>
 @endsection
@@ -29,14 +26,20 @@
 @section('content')
 <div class="container">
     <div class="d-flex">
-        <div class="col-2">{{-- quang cao --}}</div>
-        <div class="col-8">
-
+        <div class="col-2 d-none d-md-block">{{-- quang cao --}}</div>
+        <div class="col-md-8">
             <div class="row">
                 @foreach($articles as $row)
                 <div class="px-5 col-12">
                     <div class=" box-sizing border my-1 bg-light">
+<<<<<<< HEAD
+                    <a @auth
+                    href="{{asset('/home/index/'.$row->slug)}}"
+                    @endauth
+                    href="{{asset('index/'.$row->slug)}}" style="text-decoration: none">
+=======
                         <a href="{{asset('index/'.$row->slug)}}" style="text-decoration: none">
+>>>>>>> 35e9dcbcd68a0c1faac756e9f0c788c384017dcd
                             <div class="m-2 d-flex">
                                 <img src="{{$row->user->image_path}}" class="rounded-circle bg-primary"
                                     style="width:30px;height:30px ">
@@ -72,7 +75,7 @@
             </div>
             @endif
         </div>
-        <div class="col-2">{{-- quang cao --}}</div>
+        <div class="col-2 d-none d-md-block">{{-- quang cao --}}</div>
     </div>
     <div class="d-flex justify-content-center align-items-center">{!! $articles->links() !!}</div>
 </div>

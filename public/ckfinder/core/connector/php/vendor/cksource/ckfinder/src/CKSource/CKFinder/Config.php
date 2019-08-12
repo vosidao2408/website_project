@@ -180,7 +180,7 @@ class Config
             'pluginsDirectory'         => __DIR__ . '/plugins',
             'plugins'                  => array(),
             'debugLoggers'            => array('ckfinder_log', 'error_log', 'firephp'),
-            'tempDirectory' => sys_get_temp_dir(),
+            'tempDirectory' => __DIR__ . '/userfiles/.ckfinder/temp',
             'sessionWriteClose' => true,
             'csrfProtection' => true,
             'headers' => array()

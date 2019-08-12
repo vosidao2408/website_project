@@ -76,7 +76,6 @@ class AuthorPostController extends Controller
             $post = Article::where('slug',$slug)->first();
             $temp = $post->image_path;
             $srcs = explode(' ', $temp);
-            // dd($srcs);
             return view('articles.show',['post'=>$post,'user'=>$user,'srcs'=>$srcs]);
         }
         return back();

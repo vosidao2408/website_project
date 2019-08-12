@@ -33,13 +33,15 @@ class AuthorUserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         //
-        // $validator = $request->validate([
-        //     'name' => 'required',
-        //     'email' => 'required|email|unique:users',
-        // ]);
+        $validator = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'filename' => 'required',
+            'filename.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ]);
         // if ($validator->fails()) {
         //     return back()->withErrors($validator);
         // }
@@ -72,16 +74,16 @@ class AuthorUserController extends Controller
         return view('users.editPassword',['user'=>$user]);
     }
 
-    public function updatePassword(Request $request)
+    public function updatePassword(Request $request, $id)
     {
-        // $validatorPass = $request->validate([
-        //     'password' => 'required|min:6',
-        //     'oldPassword' => 'required|min:6',
-        //     'confirmPassword' => 'required|min:6'
-        // ]);
-        // if ($validatorPass->fails()) {
-        //     return back()->withErrors($validatorPass);
-        // }
+        $validatorPass = $request->validate([
+            'password' => 'required|min:6',
+            'oldPassword' => 'required|min:6',
+            'confirmPassword' => 'required|min:6'
+        ]);
+        if ($validatorPass->fails()) {
+            return back()->withErrors($validatorPass);
+        }
         $user = User::authUser();
         if ($request->newPassword == $request->confirmPassword) {
             if (Hash::check($request->password, $user->password)) {
