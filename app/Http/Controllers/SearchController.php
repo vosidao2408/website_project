@@ -38,4 +38,7 @@ class SearchController extends Controller
             'articles' => $data
         ]);
     }
+    public function show($slug){
+        return view('search.show');
+    }
 }

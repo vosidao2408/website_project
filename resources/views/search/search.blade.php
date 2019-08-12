@@ -28,7 +28,7 @@
                 @foreach($articles as $row)
                 <div class="px-5 col-12">
                     <div class=" box-sizing border my-1 bg-light">
-                        <a href="#" style="text-decoration: none">
+                        <a href="{{asset('index/'.$row->slug)}}" style="text-decoration: none">
                             <div class="m-2 d-flex">
                                 <img src="{{$row->user->image_path}}" class="rounded-circle bg-primary"
                                     style="width:30px;height:30px ">
