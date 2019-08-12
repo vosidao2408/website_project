@@ -39,13 +39,17 @@ class SearchController extends Controller
         ]);
     }
     public function show($slug){
-        $article = Article::where('slug',$slug)->first();
-            $temp = $article->image_path;
+        if (Auth::check()) {
+            $user = User::authUser();
+            $post = Article::where('slug',$slug)->first();
+            $temp = $post->image_path;
             $srcs = explode(' ', $temp);
-        return view('search.show',[
-            'article' => $article,
-            'srcs' => $srcs
-        ]);
+            return view('search.show',['post'=>$post,'user'=>$user,'srcs'=>$srcs]);
+        }
+        $post = Article::where('slug',$slug)->first();
+        $temp = $post->image_path;
+        $srcs = explode(' ', $temp);
+        return view('search.show',['post'=>$post,'srcs'=>$srcs]);
     }
    
 }
