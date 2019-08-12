@@ -19,6 +19,7 @@ class Article extends Model
     }
 
     public static function slugConverter($string) 
+    public static function slugConverter($string)
     {
         $string = preg_replace("/(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/", 'a', $string);
 		$string = preg_replace("/(è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ)/", 'e', $string);

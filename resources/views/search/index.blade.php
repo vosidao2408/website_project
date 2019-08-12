@@ -25,10 +25,14 @@
                 @foreach($articles as $row)
                 <div class="px-5 col-12">
                     <div class=" box-sizing border my-1 bg-light">
+<<<<<<< HEAD
                     <a @auth
                     href="{{asset('/home/index/'.$row->slug)}}"
                     @endauth
                     href="{{asset('index/'.$row->slug)}}" style="text-decoration: none">
+=======
+                        <a href="{{asset('index/'.$row->slug)}}" style="text-decoration: none">
+>>>>>>> 35e9dcbcd68a0c1faac756e9f0c788c384017dcd
                             <div class="m-2 d-flex">
                                 <img src="{{$row->user->image_path}}" class="rounded-circle bg-primary"
                                     style="width:30px;height:30px ">
@@ -50,11 +54,11 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title text-warning">Không tìm thấy dữ liệu.</h4>
+                            <h4 class="modal-title text-danger">Không tìm thấy dữ liệu.</h4>
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
                         <div class="modal-body">
-                            <p class="text-warning">Dữ liệu hiện không tìm được. Hãy nhập vào địa chỉ khác.</p>
+                            <p class="text-primary">Dữ liệu hiện không tìm được. Hãy nhập vào địa chỉ khác.</p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>

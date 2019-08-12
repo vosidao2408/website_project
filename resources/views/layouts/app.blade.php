@@ -37,16 +37,22 @@
         }
 
     </style>
+    @yield('headcripts')
+    @yield('stylesheets')
 </head>
 
 <body class="img-background">
     <nav class="navbar sticky-top navbar-expand navbar-dark shadow-sm opacity-nav" style="background-color: #00e600;op">
         <div class="container-fluid">
+<<<<<<< HEAD
             <a class="navbar-brand" style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif"
                 @auth
                 href="{{ url('/home') }}"
                 @endauth
                 href="{{ url('/index') }}">
+=======
+            <a class="navbar-brand" style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif" href="{{ url('/home') }}">
+>>>>>>> 35e9dcbcd68a0c1faac756e9f0c788c384017dcd
                 <strong>BẠN TRỌ WEBSITE</strong>
             </a>
             <!-- Left Side Of Navbar -->
@@ -65,8 +71,7 @@
                 @endif
                 @else
                 <div class="nav-item dropdown">
-                    <a id="navbarDropdown" class="nav-link dropdown-toggle text-light" href="#" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         <i class="fas fa-user-circle fa-lg"></i> {{ Auth::user()->name }} <span class="caret"></span>
                     </a>
 
@@ -85,8 +90,15 @@
     </nav>
     <main class="py-4">
         @yield('content')
+        @include('layouts.footer')
     </main>
     @stack('javascript')
+    @stack('ckeditor')
+    @stack('select2')
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 
 </html>

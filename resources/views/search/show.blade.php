@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+<<<<<<< HEAD
 @section('title','Show post')
 
 @section('css')
@@ -78,3 +79,17 @@
 @push('javascript')
 
 @endpush
+=======
+@section('title','Show')
+
+@section('css')
+<script src="{{asset('js/jquery.min.js')}}"></script>
+<script src="{{asset('js/popper.min.js')}}"></script>
+@endsection
+
+@section('content')
+    {{$article->title}}
+    {!!$article->content!!}
+    {{$article->image_path}}
+@endsection
+>>>>>>> 35e9dcbcd68a0c1faac756e9f0c788c384017dcd
