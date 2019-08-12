@@ -24,11 +24,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/index','SearchController@index')->name('index');
 Route::get('/index/search','SearchController@search')->name('search');
 Route::get('/index/{slug}','SearchController@show')->name('show');
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 35e9dcbcd68a0c1faac756e9f0c788c384017dcd
 
 Route::middleware('auth')->group(function(){
     Route::get('home/user/edit/','AuthorUserController@edit');

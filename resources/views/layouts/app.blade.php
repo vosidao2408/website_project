@@ -44,15 +44,11 @@
 <body class="img-background">
     <nav class="navbar sticky-top navbar-expand navbar-dark shadow-sm opacity-nav" style="background-color: #00e600;op">
         <div class="container-fluid">
-<<<<<<< HEAD
             <a class="navbar-brand" style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif"
                 @auth
                 href="{{ url('/home') }}"
                 @endauth
                 href="{{ url('/index') }}">
-=======
-            <a class="navbar-brand" style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif" href="{{ url('/home') }}">
->>>>>>> 35e9dcbcd68a0c1faac756e9f0c788c384017dcd
                 <strong>BẠN TRỌ WEBSITE</strong>
             </a>
             <!-- Left Side Of Navbar -->
