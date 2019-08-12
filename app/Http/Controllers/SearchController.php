@@ -55,4 +55,5 @@ class SearchController extends Controller
         $srcs = explode(' ', $temp);
         return view('search.show',['post'=>$post,'srcs'=>$srcs]);       
     }
+   
 }

@@ -5,6 +5,13 @@
 @section('css')
 <script src="{{asset('js/jquery.min.js')}}"></script>
 <script src="{{asset('js/popper.min.js')}}"></script>
+<style>
+    .thumb {
+      height: 75px;
+      border: 1px solid #000;
+      margin: 10px 5px 0 0;
+    }
+  </style>
 @endsection
 
 @section('search')
@@ -69,6 +76,7 @@
     <div class="d-flex justify-content-center align-items-center">{!! $articles->links() !!}</div>
 </div>
 </div>
+
 @endsection
 
 @push('javascript')
@@ -81,6 +89,11 @@
             return false;
         }
     });
-
 </script>
+
 @endpush
+
+    
+
+      
+
