@@ -1,47 +1,54 @@
-<header>
-    <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
-        <div class="container-fluid">
-            <a class="navbar-branch" href="#">
-                <img src="./images/logo.png" height="50">
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item ">
-                        <div class="box nav-link active">
-                            <input class="input_box " type="text" name="" placeholder="Search">
-                            <a class="btn1" href="#">
-                                <i class="fa fa-search" aria-hidden="true"></i>
-                            </a>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Phòng cho thuê</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Hướng dẫn đăng bài</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Giới thiệu</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Đăng
-                            tin ngay</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fa fa-sign-in" aria-hidden="true"></i> Đăng nhập</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fa fa-registered" aria-hidden="true"></i>Đăng kí</a>
-                    </li>
+<nav class="navbar navbar-expand-md navbar-light" style="background-color: #e3f2fd;">
+    <div class="container">
+        <a class="navbar-brand" style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif" 
+            href="{{ url('/index') }}">
+            <strong>BẠN TRỌ WEBSITE</strong>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- Left Side Of Navbar -->
+            <ul class="navbar-nav mr-auto">
+                @auth
+                @yield('button-navbar')
+                @endauth
+            </ul>
+            <!-- Right Side Of Navbar -->
+            <div class="navbar-nav d-flex">
+                <!-- Authentication Links -->
+                @guest
+                <div class="nav-item mr-2">
+                    <a class=" nav-link" href="{{ route('login') }}">Đăng nhập</a>
+                </div>
+                @if (Route::has('register'))
+                <div class="nav-item">
+                    <a class="nav-link" href="{{ route('register') }}">Đăng ký</a>
+                </div>
+                @endif
+                @else
+                <div class="nav-item dropdown">
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        <i class="fas fa-user-circle fa-lg"></i> {{ Auth::user()->name }} <span class="caret"></span>
+                    </a>
 
-                </ul>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{asset('home/user/')}}" data-toggle="modal"
+                            data-target="#information">Thông tin cá nhân</a>
+                        <a class="dropdown-item" href="{{asset('home/user/editpass')}}">Đổi mật khẩu</a>
+                        <a class="dropdown-item" href="{{asset('logout')}}" onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">Đăng xuất</a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </div>
+                </div>
+                @endguest
             </div>
         </div>
-    </nav>
-</header>
+    </div>
+</nav>
+@yield('search')
+

@@ -12,7 +12,9 @@
     @yield('css')
 
     <!-- Scripts -->
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/brands.js') }}"></script>
     <script src="{{ asset('js/fontawesome.js') }}"></script>
     <script src="{{ asset('js/regdivar.js') }}"></script>
     <script src="{{ asset('js/solid.js') }}"></script>
@@ -21,80 +23,55 @@
     <link href="https://fonts.googleapis.com/css?family=Anton|Fira+Sans+Condensed&display=swap" rel="stylesheet">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/brands.css') }}" rel="stylesheet">
     <link href="{{ asset('css/fontawesome.css') }}" rel="stylesheet">
     <link href="{{ asset('css/regdivar.css') }}" rel="stylesheet">
     <link href="{{ asset('css/solid.css') }}" rel="stylesheet">
     <style>
-        .img-background {
-            background-image: url("https://images.wallpaperscraft.com/image/art_trees_drawing_minimalism_100903_2560x1600.jpg");
-            background-position: center;
-            background-size: cover;
-            background-attachment: fixed;
+        a:hover {
+            text-decoration: none!important;
+        }
+        html, body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            display: table;
         }
 
-        .opacity-nav {
-            opacity: 0.8;
+        footer {
+            display: table-row;
+            height: 0;
         }
-
     </style>
     @yield('headcripts')
     @yield('stylesheets')
 </head>
 
-<body class="img-background">
-    <nav class="navbar sticky-top navbar-expand navbar-dark shadow-sm opacity-nav" style="background-color: #00e600;op">
-        <div class="container-fluid">
-            <a class="navbar-brand" style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif"
-                @auth
-                href="{{ url('/home') }}"
-                @endauth
-                href="{{ url('/index') }}">
-                <strong>BẠN TRỌ WEBSITE</strong>
-            </a>
-            <!-- Left Side Of Navbar -->
-            @yield('search')
-            <!-- Right Side Of Navbar -->
-            <div class="navbar-nav d-flex">
-                <!-- Authentication Links -->
-                @guest
-                <div class="nav-item mr-2">
-                    <a class="text-light btn btn-outline-light nav-link" href="{{ route('login') }}">Đăng nhập</a>
-                </div>
-                @if (Route::has('register'))
-                <div class="nav-item">
-                    <a class="text-light btn btn-outline-light nav-link" href="{{ route('register') }}">Đăng ký</a>
-                </div>
-                @endif
-                @else
-                <div class="nav-item dropdown">
-                    <a id="navbarDropdown" class="nav-link dropdown-toggle text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        <i class="fas fa-user-circle fa-lg"></i> {{ Auth::user()->name }} <span class="caret"></span>
-                    </a>
-
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        @yield('button')
-                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();">Đăng xuất</a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form>
-                    </div>
-                </div>
-                @endguest
+<body>
+    <header class="shadow">
+    @include('layouts.header')</header>
+    <main class="mt-5">
+        <div class="container">
+            <div class="d-flex">
+                <div class="col-1 d-none d-md-block">{{-- quang cao --}}</div>
+                @yield('content')
+                <div class="col-1 d-none d-md-block">{{-- quang cao --}}</div>
             </div>
         </div>
-    </nav>
-    <main class="py-4">
-        @yield('content')
-        @include('layouts.footer')
     </main>
+    <footer>
+        <hr style="border-top: 1px solid #8585e0">
+        <div class="container mb-3">
+            <div class="row bg-light">
+                <h5 class="mr-5 text-primary"><a class="text-decoration-none" href="#"><i class="fas fa-phone-square fa-lg"></i> LIÊN HỆ</a></h5>
+                <h5 class="text-primary"><a class="text-decoration-none" href="#"><i class="fab fa-facebook-square fa-lg"></i> FACEBOOK</a></h5>
+            </div>
+        </div>
+    </footer>
     @stack('javascript')
     @stack('ckeditor')
     @stack('select2')
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
 </body>
 
 </html>

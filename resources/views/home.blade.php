@@ -2,11 +2,13 @@
 
 @section('css')
 
+
+
 @endsection
 
-@section('button')
-<a class="dropdown-item" href="{{asset('home/user/')}}" data-toggle="modal" data-target="#information">Thông tin cá nhân</a>
-<a class="dropdown-item" href="{{asset('home/user/editpass')}}">Đổi mật khẩu</a>
+@section('button-navbar')
+<li class="nav-item"><a class="nav-link" href="{{asset('index')}}">Trang Chủ</a></li>
+<li class="nav-item active"><a class="nav-link" href="{{asset('home')}}">Trang Cá Nhân</a></li>
 @endsection
 
 @section('content')
@@ -38,7 +40,7 @@
           </div>
         </div>
       </div>
-<div class="container">
+<div class="col-md-10">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">

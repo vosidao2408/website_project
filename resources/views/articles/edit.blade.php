@@ -9,11 +9,18 @@
 <script src="{{asset('js/select2.js')}}"></script>
 <script src="{{asset('ckeditor/ckeditor.js')}}"></script>
 <script src="{{asset('ckfinder/ckfinder.js')}}"></script>
+<style>
+        .col-1.d-none {
+            display: none!important;
+        }
+    </style>
 @endsection
 
-@section('button')
-<a class="dropdown-item" href="{{asset('home/user/')}}" data-toggle="modal" data-target="#information">Thông tin cá nhân</a>
-<a class="dropdown-item" href="{{asset('home/user/editpass')}}">Đổi mật khẩu</a>
+
+
+@section('button-navbar')
+<li class="nav-item"><a class="nav-link" href="{{asset('index')}}">Trang Chủ</a></li>
+<li class="nav-item active"><a class="nav-link" href="{{asset('home')}}">Trang Cá Nhân</a></li>
 @endsection
 
 @section('content')

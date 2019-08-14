@@ -2,9 +2,21 @@
 
 @section('title','Edit user')
 
+
+
 @section('css')
 <link rel="stylesheet" href="{{asset('css/app.css')}}">
 <script src="{{asset('js/jquery.min.js')}}"></script>
+<style>
+    .col-1.d-none {
+        display: none!important;
+    }
+</style>
+@endsection
+
+@section('button-navbar')
+<li class="nav-item"><a class="nav-link" href="{{asset('index')}}">Trang Chủ</a></li>
+<li class="nav-item active"><a class="nav-link" href="{{asset('home')}}">Trang Cá Nhân</a></li>
 @endsection
 
 @section('btn-post')
@@ -16,11 +28,6 @@
         <a class="nav-link" href="{{asset('users/')}}">User</a>
     </li>
 </ul>
-@endsection
-
-@section('button')
-<a class="dropdown-item" href="{{asset('home/user/')}}" data-toggle="modal" data-target="#information">Thông tin cá nhân</a>
-<a class="dropdown-item" href="{{asset('home/user/editpass')}}">Đổi mật khẩu</a>
 @endsection
 
 @section('content')

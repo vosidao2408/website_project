@@ -7,33 +7,33 @@
 <script src="{{asset('js/popper.min.js')}}"></script>
 @endsection
 
+@section('button-navbar')
+<li class="nav-item active"><a class="nav-link" href="{{asset('index')}}">Trang Chủ</a></li>
+<li class="nav-item"><a class="nav-link" href="{{asset('home')}}">Trang Cá Nhân</a></li>
+@endsection
+
 @section('search')
-<form class="comeback-search col" action="{{asset('index/')}}" method="get">
-    <div class="input-group">
-        <input id="comeback-search" type="search" name="search" class="form-control"
-            placeholder="Input Address Or District To Search" />
+<div class="navbar navbar-expand navbar-light pt-0" style="background-color: #e3f2fd;">
+    <div class="container">
+        <form class="comeback-search col" action="{{asset('index')}}" method="get">
+            <div class="input-group">
+                <input id="comeback-search" type="search" name="search" class="form-control"
+                    placeholder="Input Address Or District To Search" />
+            </div>
+        </form>
     </div>
-</form>
+</div>
+
 @endsection
 
 @section('content')
-<div class="container">
-    <div class="d-flex">
-        <div class="col-2">{{-- quang cao --}}</div>
-        <div class="col-8">
+<div class="col-md-10">
             <div class="row">
                 @foreach($articles as $row)
-                <div class="px-5 col-12">
-                    <div class=" box-sizing border my-1 bg-light">
-<<<<<<< HEAD
-                        <a 
-                        @auth
-                        href="{{asset('/home/index/'.$row->slug)}}"
-                        @endauth
-                        href="{{asset('index/'.$row->slug)}}" style="text-decoration: none">
-=======
-                        <a href="{{asset('index/'.$row->slug)}}" style="text-decoration: none">
->>>>>>> 35e9dcbcd68a0c1faac756e9f0c788c384017dcd
+                <div class="col-12">
+                    <div class="box-sizing border border-secondary rounded shadow-sm my-1" style="background:#F0FFFF;">
+                        <a @auth href="{{asset('/home/index/'.$row->slug)}}" @endauth
+                            href="{{asset('index/'.$row->slug)}}" style="text-decoration: none">
                             <div class="m-2 d-flex">
                                 <img src="{{$row->user->image_path}}" class="rounded-circle bg-primary"
                                     style="width:30px;height:30px ">
@@ -42,7 +42,7 @@
                                 </span>
                             </div>
                             <div class="ml-4 text-dark overflow-hidden">{!!$row->content!!}</div>
-                            <p class="ml-4 text-muted">
+                            <p class="ml-4 text-primary">
                                 <small>Address: {{$row->address}}</small>
                             </p>
                         </a>
@@ -55,34 +55,32 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title text-secondary">Không tìm thấy dữ liệu.</h4>
+                            <h4 class="modal-title text-danger">Không tìm thấy dữ liệu.</h4>
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
                         <div class="modal-body">
-                            <p class="text-secondary">Dữ liệu hiện không tìm được. Hãy nhập vào địa chỉ khác.</p>
+                            <p class="text-primary">Dữ liệu hiện không tìm được. Hãy nhập vào địa chỉ khác.</p>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
                         </div>
                     </div>
                 </div>
             </div>
             @endif
-        </div>
-        <div class="col-2">{{-- quang cao --}}</div>
-    </div>
-    <div class="d-flex justify-content-center align-items-center">{!! $articles->links() !!}</div>
-</div>
+        <div class="d-flex justify-content-center align-items-center">{!! $articles->links() !!}</div>
+    
 </div>
 @endsection
 
 @push('javascript')
 <script>
-$('#modalWarning').modal('show')
+    $('#modalWarning').modal('show')
 
-$('#comeback-search').click(function (e) {
-    $('form.comeback-search').submit();
-    return false;
-});
+    $('#comeback-search').click(function (e) {
+        $('form.comeback-search').submit();
+        return false;
+    });
+
 </script>
 @endpush
