@@ -30,9 +30,6 @@ Route::middleware('auth')->group(function(){
     Route::patch('home/{id}/edited','AuthorUserController@update');
     Route::get('home/user/editpass','AuthorUserController@editPassword');
     Route::put('home/{id}/pass-edited','AuthorUserController@updatePassword');
-    Route::get('home/index','SearchController@index')->name('index');
-    Route::get('home/index/search','SearchController@search')->name('search');
-    Route::get('home/index/{slug}','SearchController@show')->name('show');
 });
 
 Route::resource('home/posts','AuthorPostController')->middleware('auth','auth.standard');

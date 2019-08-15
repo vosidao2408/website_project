@@ -39,7 +39,6 @@ class AuthorUserController extends Controller
         $validator = $request->validate([
             'name' => 'required',
             'email' => 'required|email',
-            'filename' => 'required',
             'filename.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
         // if ($validator->fails()) {
@@ -49,7 +48,6 @@ class AuthorUserController extends Controller
         if ($user->email == $request->email) {
         $user->name = $request->name;
         $user->phone = $request->phone;
-        $user->picture = $request->picture;
         $user->save();
         return redirect('home/');
             // return view('users.show',['user'=>$user]);
@@ -59,7 +57,6 @@ class AuthorUserController extends Controller
             $user->name = $request->name;
             $user->email = $request->email;
             $user->phone = $request->phone;
-            $user->picture = $request->picture;
             $user->save();
             return redirect('home/');
             // return view('users.show',['user'=>$user]);
@@ -81,12 +78,9 @@ class AuthorUserController extends Controller
             'oldPassword' => 'required|min:6',
             'confirmPassword' => 'required|min:6'
         ]);
-        if ($validatorPass->fails()) {
-            return back()->withErrors($validatorPass);
-        }
         $user = User::authUser();
-        if ($request->newPassword == $request->confirmPassword) {
-            if (Hash::check($request->password, $user->password)) {
+        if ($request->password == $request->confirmPassword) {
+            if (Hash::check($request->oldPassword, $user->password)) {
                 if (!Hash::check($request->newPassword, $user->password)) {
                     $user->password = Hash::make($request->newPassword);
                     $user->save();

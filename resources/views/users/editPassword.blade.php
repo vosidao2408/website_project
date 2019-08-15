@@ -48,13 +48,24 @@
         </div>
     </div>
 </div>
-@if (session('status'))
-<div class="alert alert-danger">
-    {{ session('status') }}
-</div>
-@endif
+
 <div class="my-2 container">
-    <form method="POST" action="{{asset('home/')}}">
+        @if (session('status'))
+        <div class="alert alert-danger">
+            {{ session('status') }}
+        </div>
+        @endif
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <button type="close">x</button>
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{$error}}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+    <form method="POST" action="{{asset('home/'.$user->id.'/pass-edited')}}">
         @method('PUT')
         @csrf
         <div class="form-group row">

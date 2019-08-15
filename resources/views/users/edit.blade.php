@@ -76,6 +76,21 @@
 </div>
 @endif
 <div class="my-2 container">
+        @if (session('status'))
+        <div class="alert alert-danger">
+            {{ session('status') }}
+        </div>
+        @endif
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <button type="close">x</button>
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{$error}}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
     <form method="POST" action="{{asset('home/'.$user->id.'/edited')}}">
         @method('PATCH')
         @csrf
