@@ -22,8 +22,6 @@ class CreateUsersTable extends Migration
             $table->string('image_path')->default('https://d1nhio0ox7pgb.cloudfront.net/_img/o_collection_png/green_dark_grey/512x512/plain/user.png');
             $table->integer('phone')->nullable();
             $table->rememberToken();
-            $table->string('phone')->nullable();
-            $table->string('image_path')->nullable();
             $table->boolean('admin')->default(0);
             $table->timestamps();
         });

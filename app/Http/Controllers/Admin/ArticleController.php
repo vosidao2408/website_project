@@ -125,9 +125,16 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        //
+        $user = User::authUser();
+        $articleCheck = Article::where('slug',$slug)->where('user_id',$user->id)->exists();
+        if ($articleCheck) {
+            $article = Article::where('slug',$slug)->first();
+            $districts = District::all();
+            return view('admin.articles.edit',['article' => $article,'districts' => $districts,'user' => $user]);
+        }
+        return back();
     }
 
     /**
@@ -137,7 +144,7 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $slug)
     {
         //
     }
