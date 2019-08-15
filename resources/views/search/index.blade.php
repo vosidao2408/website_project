@@ -39,6 +39,7 @@
 
 @section('content')
 <div class="col-md-10">
+    
     <div class="row">
         @foreach($articles as $row)
         <div class="col-12">
