@@ -43,40 +43,40 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         //dd($request);
-        function cutImg($a)
-        {
-            $time = substr_count($a, 'img');
-            $find = strstr($a, '<img');
-            $f = $a;
-            for ($i=0; $i < $time; $i++) {
-                $k = strstr($f, '<img');
-                $last = strstr($k,'>', true);
-                $z = $last.'>';
-                $f = str_replace($z,'', $f);
-            }
-            return $f;
-        }
+        // function cutImg($a)
+        // {
+        //     $time = substr_count($a, 'img');
+        //     $find = strstr($a, '<img');
+        //     $f = $a;
+        //     for ($i=0; $i < $time; $i++) {
+        //         $k = strstr($f, '<img');
+        //         $last = strstr($k,'>', true);
+        //         $z = $last.'>';
+        //         $f = str_replace($z,'', $f);
+        //     }
+        //     return $f;
+        // }
 
-        function getSrc($a)
-        {
-            $b = explode(' ', $a);
-            $c = count($b);
-            $find = array();
-            $j = 0;
-            for ($i=0; $i < $c; $i++) {
-                $d = 'src';
-                $check = strpos($b[$i], $d);
-                if ($check !== false) {
-                $find[$j] = $b[$i];
-                $j = $j + 1;
-                }
-            }
-            $u = ['src="','"'];
-            $f = ['',''];
-            $g = str_replace($u, $f, $find);
-            $image = implode(' ', $g);
-            return $image;
-        }
+        // function getSrc($a)
+        // {
+        //     $b = explode(' ', $a);
+        //     $c = count($b);
+        //     $find = array();
+        //     $j = 0;
+        //     for ($i=0; $i < $c; $i++) {
+        //         $d = 'src';
+        //         $check = strpos($b[$i], $d);
+        //         if ($check !== false) {
+        //         $find[$j] = $b[$i];
+        //         $j = $j + 1;
+        //         }
+        //     }
+        //     $u = ['src="','"'];
+        //     $f = ['',''];
+        //     $g = str_replace($u, $f, $find);
+        //     $image = implode(' ', $g);
+        //     return $image;
+        // }
 
         $article = New Article;
         $title = $request->title;
@@ -90,12 +90,12 @@ class ArticleController extends Controller
         $article->price = $request->price;
 
         $a = $request->content;
-        $article->content = cutImg($a);
+        $article->content = Article::cutImg($a);
 
-        $b = getSrc($a);
+        $b = Article::getSrc($a);
         $srcs = explode(' ', $b);
 
-        $article->image_path = getSrc($a);
+        $article->image_path = Article::getSrc($a);
 
         $article->district_id = $request->district;
         $article->user_id = Auth::user()->id;
@@ -146,7 +146,34 @@ class ArticleController extends Controller
      */
     public function update(Request $request, $slug)
     {
-        //
+        $slug = $request->title;
+        $slug = Article::slugConverter($slug);
+        //save post
+        $user = User::authUser();
+        $article = Article::where('slug',$slug)->first();
+        if (Article::getSrc($request->content) == null) {
+            $article->title = $request->title;
+            $article->slug = $slug;
+            $article->content = Article::cutImg($request->content);
+            $article->contact = $request->contact;
+            $article->address = $request->address;
+            $article->status = "Còn Trống";
+            $article->district_id = $request->district;
+            $article->save();
+            return view('admin.articles.show',['articles' => $article,'user' => $user]);
+        }
+        $article->title = $request->title;
+        $article->slug = $slug;
+        $article->content = Article::cutImg($request->content);
+        $article->contact = $request->contact;
+        $article->address = $request->address;
+        $article->status = "Còn Trống";
+        $article->image_path = Article::getSrc($request->content);
+        $article->district_id = $request->district;
+        $article->save();
+        $temp = $article->image_path;
+        $srcs = explode(' ', $temp);
+        return view('admin.articles.show',['article' => $article,'user' => $user,'srcs' => $srcs]);
     }
 
     /**

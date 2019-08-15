@@ -41,10 +41,10 @@
                     <p class="text-muted font-italic">Posted by: {{$article->user->name}}</p>
                 </div>
             </div>
-            <div class="row mt-5">
+            <div class="row mt-2">
                 <div class="col-md-12">
                     <div class="form-row">
-                        <form action="" method="get">
+                        <form action="{{route('article.edit', $article->slug)}}" method="get">
                             <button type="submit" class="btn btn-sm btn-warning ml-2">Edit</button>
                         </form>
                         <form action="{{route('article.destroy', $article->id)}}" method="post">

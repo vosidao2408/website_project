@@ -17,7 +17,7 @@
         </div>
         <div class="col-md-10 col-12">
             <div class="row">
-                <div class="col-md-8 align-self-center">
+                <div class="col-12 align-self-center">
                    <form method="POST" action="{{route('article.store')}}">
                     {{ csrf_field() }}
                     <div class="row">
@@ -40,10 +40,10 @@
                         <div class="form-group col-md-4">
                             <label for="">Quận</label>
                             <select class="form-control js-example-basic-single" name="district">
-                                <option value="{{$article->district->id}}" @if ($article->district->id == $article->district_id)
-                                    selected
-                                    @endif
-                                    >{{$article->district->name}}</option>
+                                @foreach($districts as $district)
+                                    <option value="{{$district->id}}" {{$article->district_id == $article->district->id ? 'selected' : ''}}
+                                    >{{$district->name}}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
