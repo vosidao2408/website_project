@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
-@section('title','Show post')
-
-
+@section('title','Xem bài viết')
 
 @section('css')
 <link rel="stylesheet" href="{{asset('css/app.css')}}">
@@ -15,35 +13,6 @@
 @endsection
 
 @section('content')
-<div class="modal fade" id="information" tabindex="-1" role="dialog" aria-labelledby="informationLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="informationLabel">Thông tin cá nhân</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body d-flex">
-                <div>
-                    <img src="" alt="No picture here">
-                </div>
-                <div class="ml-2">
-                    <p><b>Tên: </b>{{$user->name}}</p>
-                    <p><b>Email: </b>{{$user->email}}</p>
-                    <p><b>Số điện thoại: </b>{{$user->phone}}</p>
-                </div>
-            </div>
-            <div class="modal-footer d-flex justify-content-between">
-                <form method="GET" action="{{asset('home/user/edit')}}">
-                    <button type="submit" class="btn btn-primary">Cập nhật thông tin</button>
-                </form>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-            </div>
-        </div>
-    </div>
-</div>
 <div class="container">
     <h2>Tiêu đề : {{$post->title}}</h2>
     <div class="d-flex">

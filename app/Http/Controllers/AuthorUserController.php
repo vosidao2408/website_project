@@ -33,13 +33,12 @@ class AuthorUserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //
         $validator = $request->validate([
             'name' => 'required',
             'email' => 'required|email',
-            'filename.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
         // if ($validator->fails()) {
         //     return back()->withErrors($validator);
@@ -61,7 +60,7 @@ class AuthorUserController extends Controller
             return redirect('home/');
             // return view('users.show',['user'=>$user]);
         }
-        return back()->with('status', 'Email ready exist! Please enter another Email!');
+        return back()->with('status', 'Email của bạn đã tồn tại trên hệ thống. Phiền bạn hãy nhập email khác!!');
         }
     }
 
@@ -71,7 +70,7 @@ class AuthorUserController extends Controller
         return view('users.editPassword',['user'=>$user]);
     }
 
-    public function updatePassword(Request $request, $id)
+    public function updatePassword(Request $request)
     {
         $validatorPass = $request->validate([
             'password' => 'required|min:6',
@@ -79,18 +78,50 @@ class AuthorUserController extends Controller
             'confirmPassword' => 'required|min:6'
         ]);
         $user = User::authUser();
-        if ($request->password == $request->confirmPassword) {
-            if (Hash::check($request->oldPassword, $user->password)) {
-                if (!Hash::check($request->newPassword, $user->password)) {
-                    $user->password = Hash::make($request->newPassword);
-                    $user->save();
-                    return redirect('home/');
-                }
+        if (Hash::check($request->oldPassword, $user->password)) {
+            if (!Hash::check($request->password, $user->password)) {
+                $user->password = Hash::make($request->password);
+                $user->save();
+                return redirect('home/');
+            }
                 return back()->with('status','The new password cannot be identical to the old password!!');
             }
             return back()->with('status','Password is wrong!!');
-        }
-        return back()->with('status','Confirm password is wrong!!');
+        
     }
+
+    public function avatar()
+    {
+        $user = User::authUser();
+        return view('users.upload',['user'=>$user]);
+    }
+
+    public function avatarUpload(Request $request)
+    {
+        $validatorImg = $request->validate([
+            'avatar' => 'required|image|mimes:png,jpg,jpeg,gif|max:2048',
+        ]);
+        $user = User::authUser();   
+        $avatar = $request->file('avatar');
+        $avatarname = time().'.'.$avatar->getClientOriginalExtension();
+        $avatar->move(public_path('/images'),$avatarname);
+        $user->image_path = $avatarname;
+        $user->save();
+        return back()->with('success','Avatar upload thành công')->with('path',$avatarname);
+    }
+
+
+        
+        // $user = User::authUser();
+        // if ($request->hasFile('avatar')) {
+        //     $avatar = $request->file('avatar');
+        //     $avatarname = time().'.'.$avatar->getClientOriginalExtension();
+        //     Image::make($avatar)->resize(200,200)->save(storage_path('images/'.$avatarname));
+        //     dd($avatarname);
+        //     $user->image_path = $avatarname;
+        //     $user->save();
+        // }
+        // return redirect('home/');
+    
 
 }

@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
-@section('title','Show post')
-
-
+@section('title','Xem bài viết')
 
 @section('css')
 <link rel="stylesheet" href="{{asset('css/app.css')}}">
@@ -48,7 +46,7 @@
 @endauth
 <div class="col-md-10">
         <div class="m-2 d-flex">
-                <img src="{{$post->user->image_path}}" class="rounded-circle bg-primary"
+                <img src="{{url('images/'.$user->image_path)}}" class="rounded-circle bg-primary"
                     style="width:30px;height:30px ">
                 <span class="mx-2 mt-1 text-capitalize text-primary">
                     <strong>{{$post->user->name}}</strong>
@@ -69,44 +67,8 @@
         <div class="item"><img src="{{$src}}" class="img-thumbnail" alt="..."></div>
         @endforeach
     </div>
-    {{-- <div id="carouselExampleControls" class="carousel slide
-    " data-ride="carousel">
-        <div class="carousel-inner">
-            @foreach ($srcs as $src)
-            <div class="carousel-item @if ($loop->first) active @endif">
-                <img src="{{$src}}" class="d-block w-100" alt="...">
-            </div>
-            @endforeach
-        </div>
-        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-    </div> --}}
 </div>
 @endsection
 
 @push('javascript')
-<script>
-    $('.owl-carousel').owlCarousel({
-    loop:true,
-    margin:10,
-    nav:true,
-    responsive:{
-        0:{
-            items:1
-        },
-        600:{
-            items:3
-        },
-        1000:{
-            items:5
-        }
-    }
-})
-</script>
 @endpush

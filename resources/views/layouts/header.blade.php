@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-light" style="background-color: #e3f2fd;">
     <div class="container-fluid">
-        <a class="navbar-brand" style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif" 
+        <a class="navbar-brand" style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif"
             href="{{ url('/index') }}">
             <strong>BẠN TRỌ WEBSITE</strong>
         </a>
@@ -35,8 +35,8 @@
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{asset('home/user/')}}" data-toggle="modal"
-                            data-target="#information">Thông tin cá nhân</a>
+                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#information">Thông tin cá
+                            nhân</a>
                         <a class="dropdown-item" href="{{asset('home/user/editpass')}}">Đổi mật khẩu</a>
                         <a class="dropdown-item" href="{{asset('logout')}}" onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();">Đăng xuất</a>
@@ -50,6 +50,7 @@
         </div>
     </div>
 </nav>
+@auth
 <div class="modal fade" id="information" tabindex="-1" role="dialog" aria-labelledby="informationLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -61,8 +62,13 @@
                 </button>
             </div>
             <div class="modal-body d-flex">
-                <div>
-                    <img src="" alt="No picture here">
+                <div class="container-img">
+                    <img class="img-thumbnail image" src="{{url('images/'.$user->image_path)}}" alt="No picture here" >
+                    <div class="overlay">
+                        <form action="{{asset('home/avatar')}}" method="get">
+                            <button class="btn btn-sm btn-light p-1"><i class="fas fa-camera fa-lg"></i></button>
+                        </form>
+                    </div>
                 </div>
                 <div class="ml-2">
                     <p><b>Tên: </b>{{$user->name}}</p>
@@ -79,5 +85,5 @@
         </div>
     </div>
 </div>
+@endauth
 @yield('search')
-
