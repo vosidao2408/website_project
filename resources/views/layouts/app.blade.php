@@ -16,40 +16,23 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/brands.js') }}"></script>
     <script src="{{ asset('js/fontawesome.js') }}"></script>
-    <script src="{{ asset('js/regdivar.js') }}"></script>
     <script src="{{ asset('js/solid.js') }}"></script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Anton|Fira+Sans+Condensed&display=swap" rel="stylesheet">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/brands.css') }}" rel="stylesheet">
     <link href="{{ asset('css/fontawesome.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/regdivar.css') }}" rel="stylesheet">
     <link href="{{ asset('css/solid.css') }}" rel="stylesheet">
-    <style>
-        a:hover {
-            text-decoration: none!important;
-        }
-        html, body {
-            height: 100%;
-            width: 100%;
-            margin: 0;
-            display: table;
-        }
-
-        footer {
-            display: table-row;
-            height: 0;
-        }
-    </style>
     @yield('headcripts')
     @yield('stylesheets')
 </head>
 
 <body>
     <header class="shadow">
-    @include('layouts.header')</header>
+        @include('layouts.header')</header>
     <main class="mt-5">
         <div class="container">
             <div class="d-flex">
@@ -63,15 +46,19 @@
         <hr style="border-top: 1px solid #8585e0">
         <div class="container mb-3">
             <div class="row bg-light">
-                <h5 class="mr-5 text-primary"><a class="text-decoration-none" href="#"><i class="fas fa-phone-square fa-lg"></i> LIÊN HỆ</a></h5>
-                <h5 class="text-primary"><a class="text-decoration-none" href="#"><i class="fab fa-facebook-square fa-lg"></i> FACEBOOK</a></h5>
+                <h5 class="mr-5 text-primary"><a class="text-decoration-none" href="#"><i
+                            class="fas fa-phone-square fa-lg"></i> LIÊN HỆ</a></h5>
+                <h5 class="text-primary"><a class="text-decoration-none" href="#"><i
+                            class="fab fa-facebook-square fa-lg"></i> FACEBOOK</a></h5>
             </div>
         </div>
     </footer>
     @stack('javascript')
     @stack('ckeditor')
     @stack('select2')
-    
+    <script>
+    </script>
+
 </body>
 
 </html>

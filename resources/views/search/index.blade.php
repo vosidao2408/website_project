@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title','Search')
+@section('title','Tìm kiếm')
 
 @section('css')
 <script src="{{asset('js/jquery.min.js')}}"></script>
@@ -43,10 +43,10 @@
     <div class="row">
         @foreach($articles as $row)
         <div class="col-12">
-            <div class="box-sizing border border-secondary rounded my-1" style="background:#F0FFFF;">
-                <a href="{{asset('index/'.$row->slug)}}" style="text-decoration: none">
+            <a href="{{asset('index/'.$row->slug)}}" style="text-decoration: none">
+                <div class="box-sizing border border-secondary rounded my-1" style="background:#F0FFFF;">
                     <div class="m-2 d-flex">
-                        <img src="{{$row->user->image_path}}" class="rounded-circle bg-primary"
+                        <img src="{{url('images/'.$row->user->image_path)}}" class="rounded-circle bg-primary"
                             style="width:30px;height:30px ">
                         <span class="mx-2 mt-1 text-capitalize text-primary">
                             <strong>{{$row->user->name}}</strong>
@@ -56,8 +56,8 @@
                     <p class="ml-4 text-primary">
                         <small>Address: {{$row->address}}</small>
                     </p>
-                </a>
-            </div>
+                </div>
+            </a>
         </div>
         @endforeach
     </div>
