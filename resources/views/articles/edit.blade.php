@@ -3,9 +3,7 @@
 @section('title','Chỉnh sửa tin')
 
 @section('css')
-<link rel="stylesheet" href="{{asset('css/app.css')}}">
 <link rel="stylesheet" href="{{asset('css/select2.css')}}">
-<script src="{{asset('js/jquery.js')}}"></script>
 <script src="{{asset('js/select2.js')}}"></script>
 <script src="{{asset('ckeditor/ckeditor.js')}}"></script>
 <script src="{{asset('ckfinder/ckfinder.js')}}"></script>
