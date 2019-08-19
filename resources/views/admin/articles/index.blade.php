@@ -36,7 +36,7 @@
                                         <form action="{{route('article.show', $article->slug)}}" method="get">
                                             <button type="submit" class="btn btn-sm btn-primary">Show</button>
                                         </form>
-                                        <form action="" method="get">
+                                        <form action="{{route('article.edit', $article->slug)}}" method="get">
                                             <button type="submit" class="btn btn-sm btn-warning">Edit</button>
                                         </form>
                                         <form action="{{route('article.destroy', $article->id)}}" method="post">

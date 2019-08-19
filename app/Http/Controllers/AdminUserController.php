@@ -18,7 +18,7 @@ class AdminUserController extends Controller
         //
         if (Auth::check('admin')) {
             $users = User::paginate(10);
-            return view('users.index',['users'=>$users]);
+            return view('admin.users.index',['users'=>$users]);
         };
         return redirect('home');
     }

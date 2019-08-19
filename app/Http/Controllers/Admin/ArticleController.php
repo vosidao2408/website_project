@@ -43,59 +43,58 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         //dd($request);
-        function cutImg($a)
-        {
-            $time = substr_count($a, 'img');
-            $find = strstr($a, '<img');
-            $f = $a;
-            for ($i=0; $i < $time; $i++) {
-                $k = strstr($f, '<img');
-                $last = strstr($k,'>', true);
-                $z = $last.'>';
-                $f = str_replace($z,'', $f);
-            }
-            return $f;
-        }
+        // function cutImg($a)
+        // {
+        //     $time = substr_count($a, 'img');
+        //     $find = strstr($a, '<img');
+        //     $f = $a;
+        //     for ($i=0; $i < $time; $i++) {
+        //         $k = strstr($f, '<img');
+        //         $last = strstr($k,'>', true);
+        //         $z = $last.'>';
+        //         $f = str_replace($z,'', $f);
+        //     }
+        //     return $f;
+        // }
 
-        function getSrc($a)
-        {
-            $b = explode(' ', $a);
-            $c = count($b);
-            $find = array();
-            $j = 0;
-            for ($i=0; $i < $c; $i++) {
-                $d = 'src';
-                $check = strpos($b[$i], $d);
-                if ($check !== false) {
-                $find[$j] = $b[$i];
-                $j = $j + 1;
-                }
-            }
-            $u = ['src="','"'];
-            $f = ['',''];
-            $g = str_replace($u, $f, $find);
-            $image = implode(' ', $g);
-            return $image;
-        }
+        // function getSrc($a)
+        // {
+        //     $b = explode(' ', $a);
+        //     $c = count($b);
+        //     $find = array();
+        //     $j = 0;
+        //     for ($i=0; $i < $c; $i++) {
+        //         $d = 'src';
+        //         $check = strpos($b[$i], $d);
+        //         if ($check !== false) {
+        //         $find[$j] = $b[$i];
+        //         $j = $j + 1;
+        //         }
+        //     }
+        //     $u = ['src="','"'];
+        //     $f = ['',''];
+        //     $g = str_replace($u, $f, $find);
+        //     $image = implode(' ', $g);
+        //     return $image;
+        // }
 
         $article = New Article;
         $title = $request->title;
         $article->title = $title;
 
-        $slug = Str::slug($title,'-');
+        $slug = Article::slugConverter($title);
         $article->slug = $slug;
 
         $article->address = $request->address;
         $article->contact = $request->contact;
         $article->price = $request->price;
 
-        $a = $request->content;
-        $article->content = cutImg($a);
+        $article->content = Article::cutImg($request->content);
 
-        $b = getSrc($a);
-        $srcs = explode(' ', $b);
+        $a = Article::getSrc($request->content);
+        $srcs = explode(' ', $a);
 
-        $article->image_path = getSrc($a);
+        $article->image_path = $a;
 
         $article->district_id = $request->district;
         $article->user_id = Auth::user()->id;
@@ -125,9 +124,16 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        //
+        $user = User::authUser();
+        $articleCheck = Article::where('slug',$slug)->where('user_id',$user->id)->exists();
+        if ($articleCheck) {
+            $article = Article::where('slug',$slug)->first();
+            $districts = District::all();
+            return view('admin.articles.edit',['article' => $article,'districts' => $districts,'user' => $user]);
+        }
+        return back();
     }
 
     /**
@@ -137,9 +143,38 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $slug)
     {
-        //
+        $slug = Article::slugConverter($slug);
+        $article = Article::where('slug',$slug)->first();
+        $newSlug = $request->title;
+        $newSlug = Article::slugConverter($newSlug);
+
+        //save article
+        $user = User::authUser();
+        // if (Article::getSrc($request->content) == null) {
+        //     $article->title = $request->title;
+        //     $article->slug = $slug;
+        //     $article->content = Article::cutImg($request->content);
+        //     $article->contact = $request->contact;
+        //     $article->address = $request->address;
+        //     $article->status = "Còn Trống";
+        //     $article->district_id = $request->district;
+        //     $article->save();
+        //     return view('admin.articles.show',['article' => $article,'user' => $user]);
+        // }
+        $article->title = $request->title;
+        $article->slug = $newSlug;
+        $article->content = Article::cutImg($request->content);
+        $article->contact = $request->contact;
+        $article->address = $request->address;
+        $article->status = "Còn Trống";
+        $article->image_path = Article::getSrc($request->content);
+        $article->district_id = $request->district;
+        $article->save();
+        $temp = $article->image_path;
+        $srcs = explode(' ', $temp);
+        return view('admin.articles.show',['article' => $article,'user' => $user,'srcs' => $srcs]);
     }
 
     /**
