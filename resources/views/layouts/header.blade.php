@@ -63,9 +63,9 @@
             </div>
             <div class="modal-body d-flex">
                 <div class="container-img">
-                    <img class="img-thumbnail image" src="{{url('images/'.$user->image_path)}}" alt="No picture here" >
+                    <img class="img-thumbnail" src="{{url('images/'.$user->image_path)}}" alt="No picture here" width="120">
                     <div class="overlay">
-                        <form action="{{asset('home/avatar')}}" method="get">
+                        <form action="{{asset('home/avatar')}}" method="GET">
                             <button class="btn btn-sm btn-light p-1"><i class="fas fa-camera fa-lg"></i></button>
                         </form>
                     </div>
