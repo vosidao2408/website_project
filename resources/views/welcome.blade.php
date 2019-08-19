@@ -25,18 +25,15 @@
             background-size: cover;
             background-position: center;
         }
-
         #text {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
         }
-
         .text-bait {
             font-family: 'Mali', cursive;
         }
-
         .modal-wrapper {
             width: 100%;
             height: 100%;
@@ -48,12 +45,10 @@
             opacity: 0;
             transition: all 0.25s ease-in-out;
         }
-
         .modal-wrapper.open {
             opacity: 1;
             visibility: visible;
         }
-
         .modal {
             width: 600px;
             height: 250px;
@@ -68,12 +63,10 @@
             border: 2px solid #ff9933;
             border-radius: 10px;
         }
-
         .modal-wrapper.open .modal {
             margin-top: -200px;
             opacity: 1;
         }
-
         .head-modal {
             width: 100%;
             height: 40px;
@@ -81,7 +74,6 @@
             overflow: hidden;
             background: #ff9933;
         }
-
         .btn-mod {
           background-color: #ff9933;
           font-family: 'Roboto Slab', serif;
@@ -89,18 +81,15 @@
         .btn-mod:hover {
           background-color: #ffb366;
         }
-
         .btn-close {
             font-size: 20px;
             display: block;
             float: right;
             color: #fff;
         }
-
         .btn-close:hover {
           color: #fff;
         }
-
         .content {
             padding: 5%;
         }
@@ -147,30 +136,12 @@
         <div class="content">
             <h3 class="text-center question">Chúng Tôi Có Thể Giúp Gì Cho Bạn?</h3>
             <div class="mt-5 d-flex justify-content-around">
-              <a class="button" href="{{route('home')}}">Đăng Tin Cho Thuê</a>
+              <a class="button" href="{{asset('home')}}">Đăng Tin Cho Thuê</a>
               <a class="button" href="{{asset('/index')}}">Giúp Bạn Tìm Trọ</a>
             </div>
         </div>
       </div>
     </div>
-
-    {{-- <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg " role="document">
-            <div class="modal-content bg-success">
-                <div class="modal-body">
-                    <h3 class="text-center text-white">Chúng Tôi Có Thể Giúp Gì Cho Bạn?</h3>
-                </div>
-                <div class="modal-footer d-flex justify-content-between">
-                    <a href="{{route('home')}}" role="button" class="btn btn-warning">Đăng Tin Cho Thuê</a>
-                    <a href="{{asset('/index')}}" role="button" class="btn btn-warning">Giúp Bạn Tìm Trọ</a>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
     </script>

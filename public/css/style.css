@@ -37,6 +37,8 @@ footer {
     font-size: 15px;
     padding: 5px;
     text-align: right;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 .container-img:hover .overlay {
     opacity: 1;
@@ -48,23 +50,9 @@ footer {
     opacity: 0.8;
 }
 
-.thumbnail {
-    position: relative;
-    width: 200px;
-    height: 200px;
+#avatar {
+    border: 1px solid #ddd;
+    padding: 3px;
+    border-radius: 5px; 
     overflow: hidden;
-}
-.thumbnail img {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    height: 100%;
-    width: auto;
-    -webkit-transform: translate(-50%,-50%);
-        -ms-transform: translate(-50%,-50%);
-            transform: translate(-50%,-50%);
-}
-.thumbnail img.portrait {
-    width: 100%;
-    height: auto;
 }

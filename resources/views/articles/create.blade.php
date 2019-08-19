@@ -54,7 +54,7 @@
                 <input class="form-control" type="text" name="price">
             </div>
             <div class="form-group col-md-8">
-                <label for="">Đia chỉ</label>
+                <label for="">Địa chỉ</label>
                 <input class="form-control" type="text" name="address">
             </div>
             <div class="form-group col-md-4">

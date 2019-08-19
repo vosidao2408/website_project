@@ -15,8 +15,9 @@ class UserController extends Controller
      */
     public function index()
     {
+        $user = User::authUser();
         $users = User::paginate(10);
-        return view('admin.users.index', ['users' => $users]);
+        return view('admin.users.index', ['users' => $users,'user'=>$user]);
     }
 
     /**
@@ -48,9 +49,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //dd($id);
-        $user = User::where('id', $id)->get();
-        return view('admin.users.show', ['user' => $user[0]]);
+        $user = User::authUser();
+        $userOther = User::where('id', $id)->first();
+        return view('admin.users.show', ['userOther' => $userOther,'user'=>$user]);
     }
 
     /**

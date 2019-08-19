@@ -80,11 +80,6 @@
             </div>
         </div>
     </div>
-    {{-- <form class="mr-1" method="POST" action="{{asset('home/posts/'.$post->slug)}}">
-    @method('DELETE')
-    {{ csrf_field() }}
-    <button type="submit" class="btn btn-danger">Delete post</button>
-    </form> --}}
 </div>
 </div>
 @endsection

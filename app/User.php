@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Auth;
+use File;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -47,5 +48,15 @@ class User extends Authenticatable implements MustVerifyEmail
         $email = Auth::user()->email;
         $user = User::where('email',$email)->first();
         return $user;
+    }
+
+    public static function filePath()
+    {
+        $store = File::allFiles(public_path('/images'));
+        $stores = [];
+        for ($i=0;$i < count($store);$i++) {
+            $stores[$i] = $store[$i]->getBaseName();
+        }
+        return $stores;
     }
 }

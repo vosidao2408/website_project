@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\District;
+use App\User;
 
 class DistrictController extends Controller
 {
@@ -15,8 +16,9 @@ class DistrictController extends Controller
      */
     public function index()
     {
+        $user = User::authUser();
         $districts = District::all();
-        return view('admin.districts.index', ['districts' => $districts]);
+        return view('admin.districts.index', ['districts' => $districts,'user'=>$user]);
     }
 
     /**
@@ -65,8 +67,9 @@ class DistrictController extends Controller
      */
     public function edit($id)
     {
+        $user = User::authUser();
         $district = District::find($id);
-        return view('admin.districts.edit',['district' => $district]);
+        return view('admin.districts.edit',['district' => $district,'user'=>$user]);
     }
 
     /**

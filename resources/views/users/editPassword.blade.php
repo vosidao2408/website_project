@@ -2,8 +2,6 @@
 
 @section('title','Thay đổi mật khẩu')
 
-
-
 @section('css')
 <script src="{{asset('js/jquery.min.js')}}"></script>
 <style>

@@ -46,9 +46,13 @@
                 <label for="">Tiêu đề</label>
                 <input class="form-control" type="text" name="title" value="{{$post->title}}">
             </div>
-            <div class="form-group col-12">
+            <div class="form-group col-md-8">
                 <label for="">Số điện thoại</label>
                 <input class="form-control" type="text" name="contact" value="{{$post->contact}}">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="">Giá</label>
+                <input class="form-control" type="text" name="price" value="{{$post->price}}">
             </div>
             <div class="form-group col-md-8">
                 <label for="">Địa chỉ</label>

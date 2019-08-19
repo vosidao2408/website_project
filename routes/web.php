@@ -11,15 +11,13 @@
 |
 */
 
-use App\Http\Controllers\AuthorUserController;
-
 Route::get('/', function () {
     return view('welcome');
 });
 
 Auth::routes(['verify' => true]);
 
-Route::get('/admin','HomeController@index')->middleware('admin');
+Route::get('home','HomeController@index');
 
 Route::get('/index','SearchController@index')->name('index');
 Route::get('/index/search','SearchController@search')->name('search');
@@ -39,10 +37,8 @@ Route::resource('home/posts','AuthorPostController')->middleware('auth','auth.st
 Route::put('home/posts/{slug}/status','AuthorPostController@status')->middleware('auth');
 // Route::put('home/posts/','AuthorPostController@status')->middleware('auth')->name('status');
 
-Route::resource('/admin/users', 'AdminUserController')->middleware('admin');
-
 Route::group(['namespace' => 'Admin'], function () {
-    Route::resource('admin/user', 'UserController');
-    Route::resource('admin/article', 'ArticleController');
-    Route::resource('admin/district', 'DistrictController');
+    Route::resource('admin/user', 'UserController')->middleware('admin');
+    Route::resource('admin/article', 'ArticleController')->middleware('admin');
+    Route::resource('admin/district', 'DistrictController')->middleware('admin');
 });

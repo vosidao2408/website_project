@@ -84,10 +84,10 @@ class AuthorUserController extends Controller
                 $user->password = Hash::make($request->password);
                 $user->save();
                 return redirect('home/');
-            }
+                }
                 return back()->with('status','The new password cannot be identical to the old password!!');
             }
-            return back()->with('status','Password is wrong!!');
+        return back()->with('status','Password is wrong!!');
         
     }
 
@@ -99,18 +99,16 @@ class AuthorUserController extends Controller
 
     public function avatarUpload(Request $request)
     {
-        // $validatorImg = $request->validate([
-        //     'avatar' => 'required|image|mimes:png,jpg,jpeg,gif|max:2048',
-        // ]);
-        // $user = User::authUser();   
-        // $avatar = $request->file('avatar');
-        // $avatarname = time().'.'.$avatar->getClientOriginalExtension();
-        // $avatar->move(public_path('/images'),$avatarname);
-        // $user->image_path = $avatarname;
-        // $user->save();
-        $store = File::allFiles(public_path('images/'));
-        // $files = User::where('image_path',$store->filename)->get();
-        dd($store);
-        // return back()->with('success','Avatar upload thành công')->with('path',$avatarname);
+        $store = User::filePath();
+        $validatorImg = $request->validate([
+            'avatar' => 'required|image|mimes:png,jpg,jpeg,gif|max:2048',
+        ]);
+        $user = User::authUser();   
+        $avatar = $request->file('avatar');
+        $avatarname = time().'.'.$avatar->getClientOriginalExtension();
+        $avatar->move(public_path('/images'),$avatarname);
+        $user->image_path = $avatarname;
+        $user->save();
+        return back()->with('success','Avatar upload thành công')->with('path',$avatarname);
     }
 }

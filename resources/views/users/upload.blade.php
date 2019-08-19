@@ -2,8 +2,6 @@
 
 @section('title','Upload Avatar')
 
-
-
 @section('css')
 <link rel="stylesheet" href="{{asset('css/app.css')}}">
 <script src="{{asset('js/jquery.min.js')}}"></script>
@@ -25,7 +23,6 @@
     @endif
     @if ($errors->any())
     <div class="alert alert-danger">
-        <button type="close">x</button>
         <ul>
             @foreach ($errors->all() as $error)
             <li>{{$error}}</li>

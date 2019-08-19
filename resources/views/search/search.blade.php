@@ -27,31 +27,18 @@
 @endsection
 
 @section('content')
-<div class="container">
-    <div class="d-flex">
-        <div class="col-2">{{-- quang cao --}}</div>
-        <div class="col-8">
-            <div class="row">
-                @foreach($articles as $row)
-                <div class="px-5 col-12">
-                    <div class=" box-sizing border my-1 bg-light">
-                        <a
-                        @auth
-                        href="{{asset('/home/index/'.$row->slug)}}"
-                        @endauth
-                        href="{{asset('index/'.$row->slug)}}" style="text-decoration: none">
-                            <div class="m-2 d-flex">
-                                <img src="{{$row->user->image_path}}" class="rounded-circle bg-primary"
-                                    style="width:30px;height:30px ">
-                                <span class="mx-2 mt-1 text-capitalize text-primary">
-                                    <strong>{{$row->user->name}}</strong>
-                                </span>
-                            </div>
-                            <div class="ml-4 text-dark overflow-hidden">{!!$row->content!!}</div>
-                            <p class="ml-4 text-muted">
-                                <small>Address: {{$row->address}}</small>
-                            </p>
-                        </a>
+<div class="col-md-10">
+    <div class="row">
+        @foreach($articles as $row)
+        <div class="col-12">
+            <a href="{{asset('index/'.$row->slug)}}" style="text-decoration: none">
+                <div class="box-sizing border border-secondary rounded my-1" style="background:#F0FFFF;">
+                    <div class="m-2 d-flex">
+                        <img src="{{url('images/'.$row->user->image_path)}}" class="rounded-circle bg-primary"
+                            style="width:30px;height:30px ">
+                        <span class="mx-2 mt-1 text-capitalize text-primary">
+                            <strong>{{$row->user->name}}</strong>
+                        </span>
                     </div>
                     <div class="ml-4 text-dark overflow-hidden">{!!$row->content!!}</div>
                     <p class="ml-4 text-primary">
@@ -88,7 +75,6 @@
 @push('javascript')
 <script>
     $('#modalWarning').modal('show')
-
     $('#comeback-search').click(function (e) {
         $('form.comeback-search').submit();
         return false;

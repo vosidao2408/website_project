@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\User;
@@ -19,8 +18,9 @@ class ArticleController extends Controller
      */
     public function index()
     {
+        $user = User::authUser();
         $articles = Article::paginate(10);
-        return view('admin.articles.index', ['articles' => $articles]);
+        return view('admin.articles.index', ['articles' => $articles,'user'=>$user]);
     }
 
     /**
@@ -30,8 +30,9 @@ class ArticleController extends Controller
      */
     public function create()
     {
+        $user = User::authUser();
         $districts = District::all();
-        return view('admin.articles.create', ['districts' => $districts]);
+        return view('admin.articles.create', ['districts' => $districts,'user'=>$user]);
     }
 
     /**
@@ -42,42 +43,7 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request);
-        // function cutImg($a)
-        // {
-        //     $time = substr_count($a, 'img');
-        //     $find = strstr($a, '<img');
-        //     $f = $a;
-        //     for ($i=0; $i < $time; $i++) {
-        //         $k = strstr($f, '<img');
-        //         $last = strstr($k,'>', true);
-        //         $z = $last.'>';
-        //         $f = str_replace($z,'', $f);
-        //     }
-        //     return $f;
-        // }
-
-        // function getSrc($a)
-        // {
-        //     $b = explode(' ', $a);
-        //     $c = count($b);
-        //     $find = array();
-        //     $j = 0;
-        //     for ($i=0; $i < $c; $i++) {
-        //         $d = 'src';
-        //         $check = strpos($b[$i], $d);
-        //         if ($check !== false) {
-        //         $find[$j] = $b[$i];
-        //         $j = $j + 1;
-        //         }
-        //     }
-        //     $u = ['src="','"'];
-        //     $f = ['',''];
-        //     $g = str_replace($u, $f, $find);
-        //     $image = implode(' ', $g);
-        //     return $image;
-        // }
-
+        $user = User::authUser();
         $article = New Article;
         $title = $request->title;
         $article->title = $title;
@@ -102,7 +68,7 @@ class ArticleController extends Controller
 
         $article->save();
 
-        return view('admin.articles.show', ['article' => $article, 'srcs' => $srcs]);
+        return view('admin.articles.show', ['article' => $article,'srcs' => $srcs,'user'=>$user]);
     }
 
     /**
@@ -113,10 +79,11 @@ class ArticleController extends Controller
      */
     public function show($slug)
     {
+        $user = User::authUser();
         $article = Article::where('slug', $slug)->first();
         $temp = $article->image_path;
         $srcs = explode(' ', $temp);
-        return view('admin.articles.show', ['article' => $article, 'srcs' => $srcs]);
+        return view('admin.articles.show', ['article' => $article,'srcs' => $srcs,'user'=>$user]);
     }
 
     /**
@@ -128,13 +95,9 @@ class ArticleController extends Controller
     public function edit($slug)
     {
         $user = User::authUser();
-        $articleCheck = Article::where('slug',$slug)->where('user_id',$user->id)->exists();
-        if ($articleCheck) {
-            $article = Article::where('slug',$slug)->first();
-            $districts = District::all();
-            return view('admin.articles.edit',['article' => $article,'districts' => $districts,'user' => $user]);
-        }
-        return back();
+        $article = Article::where('slug',$slug)->first();
+        $districts = District::all();
+        return view('admin.articles.edit',['article'=>$article,'districts' => $districts,'user' => $user]);
     }
 
     /**

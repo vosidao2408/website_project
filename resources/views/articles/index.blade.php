@@ -49,37 +49,6 @@
             </div>
             
         </div>
-        {{-- <div class="mt-1 col-12
-        @if ($post->status == "Đã Thuê") opacity @endif">
-            <div class="card">
-                <div class="card-body">
-                    <div class=" d-flex">
-                    <h4 class="mr-auto card-title"><strong>{{$post->title}}</strong></h4>
-        <form method="POST" action="{{asset('home/posts/'.$post->slug.'/status')}}">
-            @method('PUT')
-            {{ csrf_field() }}
-            @if ($post->status == "Còn Trống")
-            <input class="d-none" type="text" name="status" value="Đã Thuê">
-            <button type="submit" class="btn btn-sm btn-primary">Còn Trống</button>
-            @else
-            <input class="d-none" type="text" name="status" value="Còn Trống">
-            <button type="submit" class="btn btn-sm btn-warning">Đã Thuê</button>
-            @endif
-            </button>
-        </form>
-    </div>
-    <div class="d-flex">
-        <p class="mr-auto"><b>{{$post->address}}, <span
-                    class="badge badge-pill badge-secondary">{{$post->district->name}}</span></b></p>
-        <p><b>Số điện thoại: {{$post->contact}}</b></p>
-    </div>
-    <p>{!!$post->content!!}</p>
-    <form method="GET" action="{{asset('home/posts/'.$post->slug)}}">
-        <button type="submit" class="btn btn-sm btn-success">Xem thêm</button>
-    </form>
-</div>
-</div>
-</div> --}}
 @endforeach
 </div>
 </div>
