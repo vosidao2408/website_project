@@ -19,8 +19,6 @@ Auth::routes(['verify' => true]);
 
 Route::get('/admin','HomeController@index')->middleware('admin');
 
-Route::get('/home', 'HomeController@index')->name('home');
-
 Route::get('/index','SearchController@index')->name('index');
 Route::get('/index/search','SearchController@search')->name('search');
 Route::get('/index/{slug}','SearchController@show')->name('show');
@@ -41,6 +39,7 @@ Route::put('home/posts/{slug}/status','AuthorPostController@status')->middleware
 // Route::put('home/posts/','AuthorPostController@status')->middleware('auth')->name('status');
 
 Route::resource('/admin/users', 'AdminUserController')->middleware('admin');
+
 Route::group(['namespace' => 'Admin'], function () {
     Route::resource('admin/user', 'UserController');
     Route::resource('admin/article', 'ArticleController');

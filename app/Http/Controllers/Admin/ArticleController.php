@@ -82,7 +82,7 @@ class ArticleController extends Controller
         $title = $request->title;
         $article->title = $title;
 
-        $slug = Str::slug($title,'-');
+        $slug = Article::slugConverter($title);
         $article->slug = $slug;
 
         $article->address = $request->address;
@@ -146,24 +146,26 @@ class ArticleController extends Controller
      */
     public function update(Request $request, $slug)
     {
-        $slug = $request->title;
         $slug = Article::slugConverter($slug);
-        //save post
-        $user = User::authUser();
         $article = Article::where('slug',$slug)->first();
-        if (Article::getSrc($request->content) == null) {
-            $article->title = $request->title;
-            $article->slug = $slug;
-            $article->content = Article::cutImg($request->content);
-            $article->contact = $request->contact;
-            $article->address = $request->address;
-            $article->status = "Còn Trống";
-            $article->district_id = $request->district;
-            $article->save();
-            return view('admin.articles.show',['articles' => $article,'user' => $user]);
-        }
+        $newSlug = $request->title;
+        $newSlug = Article::slugConverter($newSlug);
+
+        //save article
+        $user = User::authUser();
+        // if (Article::getSrc($request->content) == null) {
+        //     $article->title = $request->title;
+        //     $article->slug = $slug;
+        //     $article->content = Article::cutImg($request->content);
+        //     $article->contact = $request->contact;
+        //     $article->address = $request->address;
+        //     $article->status = "Còn Trống";
+        //     $article->district_id = $request->district;
+        //     $article->save();
+        //     return view('admin.articles.show',['article' => $article,'user' => $user]);
+        // }
         $article->title = $request->title;
-        $article->slug = $slug;
+        $article->slug = $newSlug;
         $article->content = Article::cutImg($request->content);
         $article->contact = $request->contact;
         $article->address = $request->address;

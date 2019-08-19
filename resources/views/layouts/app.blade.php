@@ -18,6 +18,7 @@
     <script src="{{ asset('js/fontawesome.js') }}"></script>
     <script src="{{ asset('js/regdivar.js') }}"></script>
     <script src="{{ asset('js/solid.js') }}"></script>
+    <script src="{{ asset('js/boostrap.js') }}"></script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Anton|Fira+Sans+Condensed&display=swap" rel="stylesheet">
@@ -27,6 +28,8 @@
     <link href="{{ asset('css/fontawesome.css') }}" rel="stylesheet">
     <link href="{{ asset('css/regdivar.css') }}" rel="stylesheet">
     <link href="{{ asset('css/solid.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
+    <link href="css/simple-sidebar.css" rel="stylesheet">
     <style>
         .img-background {
             background-image: url("https://images.wallpaperscraft.com/image/art_trees_drawing_minimalism_100903_2560x1600.jpg");
@@ -89,12 +92,12 @@
     </nav>
     <main class="py-4">
         @yield('content')
+        <br>
         @include('layouts.footer')
     </main>
     @stack('javascript')
     @stack('ckeditor')
     @stack('select2')
-
 
 </body>
 

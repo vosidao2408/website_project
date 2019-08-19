@@ -20,23 +20,25 @@
                     <h6>Price: </h6><p class="font-italic font-weight-bold">{{$article->price}}</p>
                     <hr>
                     {!!$article->content!!}
-                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner">
-                            @foreach ($srcs as $key => $src)
-                                <div class="carousel-item {{$key == 0 ? 'active' : '' }}" style="height: 400px;">
-                                    <img src="{{$src}}" class="d-block w-100" alt="...">
-                                </div>
-                            @endforeach
+                    @if ($article->image_path != null)
+                        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                @foreach ($srcs as $key => $src)
+                                    <div class="carousel-item {{$key == 0 ? 'active' : '' }}" style="height: 400px;">
+                                        <img src="{{$src}}" class="d-block w-100" alt="...">
+                                    </div>
+                                @endforeach
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
                         </div>
-                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>
+                    @endif
                     <hr>
                     <p class="text-muted font-italic">Posted by: {{$article->user->name}}</p>
                 </div>
