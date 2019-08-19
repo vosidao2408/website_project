@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\User;
+use File;
 
 class AuthorUserController extends Controller
 {
@@ -98,30 +99,18 @@ class AuthorUserController extends Controller
 
     public function avatarUpload(Request $request)
     {
-        $validatorImg = $request->validate([
-            'avatar' => 'required|image|mimes:png,jpg,jpeg,gif|max:2048',
-        ]);
-        $user = User::authUser();   
-        $avatar = $request->file('avatar');
-        $avatarname = time().'.'.$avatar->getClientOriginalExtension();
-        $avatar->move(public_path('/images'),$avatarname);
-        $user->image_path = $avatarname;
-        $user->save();
-        return back()->with('success','Avatar upload thành công')->with('path',$avatarname);
+        // $validatorImg = $request->validate([
+        //     'avatar' => 'required|image|mimes:png,jpg,jpeg,gif|max:2048',
+        // ]);
+        // $user = User::authUser();   
+        // $avatar = $request->file('avatar');
+        // $avatarname = time().'.'.$avatar->getClientOriginalExtension();
+        // $avatar->move(public_path('/images'),$avatarname);
+        // $user->image_path = $avatarname;
+        // $user->save();
+        $store = File::allFiles(public_path('images/'));
+        // $files = User::where('image_path',$store->filename)->get();
+        dd($store);
+        // return back()->with('success','Avatar upload thành công')->with('path',$avatarname);
     }
-
-
-        
-        // $user = User::authUser();
-        // if ($request->hasFile('avatar')) {
-        //     $avatar = $request->file('avatar');
-        //     $avatarname = time().'.'.$avatar->getClientOriginalExtension();
-        //     Image::make($avatar)->resize(200,200)->save(storage_path('images/'.$avatarname));
-        //     dd($avatarname);
-        //     $user->image_path = $avatarname;
-        //     $user->save();
-        // }
-        // return redirect('home/');
-    
-
 }
