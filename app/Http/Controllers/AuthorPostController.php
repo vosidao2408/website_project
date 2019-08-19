@@ -43,6 +43,13 @@ class AuthorPostController extends Controller
      */
     public function store(Request $request)
     {
+        $validatorPost = $request->validate([
+            'title' => 'required',
+            'content' => 'required|min:100',
+            'address' => 'required',
+            'contact' =>'required',
+            'district' => 'required'
+        ]);
         $slug = $request->title;
         $slug = Article::slugConverter($slug);
         //save post
@@ -121,6 +128,13 @@ class AuthorPostController extends Controller
      */
     public function update(Request $request, $slug)
     {
+        $validatorPost = $request->validate([
+            'title' => 'required',
+            'content' => 'required|min:100',
+            'address' => 'required',
+            'contact' =>'required',
+            'district' => 'required'
+        ]);
         $slug = $request->title;
         $slug = Article::slugConverter($slug);
         //save post

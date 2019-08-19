@@ -1,44 +1,14 @@
 @extends('layouts.app')
 
-@section('css')
+@section('title','Trang cá nhân')
 
-@endsection
-
-@section('button')
-<a class="dropdown-item" href="{{asset('home/user/')}}" data-toggle="modal" data-target="#information">Thông tin cá nhân</a>
-<a class="dropdown-item" href="{{asset('home/user/editpass')}}">Đổi mật khẩu</a>
+@section('button-navbar')
+<li class="nav-item"><a class="nav-link" href="{{asset('index')}}">Trang Chủ</a></li>
+<li class="nav-item active"><a class="nav-link" href="{{asset('home')}}">Trang Cá Nhân</a></li>
 @endsection
 
 @section('content')
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Information</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body d-flex">
-                <div>
-                    <img src="" alt="No picture here">
-                </div>
-                <div class="ml-2">
-                <p><b>Name: </b>{{$user->name}}</p>
-                <p><b>Email: </b>{{$user->email}}</p>
-                <p><b>Phone Number: </b>{{$user->phone}}</p>
-                </div>
-            </div>
-            <div class="modal-footer d-flex justify-content-between">
-              <form method="GET" action="{{asset('home/user/edit')}}">
-                <button type="submit" class="btn btn-primary">Update Information</button>
-              </form>
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div>
-      </div>
-<div class="container">
+<div class="col-md-10">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">

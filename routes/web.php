@@ -11,6 +11,8 @@
 |
 */
 
+use App\Http\Controllers\AuthorUserController;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -25,12 +27,11 @@ Route::get('/index/{slug}','SearchController@show')->name('show');
 
 Route::middleware('auth')->group(function(){
     Route::get('home/user/edit/','AuthorUserController@edit');
-    Route::patch('home/{id}/edited','AuthorUserController@update');
+    Route::put('home/{id}/edited','AuthorUserController@update');
     Route::get('home/user/editpass','AuthorUserController@editPassword');
     Route::put('home/{id}/pass-edited','AuthorUserController@updatePassword');
-    Route::get('home/index','SearchController@index')->name('index');
-    Route::get('home/index/search','SearchController@search')->name('search');
-    Route::get('home/index/{slug}','SearchController@show')->name('show');
+    Route::get('home/avatar','AuthorUserController@avatar');
+    Route::put('home/avatar','AuthorUserController@avatarUpload');
 });
 
 Route::resource('home/posts','AuthorPostController')->middleware('auth','auth.standard');

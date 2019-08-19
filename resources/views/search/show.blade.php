@@ -1,16 +1,15 @@
 @extends('layouts.app')
 
-@section('title','Show post')
+@section('title','Xem bài viết')
 
 @section('css')
 <link rel="stylesheet" href="{{asset('css/app.css')}}">
 <script src="{{asset('js/jquery.min.js')}}"></script>
 @endsection
 
-@section('button')
-<a class="dropdown-item" href="{{asset('home/user/')}}" data-toggle="modal" data-target="#information">Thông tin cá
-    nhân</a>
-<a class="dropdown-item" href="{{asset('home/user/editpass')}}">Đổi mật khẩu</a>
+@section('button-navbar')
+<li class="nav-item active"><a class="nav-link" href="{{asset('index')}}">Trang Chủ</a></li>
+<li class="nav-item"><a class="nav-link" href="{{asset('home')}}">Trang Cá Nhân</a></li>
 @endsection
 
 @section('content')
@@ -45,36 +44,31 @@
     </div>
 </div>
 @endauth
-<div class="container">
-    <h2>{{$post->title}} <span class="badge
-        @if ($post->status == " Còn Trống") badge-primary @else badge-warning @endif">{{$post->status}}</span></h2>
-    <div class="d-flex">
-        <p><b>{{$post->address}},</b></p>
-        <p class="ml-1 mr-auto"><b>{{$post->district->name}}</b></p>
-        <p><b>{{$post->contact}}</b></p>
-    </div>
-    {!!$post->content!!}
-    <div id="carouselExampleControls" class="carousel slide
-    " data-ride="carousel">
-        <div class="carousel-inner">
-            @foreach ($srcs as $src)
-            <div class="carousel-item @if ($loop->first) active @endif">
-                <img src="{{$src}}" class="d-block w-100" alt="...">
+<div class="col-md-10">
+        <div class="m-2 d-flex">
+                <img src="{{url('images/'.$user->image_path)}}" class="rounded-circle bg-primary"
+                    style="width:30px;height:30px ">
+                <span class="mx-2 mt-1 text-capitalize text-primary">
+                    <strong>{{$post->user->name}}</strong>
+                </span>
             </div>
-            @endforeach
-        </div>
-        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
+    <h2>Tiêu đề : {{$post->title}}</h2>
+    <div class="d-flex">
+        <p><b>Địa chỉ : {{$post->address}},</b></p>
+        <p class="ml-1 mr-auto"><b>{{$post->district->name}}</b></p>
+        <p><b>Liên hệ : {{$post->contact}}</b></p>
+    </div>
+    <div><b>Nội dung bài viết :</b></div>
+    {!!$post->content!!}
+    <div><b>Hình ảnh cụ thể :</b></div>
+    {{-- carousel --}}
+    <div class="owl-carousel owl-theme">
+        @foreach ($srcs as $src)
+        <div class="item"><img src="{{$src}}" class="img-thumbnail" alt="..."></div>
+        @endforeach
     </div>
 </div>
 @endsection
 
 @push('javascript')
-
 @endpush

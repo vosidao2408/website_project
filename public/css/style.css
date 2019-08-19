@@ -1,63 +1,49 @@
-/* The side navigation menu */
-.sidebar {
-    margin: 0;
-    padding: 0;
-    width: 200px;
-    background-color: #f1f1f1;
+a:hover {
+    text-decoration: none !important;
+}
+html,
+body {
     height: 100%;
-    overflow: auto;
-  }
+    width: 100%;
+    margin: 0;
+    display: table;
+}
 
-  /* Sidebar links */
-  .sidebar a {
+footer {
+    display: table-row;
+    height: 0;
+}
+
+.container-img {
+    position: relative;
+    width: 30%;
+}
+
+.image {
     display: block;
-    color: black;
-    padding: 16px;
-    text-decoration: none;
-  }
+}
 
-  /* Active/current link */
-  .sidebar a.active {
-    background-color: #4CAF50;
+.overlay {
+    position: absolute;
+    bottom: 0;
+    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.5);
+    /* Black see-through */
+    color: #f1f1f1;
+    width: 120px;
+    transition: .5s ease;
+    opacity: 0;
     color: white;
-  }
-
-  /* Links on mouse-over */
-  .sidebar a:hover:not(.active) {
-    background-color: #555;
-    color: white;
-  }
-
-  /* On screens that are less than 700px wide, make the sidebar into a topbar */
-  @media screen and (max-width: 700px) {
-    .sidebar {
-      width: 100%;
-      height: auto;
-      position: relative;
-    }
-    .sidebar a {float: left;}
-    div.content {margin-left: 0;}
-  }
-
-  /* On screens that are less than 400px, display the bar vertically, instead of horizontally */
-  @media screen and (max-width: 400px) {
-.sidebar a {
-      text-align: center;
-      float: none;
-    }
-  }
-
-.Header--height {
-    height: 70px
+    font-size: 15px;
+    padding: 5px;
+    text-align: right;
 }
-
-.Intro--height{
-    height: 300px;
+.container-img:hover .overlay {
+    opacity: 1;
 }
-.Border--custom {
-    border-radius: 2rem !important;
+.box-sizing:hover {
+    box-shadow: 0 0 4px 2px rgba(0, 255, 0, 0.3);
 }
-
-.Font--custom {
-    font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+.opacity {
+    opacity: 0.8;
 }
