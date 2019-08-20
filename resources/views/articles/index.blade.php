@@ -3,6 +3,7 @@
 @section('title','Xem bài viết')
 
 @section('css')
+
 @endsection
 
 @section('button-navbar')
@@ -13,7 +14,7 @@
 @section('content')
 <div class="container">
     <div class="d-flex justify-content-between">
-        <h3>Bạn hiện có : <span>{{count($posts)}}</span> bài viết</h3>
+        <h3 id="status-post" >Bạn hiện có : <span>{{count($posts)}}</span> bài viết</h3>
         <form action="{{asset('home/posts/create')}}" method="get">
             <button class="btn btn-outline-success" type="submit">Tạo bài viết</button>
         </form>
@@ -25,7 +26,7 @@
                 <div class="m-2 ml-4">
                     <p class="badge badge-pill badge-secondary mb-0">{{$post->district->name}}</p>
                     <div class="d-flex">
-                    <h4 class="mr-auto card-title"><strong>{{$post->title}}</strong></h4>
+                    <h4 class="mr-auto text-title"><strong>{{$post->title}}</strong></h4>
                     <form method="POST" action="{{asset('home/posts/'.$post->slug.'/status')}}">
                         @method('PUT')
                         {{ csrf_field() }}
@@ -39,7 +40,7 @@
                         </button>
                     </form>
                 </div>
-                <div class="text-dark overflow-hidden">{!!$post->content!!}</div>
+                <div class="text-dark text-content overflow-hidden">{!!$post->content!!}</div>
                 <p class="text-primary">
                     <small>Address: {{$post->address}}</small>
                 </p>

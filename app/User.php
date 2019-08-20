@@ -45,9 +45,12 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public static function authUser()
     {
-        $email = Auth::user()->email;
-        $user = User::where('email',$email)->first();
-        return $user;
+        if (!Auth::user() == null) {
+            $id = Auth::user()->id;
+            $user = User::where('id',$id)->first();
+            return $user;
+        }
+        return false;
     }
 
     public static function filePath()

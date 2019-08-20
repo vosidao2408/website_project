@@ -56,3 +56,21 @@ footer {
     border-radius: 5px; 
     overflow: hidden;
 }
+
+.text-content {
+    font-family: 'Crimson Pro', serif;
+    font-size: 18px;
+}
+.text-title {
+    font-family: 'Noticia Text', serif;
+}
+#status-post {
+    background-color: mediumorchid;
+    padding: 3px 6px 3px 6px;
+    border-radius: 5px;
+    color:whitesmoke;
+    font-family: 'Varela Round', sans-serif;
+}
+.btn {
+    font-weight: bold;
+}

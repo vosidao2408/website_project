@@ -22,6 +22,8 @@
 @endsection
 
 @section('content')
+        
+<div class="container">
         @if (session('status'))
         <div class="alert alert-danger">
             {{ session('status') }}
@@ -37,7 +39,6 @@
             </ul>
         </div>
         @endif
-<div class="container">
     <form method="POST" action="{{asset('home/posts/')}}">
         {{ csrf_field() }}
         <div class="row">

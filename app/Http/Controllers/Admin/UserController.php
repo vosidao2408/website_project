@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
+use Carbon\Carbon;
 
 class UserController extends Controller
 {
@@ -87,5 +88,11 @@ class UserController extends Controller
     {
         User::where('id', $id)->delete();
         return redirect()->route('user.index');
+    }
+
+    public function deleteUnverify ()
+    {
+        User::where('email_verified_at',null)->where('created_at','<',Carbon::now()->subDays(30))->delete();
+        return redirect('admin/user');
     }
 }

@@ -3,6 +3,14 @@
 @section('content')
 <div class="container-fluid">
     <h1>Users</h1>
+    <div class="d-flex justify-content-between mb-1">
+        <h3>Số lượng hiện có :<span>{{count($users)}}</span></h3>
+        <form action="{{asset('admin/user/delete')}}" method="post">
+            @csrf
+            @method('Delete')
+            <button class="btn btn-success">Xóa User Chưa Verify</button>
+        </form>
+    </div>  
     <div class="row">
         <div class="col-md-12">
             <table class="table table-hover table-bordered">
@@ -11,6 +19,7 @@
                         <th>#</th>
                         <th>Name</th>
                         <th>Email</th>
+                        <th>Verify</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -20,6 +29,13 @@
                         <th>{{$user->id}}</th>
                         <td>{{$user->name}}</td>
                         <td>{{$user->email}}</td>
+                        <td>
+                            @if ($user->email_verified_at == null)
+                            <i class="fas fa-times text-danger"></i>
+                            @else
+                            <i class="fas fa-check text-primary"></i>
+                            @endif
+                        </td>
                         <td class="d-flex justify-content-around align-items-center">
                             <form action="{{route('user.show', $user->id)}}" method="get">
                                 <button type="submit" class="btn btn-sm btn-primary">Show</button>

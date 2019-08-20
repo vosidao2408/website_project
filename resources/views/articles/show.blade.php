@@ -14,14 +14,14 @@
 
 @section('content')
 <div class="container">
-    <h2>Tiêu đề : {{$post->title}}</h2>
+    <h2 class="text-title">Tiêu đề : {{$post->title}}</h2>
     <div class="d-flex">
         <p><b>Địa chỉ : {{$post->address}},</b></p>
         <p class="ml-1 mr-auto"><b>{{$post->district->name}}</b></p>
         <p><b>Liên hệ : {{$post->contact}}</b></p>
     </div>
     <div><b>Nội dung bài viết :</b></div>
-    {!!$post->content!!}
+    <div class="text-content">{!!$post->content!!}</div>
     <div><b>Hình ảnh cụ thể :</b></div>
     {{-- carousel --}}
     <div id="carouselExampleControls" class="carousel slide

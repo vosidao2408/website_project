@@ -60,6 +60,9 @@ class AuthorPostController extends Controller
         $post->content = Article::cutImg($request->content);
         $post->contact = $request->contact;
         $post->address = $request->address;
+        if ($request->price == null) {
+            $post->price = 'Thỏa Thuận';
+        }
         $post->price = $request->price;
         $post->image_path = Article::getSrc($request->content);
         $post->user_id = $user->id;
@@ -74,9 +77,8 @@ class AuthorPostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($slug)
+    public function show(Request $request, $slug)
     {
-        //
         $user = User::authUser();
         $postCheck = Article::where('slug',$slug)->where('user_id',$user->id)->exists();
         if ($postCheck) {
@@ -130,7 +132,7 @@ class AuthorPostController extends Controller
     {
         $validatorPost = $request->validate([
             'title' => 'required',
-            'content' => 'required|min:100',
+            'content' => 'required|min:50',
             'address' => 'required',
             'contact' =>'required',
             'district' => 'required'
@@ -146,16 +148,20 @@ class AuthorPostController extends Controller
             $post->content = Article::cutImg($request->content);
             $post->contact = $request->contact;
             $post->address = $request->address;
+            $post->price = $request->price;
             $post->status = "Còn Trống";
             $post->district_id = $request->district;
             $post->save();
-            return view('articles.show',['post'=>$post,'user'=>$user]);
+            $temp = $post->image_path;
+            $srcs = explode(' ', $temp);
+            return view('articles.show',['post'=>$post,'user'=>$user,'srcs'=>$srcs]);
         }
         $post->title = $request->title;
         $post->slug = $slug;
         $post->content = Article::cutImg($request->content);
         $post->contact = $request->contact;
         $post->address = $request->address;
+        $post->price = $request->price;
         $post->status = "Còn Trống";
         $post->image_path = Article::getSrc($request->content);
         $post->district_id = $request->district;

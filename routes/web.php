@@ -39,6 +39,7 @@ Route::put('home/posts/{slug}/status','AuthorPostController@status')->middleware
 
 Route::group(['namespace' => 'Admin'], function () {
     Route::resource('admin/user', 'UserController')->middleware('admin');
+    Route::delete('admin/user/delete','UserController@deleteUnverify')->middleware('admin');
     Route::resource('admin/article', 'ArticleController')->middleware('admin');
     Route::resource('admin/district', 'DistrictController')->middleware('admin');
 });

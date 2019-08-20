@@ -9,7 +9,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>@yield('title')</title>
-    @yield('css')
 
     <!-- Scripts -->
     <script src="{{ asset('js/jquery.min.js') }}"></script>
@@ -17,6 +16,9 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/brands.js') }}"></script>
     <script src="{{ asset('js/solid.js') }}"></script>
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/fontawesome.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
@@ -30,7 +32,7 @@
             <div class="container-fluid">
                 <a class="navbar-brand" style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif"
                     href="{{ url('/index') }}">
-                    <strong>BẠN TRỌ DASHBOARD</strong>
+                    <strong>BẠN TRỌ WEBSITE</strong>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -39,13 +41,20 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item"><a class="nav-link" href="{{asset('index')}}">Trang Chủ</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{asset('home')}}">Trang Cá Nhân</a></li>
-                        <li class="nav-item active"><a class="nav-link" href="{{asset('admin/user')}}">Trang Admin</a></li>
                     </ul>
                     <!-- Right Side Of Navbar -->
                     <div class="navbar-nav d-flex">
                         <!-- Authentication Links -->
+                        @guest
+                        <div class="nav-item mr-2">
+                            <a class=" nav-link" href="{{ route('login') }}">Đăng Nhập</a>
+                        </div>
+                        @if (Route::has('register'))
+                        <div class="nav-item">
+                            <a class="nav-link" href="{{ route('register') }}">Đăng Ký</a>
+                        </div>
+                        @endif
+                        @else
                         <div class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -53,64 +62,24 @@
                             </a>
         
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#information">Thông Tin Cá
-                                    Nhân</a>
-                                <a class="dropdown-item" href="{{asset('home/user/editpass')}}">Đổi Mật Khẩu</a>
                                 <a class="dropdown-item" href="{{asset('logout')}}" onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();">Đăng Xuất</a>
+                                    document.getElementById('logout-form').submit();">Đăng Xuất</a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf
                                 </form>
                             </div>
                         </div>
+                        @endguest
                     </div>
                 </div>
             </div>
-        </nav>
-        <div class="modal fade" id="information" tabindex="-1" role="dialog" aria-labelledby="informationLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="informationLabel">Thông Tin Cá Nhân</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body d-flex">
-                        <div class="container-img">
-                            <img id="avatar" src="{{url('images/'.$user->image_path)}}" alt="No picture here" width="120" height="140">
-                            <div class="overlay">
-                                <form action="{{asset('home/avatar')}}" method="GET">
-                                    <button class="btn btn-sm btn-light p-1"><i class="fas fa-camera fa-lg"></i></button>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="ml-2">
-                            <p><b>Tên: </b>{{$user->name}}</p>
-                            <p><b>Email: </b>{{$user->email}}</p>
-                            <p><b>Số điện thoại: </b>{{$user->phone}}</p>
-                        </div>
-                    </div>
-                    <div class="modal-footer d-flex justify-content-between">
-                        <form method="GET" action="{{asset('home/user/edit')}}">
-                            <button type="submit" class="btn btn-primary">Cập nhật thông tin</button>
-                        </form>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-</header>
-    <main class="mt-4">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-2 mb-3">
-                    @include('admin.layouts.sidebar')
-                </div>
-                <div class="col-md-10">
+        </nav></header>
+    <main class="mt-5">
+        <div class="container">
+            <div class="d-flex">
+                <div class="col-1 d-none d-md-block">{{-- quang cao --}}</div>
                 @yield('content')
-                </div>
+                <div class="col-1 d-none d-md-block">{{-- quang cao --}}</div>
             </div>
         </div>
     </main>
@@ -118,16 +87,13 @@
         <hr style="border-top: 1px solid #8585e0">
         <div class="container mb-3">
             <div class="row bg-light">
-                <h5 class="ml-2 mr-5 text-primary"><a class="text-decoration-none" href="#"><i
+                <h5 class="mr-5 text-primary"><a class="text-decoration-none" href="#"><i
                             class="fas fa-phone-square fa-lg"></i> LIÊN HỆ</a></h5>
                 <h5 class="text-primary"><a class="text-decoration-none" href="#"><i
                             class="fab fa-facebook-square fa-lg"></i> FACEBOOK</a></h5>
             </div>
         </div>
     </footer>
-    @stack('javascript')
-    @stack('ckeditor')
-    @stack('select2')
     <script>
     </script>
 

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Article;
 use App\District;
 use App\User;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class SearchController extends Controller
 {
@@ -16,7 +16,7 @@ class SearchController extends Controller
         $articles = Article::where('status','Còn Trống')->orderBy('created_at','asc')->paginate(10);
         return view('search.index',[
             'articles' => $articles,
-            'user' =>$user
+            'user' => $user
         ]);
     }
 

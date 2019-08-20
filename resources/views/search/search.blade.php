@@ -40,7 +40,7 @@
                             <strong>{{$row->user->name}}</strong>
                         </span>
                     </div>
-                    <div class="ml-4 text-dark overflow-hidden">{!!$row->content!!}</div>
+                    <div class="ml-4 text-dark text-content overflow-hidden">{!!$row->content!!}</div>
                     <p class="ml-4 text-primary">
                         <small>Address: {{$row->address}}</small>
                     </p>
