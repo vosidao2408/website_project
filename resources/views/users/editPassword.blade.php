@@ -5,7 +5,7 @@
 @section('css')
 <script src="{{asset('js/jquery.min.js')}}"></script>
 <style>
-    .col-1.d-none {
+    .col-2.d-none {
         display: none!important;
     }
 </style>

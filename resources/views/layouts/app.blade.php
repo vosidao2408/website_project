@@ -29,14 +29,15 @@
 </head>
 
 <body>
-    <header class="shadow">
-        @include('layouts.header')</header>
-    <main class="mt-5">
-        <div class="container">
+    <header>
+        @include('layouts.header')
+    </header>
+    <main>
+        <div class="container-fluid">
             <div class="d-flex">
-                <div class="col-1 d-none d-md-block">{{-- quang cao --}}</div>
+                <div id="boxing" class="col-2 d-none d-md-block">quang cao</div>
                 @yield('content')
-                <div class="col-1 d-none d-md-block">{{-- quang cao --}}</div>
+                <div id="boxing" class="col-2 d-none d-md-block">quang cao</div>
             </div>
         </div>
     </main>

@@ -14,7 +14,7 @@
 @section('content')
 <div class="container">
     <div class="d-flex justify-content-between">
-        <h3 id="status-post" >Bạn hiện có : <span>{{count($posts)}}</span> bài viết</h3>
+        <h3 id="status-post" >Bạn hiện có : <span>{{$posts->total()}}</span> bài viết</h3>
         <form action="{{asset('home/posts/create')}}" method="get">
             <button class="btn btn-outline-success" type="submit">Tạo bài viết</button>
         </form>
@@ -41,10 +41,10 @@
                     </form>
                 </div>
                 <div class="text-dark text-content overflow-hidden">{!!$post->content!!}</div>
-                <p class="text-primary">
+                <p class="d-block text-primary">
                     <small>Address: {{$post->address}}</small>
                 </p>
-                <form method="GET" action="{{asset('home/posts/'.$post->slug)}}">
+                <form class="d-block" method="GET" action="{{asset('home/posts/'.$post->slug)}}">
                     <button type="submit" class="btn btn-sm btn-success">Xem thêm</button>
                 </form></div>
             </div>

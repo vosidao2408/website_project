@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Article;
 use App\District;
 use App\User;
+use File;
 
 class AuthorPostController extends Controller
 {
@@ -62,8 +63,9 @@ class AuthorPostController extends Controller
         $post->address = $request->address;
         if ($request->price == null) {
             $post->price = 'Thỏa Thuận';
-        }
-        $post->price = $request->price;
+        } else {
+            $post->price = $request->price;
+        }       
         $post->image_path = Article::getSrc($request->content);
         $post->user_id = $user->id;
         $post->district_id = $request->district;

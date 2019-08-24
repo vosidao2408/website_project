@@ -55,11 +55,28 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public static function filePath()
     {
-        $store = File::allFiles(public_path('/images'));
+        $store = File::allFiles(public_path('/images/users'));
         $stores = [];
         for ($i=0;$i < count($store);$i++) {
             $stores[$i] = $store[$i]->getBaseName();
         }
         return $stores;
     }
+
+    public static function imagePath()
+    {
+        $user = User::all();
+        $images = [];
+        for ($i=0;$i < count($user);$i++) {
+            $images[$i] = $user[$i]->image_path;
+        }
+        return $images;
+    }
+
+    // public static function delFile()
+    // {
+    //     $stores = User::filePath();
+    //     $images = User::imagePath();
+
+    // }
 }

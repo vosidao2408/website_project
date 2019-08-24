@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light" style="background-color: #e3f2fd;">
+<nav class="navbar-intop navbar navbar-expand-md navbar-light">
     <div class="container-fluid">
         <a class="navbar-brand" style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif"
             href="{{ url('/index') }}">
@@ -66,7 +66,7 @@
             </div>
             <div class="modal-body d-flex">
                 <div class="container-img">
-                    <img id="avatar" src="{{url('images/'.$user->image_path)}}" width="120" height="140">
+                    <img id="avatar" src="{{url('images/users/'.$user->image_path)}}" width="120" height="140">
                     <div class="overlay">
                         <form action="{{asset('home/avatar')}}" method="GET">
                             <button class="btn btn-sm btn-light p-1"><i class="fas fa-camera fa-lg"></i></button>

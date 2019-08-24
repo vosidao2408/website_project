@@ -4,7 +4,7 @@
 <div class="container-fluid">
     <h1>Users</h1>
     <div class="d-flex justify-content-between mb-1">
-        <h3>Số lượng hiện có :<span>{{count($users)}}</span></h3>
+        <h4>Số lượng hiện có : <span>{{$users->total()}}</span></h4>
         <form action="{{asset('admin/user/delete')}}" method="post">
             @csrf
             @method('Delete')

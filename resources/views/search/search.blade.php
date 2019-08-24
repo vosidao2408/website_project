@@ -13,7 +13,7 @@
 @endsection
 
 @section('search')
-<div class="navbar navbar-expand navbar-light pt-0" style="background-color: #e3f2fd;">
+<div class="search-bar">
     <div class="container">
         <form class="comeback-search col" action="{{asset('index')}}" method="get">
             <div class="input-group">
@@ -27,7 +27,7 @@
 @endsection
 
 @section('content')
-<div class="col-md-10">
+<div class="container">
     <div class="row">
         @foreach($articles as $row)
         <div class="col-12">

@@ -13,21 +13,29 @@
 @endsection
 
 @section('content')
-<div class="col-md-10">
+<div class="container">
         <div class="m-2 d-flex">
-                <img src="{{url('images/'.$post->user->image_path)}}" class="rounded-circle bg-primary"
+                <img src="{{url('images/users/'.$post->user->image_path)}}" class="rounded-circle bg-primary"
                     style="width:30px;height:30px ">
                 <span class="mx-2 mt-1 text-capitalize text-primary">
                     <strong>{{$post->user->name}}</strong>
                 </span>
-            </div>
-    <h2 class="text-title">Tiêu đề : {{$post->title}}</h2>
+                <a class="btn btn-primary btn-sm ml-auto" href="{{asset('index')}}">Trở Lại</a>
+        </div>
+    <h2 class="text-title">{{$post->title}}</h2>
     <div class="d-flex">
         <p><b>Địa chỉ : {{$post->address}},</b></p>
         <p class="ml-1 mr-auto"><b>{{$post->district->name}}</b></p>
         <p><b>Liên hệ : {{$post->contact}}</b></p>
     </div>
-    <div><b>Nội dung bài viết :</b></div>
+    <p><b>Giá thuê : 
+    @if ($post->price !== "Thỏa Thuận")
+    {{number_format($post->price,0,',','.')}} <span class="text-muted">đ</span>
+    @else
+    {{$post->price}}
+    @endif
+    </b></p>
+    <div><b>Nội dung :</b></div>
     <div class="text-content">{!!$post->content!!}</div>
     <div><b>Hình ảnh cụ thể :</b></div>
     {{-- carousel --}}

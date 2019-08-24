@@ -16,7 +16,12 @@
             <h6>Contact: </h6>
             <p class="font-italic font-weight-bold">{{$article->contact}}</p>
             <h6>Price: </h6>
-            <p class="font-italic font-weight-bold">{{$article->price}}</p>
+            <p class="font-italic font-weight-bold">
+                @if ($article->price !== "Thỏa Thuận")
+                {{number_format($article->price,0,',','.')}} <span class="text-muted">đ</span>
+                @else
+                {{$article->price}}
+                @endif</p>
             <hr>
             {!!$article->content!!}
             @if ($article->image_path != null)
@@ -39,7 +44,7 @@
             </div>
             @endif
             <hr>
-            <p class="text-muted font-italic">Posted by: {{$article->user->name}}</p>
+        <p class="text-muted font-italic">Posted by: <a href="{{asset('admin/user/'.$article->user->id)}}">{{$article->user->name}}</a></p>
         </div>
     </div>
     <div class="row mt-2">

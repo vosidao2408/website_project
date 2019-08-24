@@ -23,7 +23,7 @@
 @endsection
 
 @section('search')
-<div class="navbar navbar-expand navbar-light pt-0" style="background-color: #e3f2fd;">
+<div class="search-bar">
     <div class="container">
         <form class="search col py-0" action="{{route('search')}}" method="get">
             <div class="input-group py-0">
@@ -36,22 +36,21 @@
 @endsection
 
 @section('content')
-<div class="col-md-10">
-
+<div class="container">
     <div class="row">
         @foreach($articles as $row)
         <div class="col-12">
             <a href="{{asset('index/'.$row->slug)}}" style="text-decoration: none">
-                <div class="box-sizing border border-secondary rounded my-1" style="background:#F0FFFF;">
+                <div class="box-sizing index-box border border-secondary rounded my-1" style="background:#F0FFFF;">
                     <div class="m-2 d-flex">
-                        <img src="{{url('images/'.$row->user->image_path)}}" class="rounded-circle bg-primary"
+                        <img src="{{url('images/users/'.$row->user->image_path)}}" class="rounded-circle bg-primary"
                             style="width:30px;height:30px ">
                         <span class="mx-2 mt-1 text-capitalize text-primary">
                             <strong>{{$row->user->name}}</strong>
                         </span>
                     </div>
                     <div class="ml-4 text-dark text-content overflow-hidden">{!!$row->content!!}</div>
-                    <p class="ml-4 text-primary">
+                    <p class="ml-4 text-primary text-info-small">
                         <small>Address: {{$row->address}}</small>
                     </p>
                 </div>

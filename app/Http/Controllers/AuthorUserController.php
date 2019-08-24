@@ -41,9 +41,6 @@ class AuthorUserController extends Controller
             'name' => 'required',
             'email' => 'required|email',
         ]);
-        // if ($validator->fails()) {
-        //     return back()->withErrors($validator);
-        // }
         $user = User::authUser();
         if ($user->email == $request->email) {
         $user->name = $request->name;
@@ -99,16 +96,23 @@ class AuthorUserController extends Controller
 
     public function avatarUpload(Request $request)
     {
-        $store = User::filePath();
         $validatorImg = $request->validate([
             'avatar' => 'required|image|mimes:png,jpg,jpeg,gif|max:2048',
         ]);
         $user = User::authUser();   
         $avatar = $request->file('avatar');
         $avatarname = time().'.'.$avatar->getClientOriginalExtension();
-        $avatar->move(public_path('/images'),$avatarname);
+        $avatar->move(public_path('/images/users/'),$avatarname);
         $user->image_path = $avatarname;
         $user->save();
+        // Delete Images File;
+        $stores = User::filePath();
+        $images = User::imagePath();
+        $diff = array_diff($stores,$images);
+        foreach ($diff as $file) {
+            $file_path = public_path().'/images/users/'.$file;
+            File::delete($file_path);
+        }
         return back()->with('success','Avatar upload thành công')->with('path',$avatarname);
     }
 }

@@ -9,6 +9,14 @@ body {
     display: table;
 }
 
+main {
+    margin-top: 20px; 
+}
+
+header {
+    box-shadow: 0 1px 4px 0px #a6a6a6;
+}
+
 footer {
     display: table-row;
     height: 0;
@@ -43,9 +51,24 @@ footer {
 .container-img:hover .overlay {
     opacity: 1;
 }
-.box-sizing:hover {
-    box-shadow: 0 0 4px 2px rgba(0, 255, 0, 0.3);
+
+div.box-sizing {
+    box-sizing: border-box;
 }
+
+div.box-sizing:hover {
+    box-shadow: 0 0 4px 2px rgba(0, 255, 0, 0.3);
+    background-color: #e6ffff;
+}
+
+div.box-sizing.index-box {
+    height: 180px;
+}
+
+div.box-sizing.admin-box {
+    height: 80px;
+}
+
 .opacity {
     opacity: 0.8;
 }
@@ -73,4 +96,29 @@ footer {
 }
 .btn {
     font-weight: bold;
+}
+
+div.search-bar {
+    padding: 2px 0 7px 0;    
+}
+
+div.search-bar, nav.navbar-intop {
+    background-color: #e6e6ff;
+}
+
+#boxing {
+    margin-top: 5px;
+    height: 78vh;
+    border: 1px;
+    color: black;
+    box-sizing: border-box;
+    position: sticky;
+    top: 10px;
+    display: block;
+    background-color: cyan;
+}
+
+p.text-info-small {
+    position: absolute;
+    bottom: 7px;
 }

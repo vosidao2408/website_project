@@ -20,6 +20,11 @@
         <p class="ml-1 mr-auto"><b>{{$post->district->name}}</b></p>
         <p><b>Liên hệ : {{$post->contact}}</b></p>
     </div>
+    <p><b>Giá thuê : @if ($post->price !== "Thỏa Thuận")
+        {{number_format($post->price,0,',','.')}} <span class="text-muted">đ</span>
+        @else
+        {{$post->price}}
+        @endif</b></p>
     <div><b>Nội dung bài viết :</b></div>
     <div class="text-content">{!!$post->content!!}</div>
     <div><b>Hình ảnh cụ thể :</b></div>

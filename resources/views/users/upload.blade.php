@@ -33,7 +33,7 @@
     <div class="card m-2">
         <div class="card-header text-center pb-0"><h3>UPLOAD AVATAR</h3></div>
         <div class="card-body">
-            <img class="img-thumbnail d-block mr-auto ml-auto mb-2" src="{{asset('images/'.$user->image_path)}}" alt=""
+            <img class="img-thumbnail d-block mr-auto ml-auto mb-2" src="{{asset('images/users/'.$user->image_path)}}" alt=""
                 width="250" height="270">
             <form id="form-upload" method="POST" action="{{asset('home/avatar')}}" enctype="multipart/form-data">
                 @method('PUT')
