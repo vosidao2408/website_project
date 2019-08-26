@@ -52,7 +52,7 @@ class SearchController extends Controller
         $user = User::authUser();
         $post = Article::where('slug',$slug)->first();
         $temp = $post->image_path;
-        $srcs = explode(' ', $temp);
+        $srcs = unserialize($temp);
         return view('search.show',[
             'post'=>$post,
             'user'=>$user,

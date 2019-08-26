@@ -14,7 +14,7 @@
 @section('content')
 <div class="container">
     <div class="d-flex justify-content-between">
-        <h3 id="status-post" >Bạn hiện có : <span>{{$posts->total()}}</span> bài viết</h3>
+        <h3 id="status-post" >Bạn hiện có : <span>{{count($posts)}}</span> bài viết</h3>
         <form action="{{asset('home/posts/create')}}" method="get">
             <button class="btn btn-outline-success" type="submit">Tạo bài viết</button>
         </form>

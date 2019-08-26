@@ -55,14 +55,22 @@ class ArticleController extends Controller
         $article->contact = $request->contact;
         $article->price = $request->price;
 
-        $a = $request->content;
-        $article->content = Article::cutImg($a);
+        $article->content = $request->content;
 
-        $b = Article::getSrc($a);
-        $srcs = explode(' ', $b);
-
-        $article->image_path = Article::getSrc($a);
-
+        if ($request->hasFile('images')) {
+            $images = $request->file('images');
+            $stores = [];
+            foreach ($images as $key => $image) {
+                $filename = rand(111111,999999).time().'.'.$image->getClientOriginalExtension();
+                $image->move(public_path('/images/posts/'),$filename);
+                $stores[$key] = $filename;
+            }
+            $saveFile = serialize($stores);
+            // $stores1 = unserialize($saveFile);
+            $article->image_path = $saveFile;
+        }
+        $temp = $article->image_path;
+        $srcs = unserialize($temp);
         $article->district_id = $request->district;
         $article->user_id = Auth::user()->id;
 
@@ -82,7 +90,7 @@ class ArticleController extends Controller
         $user = User::authUser();
         $article = Article::where('slug', $slug)->first();
         $temp = $article->image_path;
-        $srcs = explode(' ', $temp);
+        $srcs = unserialize($temp);
         return view('admin.articles.show', ['article' => $article,'srcs' => $srcs,'user'=>$user]);
     }
 
@@ -97,7 +105,9 @@ class ArticleController extends Controller
         $user = User::authUser();
         $article = Article::where('slug',$slug)->first();
         $districts = District::all();
-        return view('admin.articles.edit',['article'=>$article,'districts' => $districts,'user' => $user]);
+        $temp = $article->image_path;
+        $srcs = unserialize($temp);
+        return view('admin.articles.edit',['article'=>$article,'districts' => $districts,'user' => $user,'srcs'=>$srcs]);
     }
 
     /**
@@ -109,35 +119,38 @@ class ArticleController extends Controller
      */
     public function update(Request $request, $slug)
     {
-        $slug = Article::slugConverter($slug);
         $article = Article::where('slug',$slug)->first();
         $newSlug = $request->title;
         $newSlug = Article::slugConverter($newSlug);
 
-        //save article
         $user = User::authUser();
-        // if (Article::getSrc($request->content) == null) {
-        //     $article->title = $request->title;
-        //     $article->slug = $slug;
-        //     $article->content = Article::cutImg($request->content);
-        //     $article->contact = $request->contact;
-        //     $article->address = $request->address;
-        //     $article->status = "Còn Trống";
-        //     $article->district_id = $request->district;
-        //     $article->save();
-        //     return view('admin.articles.show',['article' => $article,'user' => $user]);
-        // }
         $article->title = $request->title;
         $article->slug = $newSlug;
-        $article->content = Article::cutImg($request->content);
+        $article->content = $request->content;
         $article->contact = $request->contact;
         $article->address = $request->address;
-        $article->status = "Còn Trống";
-        $article->image_path = Article::getSrc($request->content);
+        $article->status = $request->status;
+        if ($request->hasFile('images')) {
+            $delFile = unserialize($article->image_path);
+            foreach ($delFile as $file) {
+                $file_path = public_path().'/images/posts/'.$file;
+                File::delete($file_path);
+            }
+            $images = $request->file('images');
+            $stores = [];
+            foreach ($images as $key => $image) {
+                $filename = rand(111111,999999).time().'.'.$image->getClientOriginalExtension();
+                $image->move(public_path('/images/posts/'),$filename);
+                $stores[$key] = $filename;
+            }
+            $saveFile = serialize($stores);
+            // $stores1 = unserialize($saveFile);
+            $article->image_path = $saveFile;
+        }
         $article->district_id = $request->district;
         $article->save();
         $temp = $article->image_path;
-        $srcs = explode(' ', $temp);
+        $srcs = unserialize($temp);
         return view('admin.articles.show',['article' => $article,'user' => $user,'srcs' => $srcs]);
     }
 

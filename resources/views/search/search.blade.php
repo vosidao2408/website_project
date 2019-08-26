@@ -34,7 +34,7 @@
             <a href="{{asset('index/'.$row->slug)}}" style="text-decoration: none">
                 <div class="box-sizing border border-secondary rounded my-1" style="background:#F0FFFF;">
                     <div class="m-2 d-flex">
-                        <img src="{{url('images/'.$row->user->image_path)}}" class="rounded-circle bg-primary"
+                        <img src="{{url('images/users/'.$row->user->image_path)}}" class="rounded-circle bg-primary"
                             style="width:30px;height:30px ">
                         <span class="mx-2 mt-1 text-capitalize text-primary">
                             <strong>{{$row->user->name}}</strong>

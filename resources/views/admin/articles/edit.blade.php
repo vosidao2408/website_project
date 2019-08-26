@@ -1,8 +1,6 @@
 @extends('layouts.admin')
 
 @section('css')
-<script src="{{asset('ckeditor/ckeditor.js')}}"></script>
-<script src="{{asset('ckfinder/ckfinder.js')}}"></script>
 <link rel="stylesheet" href="{{asset('css/select2.min.css')}}">
 @endsection
 
@@ -10,7 +8,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-12 align-self-center">
-            <form method="POST" action="{{route('article.update', $article->slug)}}">
+            <form method="POST" action="{{route('article.update', $article->slug)}}" enctype="multipart/form-data">
                 @method('put')
                 @csrf
                 <div class="row">
@@ -20,7 +18,7 @@
                     </div>
                     <div class="form-group col-md-2">
                         <label for="">Trạng thái</label>
-                        <select class="form-control js-example-basic-single" name="district">
+                        <select class="form-control js-example-basic-single" name="status">
                             <option value="Còn Trống">Còn Trống</option>
                             <option value="Đã Thuê">Đã Thuê</option>  
                         </select>
@@ -47,11 +45,20 @@
                             @endforeach
                         </select>
                     </div>
+                    <div class="form-group col-12">
+                        <label for="">Ảnh</label>
+                        <input type="file" name="images[]" class="form-control" multiple required>
+                        <div class="border border-dark rounded p-1 mt-1">
+                            @foreach ($srcs as $src)
+                            <img class="img-thumbnail" src="{{asset('images/posts/'.$src)}}" alt="" width="120" height="120">
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="form-group col-12">
+                        <label for="">Nội dung</label>
+                        <textarea class="form-control" rows="5" name="content">{{$article->content}}</textarea>
+                    </div>
                 </div>
-
-                <body>
-                    <textarea name="content" id="editor">{{$article->content}}</textarea>
-                </body>
                 <button type="submit" class="col mt-2 btn btn-sm btn-success">Xác nhận</button>
             </form>
             <form class="my-2" method="GET" action="{{route('article.index')}}">
@@ -61,16 +68,6 @@
     </div>
 </div>
 @endsection
-
-@push('ckeditor')
-<script>
-    CKEDITOR.replace('editor', {
-        filebrowserBrowseUrl: "{{asset('/ckfinder/ckfinder.html')}}",
-        filebrowserUploadUrl: "{{asset('/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files')}}"
-    });
-
-</script>
-@endpush
 
 @push('select2')
 <script src="{{asset('js/select2.min.js')}}"></script>

@@ -46,7 +46,7 @@ class AuthorPostController extends Controller
     {
         $validatorPost = $request->validate([
             'title' => 'required',
-            'content' => 'required|min:100',
+            'content' => 'required|min:50',
             'address' => 'required',
             'contact' =>'required',
             'district' => 'required'
@@ -58,15 +58,26 @@ class AuthorPostController extends Controller
         $post = new Article;
         $post->title = $request->title;
         $post->slug = $slug;
-        $post->content = Article::cutImg($request->content);
+        $post->content = $request->content;
         $post->contact = $request->contact;
         $post->address = $request->address;
         if ($request->price == null) {
             $post->price = 'Thỏa Thuận';
         } else {
             $post->price = $request->price;
-        }       
-        $post->image_path = Article::getSrc($request->content);
+        }
+        if ($request->hasFile('images')) {
+            $images = $request->file('images');
+            $stores = [];
+            foreach ($images as $key => $image) {
+                $filename = rand(111111,999999).time().'.'.$image->getClientOriginalExtension();
+                $image->move(public_path('/images/posts/'),$filename);
+                $stores[$key] = $filename;
+            }
+            $saveFile = serialize($stores);
+            // $stores1 = unserialize($saveFile);
+            $post->image_path = $saveFile;
+        }
         $post->user_id = $user->id;
         $post->district_id = $request->district;
         $post->save();
@@ -86,7 +97,7 @@ class AuthorPostController extends Controller
         if ($postCheck) {
             $post = Article::where('slug',$slug)->first();
             $temp = $post->image_path;
-            $srcs = explode(' ', $temp);
+            $srcs = unserialize($temp);
             return view('articles.show',['post'=>$post,'user'=>$user,'srcs'=>$srcs]);
         }
         return back();
@@ -117,8 +128,10 @@ class AuthorPostController extends Controller
         $postCheck = Article::where('slug',$slug)->where('user_id',$user->id)->exists();
         if ($postCheck) {
             $post = Article::where('slug',$slug)->first();
+            $temp = $post->image_path;
+            $srcs = unserialize($temp);
             $districts = District::all();
-            return view('articles.edit',['post'=>$post,'districts'=>$districts,'user'=>$user]);
+            return view('articles.edit',['post'=>$post,'districts'=>$districts,'user'=>$user,'srcs'=>$srcs]);
         }
         return back();
     }
@@ -132,6 +145,13 @@ class AuthorPostController extends Controller
      */
     public function update(Request $request, $slug)
     {
+        // $post = Article::where('slug',$slug)->first();
+        // $delFile = unserialize($post->image_path);
+        //     foreach ($delFile as $file) {
+        //         $file_path = public_path().'/images/posts/'.$file;
+        //         echo $file_path;
+        //         File::delete($file_path);
+        //     }
         $validatorPost = $request->validate([
             'title' => 'required',
             'content' => 'required|min:50',
@@ -144,32 +164,30 @@ class AuthorPostController extends Controller
         //save post
         $user = User::authUser();
         $post = Article::where('slug',$slug)->first();
-        if (Article::getSrc($request->content) == null) {
-            $post->title = $request->title;
-            $post->slug = $slug;
-            $post->content = Article::cutImg($request->content);
-            $post->contact = $request->contact;
-            $post->address = $request->address;
-            $post->price = $request->price;
-            $post->status = "Còn Trống";
-            $post->district_id = $request->district;
-            $post->save();
-            $temp = $post->image_path;
-            $srcs = explode(' ', $temp);
-            return view('articles.show',['post'=>$post,'user'=>$user,'srcs'=>$srcs]);
-        }
         $post->title = $request->title;
         $post->slug = $slug;
-        $post->content = Article::cutImg($request->content);
+        $post->content = $request->content;
         $post->contact = $request->contact;
         $post->address = $request->address;
         $post->price = $request->price;
         $post->status = "Còn Trống";
-        $post->image_path = Article::getSrc($request->content);
+        if ($request->hasFile('images')) {
+            $delFile = unserialize($post->image_path);
+            $images = $request->file('images');
+            $stores = [];
+            foreach ($images as $key => $image) {
+                $filename = rand(111111,999999).time().'.'.$image->getClientOriginalExtension();
+                $image->move(public_path('/images/posts/'),$filename);
+                $stores[$key] = $filename;
+            }
+            $saveFile = serialize($stores);
+            // $stores1 = unserialize($saveFile);
+            $post->image_path = $saveFile;
+        }
         $post->district_id = $request->district;
         $post->save();
         $temp = $post->image_path;
-        $srcs = explode(' ', $temp);
+        $srcs = unserialize($temp);
         return view('articles.show',['post'=>$post,'user'=>$user,'srcs'=>$srcs]);
     }
 

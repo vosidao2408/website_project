@@ -5,13 +5,12 @@
 @section('css')
 <link rel="stylesheet" href="{{asset('css/select2.css')}}">
 <script src="{{asset('js/select2.js')}}"></script>
-<script src="{{asset('ckeditor/ckeditor.js')}}"></script>
-<script src="{{asset('ckfinder/ckfinder.js')}}"></script>
 <style>
-        .col-1.d-none {
-            display: none!important;
-        }
-    </style>
+    .col-1.d-none {
+        display: none !important;
+    }
+
+</style>
 @endsection
 
 
@@ -22,24 +21,24 @@
 @endsection
 
 @section('content')
-        
+
 <div class="container">
-        @if (session('status'))
-        <div class="alert alert-danger">
-            {{ session('status') }}
-        </div>
-        @endif
-        @if ($errors->any())
-        <div class="alert alert-danger">
-            <button type="close">x</button>
-            <ul>
-                @foreach ($errors->all() as $error)
-                <li>{{$error}}</li>
-                @endforeach
-            </ul>
-        </div>
-        @endif
-    <form method="POST" action="{{asset('home/posts/')}}">
+    @if (session('status'))
+    <div class="alert alert-danger">
+        {{ session('status') }}
+    </div>
+    @endif
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <button type="close">x</button>
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{$error}}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+    <form method="POST" action="{{asset('home/posts/')}}" enctype="multipart/form-data">
         {{ csrf_field() }}
         <div class="row">
             <div class="form-group col-12">
@@ -66,10 +65,15 @@
                     @endforeach
                 </select>
             </div>
+            <div class="form-group col-12">
+                <label for="">Ảnh</label>
+                <input type="file" name="images[]" class="form-control" multiple required>
+            </div>
+            <div class="form-group col-12">
+                <label for="">Nội dung</label>
+                <textarea class="form-control" rows="5" name="content"></textarea>
+            </div>
         </div>
-        <body>
-            <textarea name="content" id="editor">Nhập bài viết ở đây...</textarea>
-        </body>
         <button type="submit" class="col mt-2 btn btn-sm btn-success">Xác nhận</button>
     </form>
     <form class="my-2" method="GET" action="{{asset('home/posts/')}}">
@@ -80,10 +84,6 @@
 
 @push('javascript')
 <script>
-    CKEDITOR.replace('editor', {
-        filebrowserBrowseUrl: "{{asset('/ckfinder/ckfinder.html')}}",
-        filebrowserUploadUrl: "{{asset('/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files')}}"
-    });
     $(document).ready(function () {
         $('.js-example-basic-single').select2();
     });

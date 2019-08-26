@@ -23,13 +23,12 @@
                 {{$article->price}}
                 @endif</p>
             <hr>
-            {!!$article->content!!}
-            @if ($article->image_path != null)
+            <p>{{$article->content}}</p>
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
-                    @foreach ($srcs as $key => $src)
-                    <div class="carousel-item {{$key == 0 ? 'active' : '' }}" style="height: 400px;">
-                        <img src="{{$src}}" class="d-block w-100" alt="...">
+                    @foreach ($srcs as $src)
+                    <div class="carousel-item @if ($loop->first) active @endif">
+                        <div class="carousel-images" style="background-image: url('{{asset('images/posts/'.$src)}}')"></div>
                     </div>
                     @endforeach
                 </div>
@@ -42,9 +41,9 @@
                     <span class="sr-only">Next</span>
                 </a>
             </div>
-            @endif
             <hr>
-        <p class="text-muted font-italic">Posted by: <a href="{{asset('admin/user/'.$article->user->id)}}">{{$article->user->name}}</a></p>
+            <p class="text-muted font-italic">Posted by: <a
+                    href="{{asset('admin/user/'.$article->user->id)}}">{{$article->user->name}}</a></p>
         </div>
     </div>
     <div class="row mt-2">
