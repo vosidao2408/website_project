@@ -8,8 +8,8 @@
 @endsection
 
 @section('button-navbar')
-<li class="nav-item active"><a class="nav-link" href="{{asset('index')}}">Trang Chủ</a></li>
-<li class="nav-item"><a class="nav-link" href="{{asset('home')}}">Trang Cá Nhân</a></li>
+<li class="nav-item text-navbar active"><a class="nav-link" href="{{asset('index')}}">Trang Chủ</a></li>
+<li class="nav-item text-navbar"><a class="nav-link" href="{{asset('home')}}">Trang Cá Nhân</a></li>
 @endsection
 
 @section('search')
@@ -17,7 +17,7 @@
     <div class="container">
         <form class="comeback-search col" action="{{asset('index')}}" method="get">
             <div class="input-group">
-                <input id="comeback-search" type="search" name="search" class="form-control"
+                <input id="comeback-search" type="search" name="search" class="search"
                     placeholder="Input Address Or District To Search" />
             </div>
         </form>
@@ -31,19 +31,22 @@
     <div class="row">
         @foreach($articles as $row)
         <div class="col-12">
-            <a href="{{asset('index/'.$row->slug)}}" style="text-decoration: none">
-                <div class="box-sizing border border-secondary rounded my-1" style="background:#F0FFFF;">
-                    <div class="m-2 d-flex">
-                        <img src="{{url('images/users/'.$row->user->image_path)}}" class="rounded-circle bg-primary"
-                            style="width:30px;height:30px ">
-                        <span class="mx-2 mt-1 text-capitalize text-primary">
-                            <strong>{{$row->user->name}}</strong>
-                        </span>
+            <a class="parent-box" href="{{asset('index/'.$row->slug)}}" style="text-decoration: none">
+                <div class="d-flex box-sizing index-box border-post my-1" style="background:#F0FFFF;">
+                    <div class="content-group">
+                        <div class="m-2 d-flex">
+                            <img src="{{url('images/users/'.$row->user->image_path)}}" class="rounded-circle bg-primary"
+                                style="width:30px;height:30px ">
+                            <span class="mx-2 mt-1 text-capitalize text-primary">
+                                <strong>{{$row->user->name}}</strong>
+                            </span>
+                        </div>
+                        <div class="ml-4 text-dark text-content content-post">{{$row->content}}</div>
+                        <p class="ml-4 text-primary text-info-small">
+                            <small>Address: {{$row->address}}</small>
+                        </p>
                     </div>
-                    <div class="ml-4 text-dark text-content overflow-hidden">{!!$row->content!!}</div>
-                    <p class="ml-4 text-primary">
-                        <small>Address: {{$row->address}}</small>
-                    </p>
+                    <div class="arrow-show"><div class="arrow-inside"></div></div>
                 </div>
             </a>
         </div>

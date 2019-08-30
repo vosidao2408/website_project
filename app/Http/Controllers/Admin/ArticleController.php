@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use App\Article;
 use App\District;
+use File;
 
 class ArticleController extends Controller
 {

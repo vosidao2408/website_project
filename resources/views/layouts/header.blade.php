@@ -1,9 +1,8 @@
 <nav class="navbar-intop navbar navbar-expand-md navbar-light">
     <div class="container-fluid">
-        <a class="navbar-brand" style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif"
-            href="{{ url('/index') }}">
-            <strong>BẠN TRỌ WEBSITE</strong>
-        </a>
+        <a class="navbar-brand pt-0" href="{{ url('/index') }}">
+        <img src="{{asset('images/logo.png')}}" alt="" width="230" height="25">
+                </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
             <span class="navbar-toggler-icon"></span>
@@ -14,7 +13,7 @@
                 @auth
                 @yield('button-navbar')
                 @if ($user->admin == 1)
-                <li class="nav-item"><a class="nav-link" href="{{asset('admin/user')}}">Trang Admin</a></li>
+                <li class="nav-item text-navbar"><a class="nav-link" href="{{asset('admin/user')}}">Trang Admin</a></li>
                 @endif
                 @endauth
             </ul>
@@ -23,25 +22,25 @@
                 <!-- Authentication Links -->
                 @guest
                 <div class="nav-item mr-2">
-                    <a class=" nav-link" href="{{ route('login') }}">Đăng Nhập</a>
+                    <a class="text-navbar nav-link" href="{{ route('login') }}">Đăng Nhập</a>
                 </div>
                 @if (Route::has('register'))
                 <div class="nav-item">
-                    <a class="nav-link" href="{{ route('register') }}">Đăng Ký</a>
+                    <a class="text-navbar nav-link" href="{{ route('register') }}">Đăng Ký</a>
                 </div>
                 @endif
                 @else
                 <div class="nav-item dropdown">
-                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle text-navbar" href="#" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         <i class="fas fa-user-circle fa-lg"></i> {{ Auth::user()->name }} <span class="caret"></span>
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#information">Thông Tin Cá
+                        <a class="dropdown-item text-navbar" href="#" data-toggle="modal" data-target="#information">Thông Tin Cá
                             Nhân</a>
-                        <a class="dropdown-item" href="{{asset('home/user/editpass')}}">Đổi Mật Khẩu</a>
-                        <a class="dropdown-item" href="{{asset('logout')}}" onclick="event.preventDefault();
+                        <a class="dropdown-item text-navbar" href="{{asset('home/user/editpass')}}">Đổi Mật Khẩu</a>
+                        <a class="dropdown-item text-navbar" href="{{asset('logout')}}" onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">Đăng Xuất</a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf

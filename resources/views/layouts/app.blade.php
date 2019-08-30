@@ -19,7 +19,7 @@
     <script src="{{ asset('js/solid.js') }}"></script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Anton|Fira+Sans+Condensed|Crimson+Pro|Noticia+Text:700|Varela+Round&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Anton|Fira+Sans+Condensed|Crimson+Pro|Noticia+Text:700|Baloo+Bhaina|Roboto:500|Varela+Round&display=swap" rel="stylesheet">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/fontawesome.css') }}" rel="stylesheet">
@@ -35,25 +35,24 @@
     <main>
         <div class="container-fluid">
             <div class="d-flex">
-                <div id="boxing" class="col-2 d-none d-md-block">quang cao</div>
+                <div id="boxing" class="col-2 d-none d-md-block"></div>
                 @yield('content')
-                <div id="boxing" class="col-2 d-none d-md-block">quang cao</div>
+                <div id="boxing" class="col-2 d-none d-md-block"></div>
             </div>
         </div>
     </main>
     <footer>
-        <hr style="border-top: 1px solid #8585e0">
+        <hr style="border-top: 2px solid #ff8c1a">
         <div class="container mb-3">
             <div class="row bg-light">
-                <h5 class="mr-5 text-primary"><a class="text-decoration-none" href="#"><i
-                            class="fas fa-phone-square fa-lg"></i> LIÊN HỆ</a></h5>
-                <h5 class="text-primary"><a class="text-decoration-none" href="#"><i
-                            class="fab fa-facebook-square fa-lg"></i> FACEBOOK</a></h5>
+                <h5 class="mr-5" ><a class="text-decoration-none" style="color:black;" href="#"><i
+                            class="fas fa-phone-square fa-lg"></i> <b>LIÊN HỆ</a></h5>
+                <h5><a class="text-decoration-none" style="color:black;" href="#"><i
+                            class="fab fa-facebook-square fa-lg"></i> <b>FACEBOOK</b></a></h5>
             </div>
         </div>
     </footer>
     @stack('javascript')
-    @stack('ckeditor')
     @stack('select2')
     <script>
     </script>

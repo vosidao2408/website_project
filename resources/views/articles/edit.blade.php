@@ -9,15 +9,14 @@
     .col-1.d-none {
         display: none !important;
     }
-
 </style>
 @endsection
 
 
 
 @section('button-navbar')
-<li class="nav-item"><a class="nav-link" href="{{asset('index')}}">Trang Chủ</a></li>
-<li class="nav-item active"><a class="nav-link" href="{{asset('home')}}">Trang Cá Nhân</a></li>
+<li class="nav-item text-navbar"><a class="nav-link" href="{{asset('index')}}">Trang Chủ</a></li>
+<li class="nav-item text-navbar active"><a class="nav-link" href="{{asset('home')}}">Trang Cá Nhân</a></li>
 @endsection
 
 @section('content')
