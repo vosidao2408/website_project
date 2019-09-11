@@ -284,3 +284,12 @@ li.nav-item.text-navbar:hover {
     width: 100%;
     padding: 8px;
 }
+tr.table-bottom {
+    visibility: collapse;
+}
+tr.table-bottom:hover {
+    visibility: visible;
+}
+tr.table-top:hover + tr.table-bottom {
+    visibility: visible;
+}

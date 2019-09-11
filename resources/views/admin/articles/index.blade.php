@@ -19,29 +19,32 @@
                         <th>Địa Chỉ</th>
                         <th>Liên Lạc</th>
                         <th>Trạng Thái</th>
-                        <th>Thao Tác</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($articles as $article)
-                    <tr class="text-center">
+                    <tr class="text-center table-top">
                         <th>{{$article->id}}</th>
                         <td>{{$article->title}}</td>
                         <td>{{$article->address}}, {{$article->district->name}}</td>
                         <td>{{$article->contact}}</td>
                         <td>{{$article->status}}</td>
-                        <td class="d-flex justify-content-around align-items-center">
-                            <form action="{{route('article.show', $article->slug)}}" method="get">
-                                <button type="submit" class="btn btn-sm btn-primary">Xem</button>
-                            </form>
-                            <form action="{{route('article.edit', $article->slug)}}" method="get">
-                                <button type="submit" class="btn btn-sm btn-warning">Sửa Bài</button>
-                            </form>
-                            <form action="{{route('article.destroy', $article->id)}}" method="post">
-                                @method('delete')
-                                @csrf
-                                <button type="submit" class="btn btn-sm btn-danger">Xóa</button>
-                            </form>
+                    </tr>
+                    <tr class="table-bottom">
+                        <td colspan="5">
+                            <div class="d-flex justify-content-around table-btn">
+                                <form action="{{route('article.show', $article->slug)}}" method="get">
+                                    <button type="submit" class="btn btn-sm btn-primary">Xem</button>
+                                </form>
+                                <form action="{{route('article.edit', $article->slug)}}" method="get">
+                                    <button type="submit" class="btn btn-sm btn-warning">Sửa Bài</button>
+                                </form>
+                                <form action="{{route('article.destroy', $article->id)}}" method="post">
+                                    @method('delete')
+                                    @csrf
+                                    <button type="submit" class="btn btn-sm btn-danger">Xóa</button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                     @endforeach
