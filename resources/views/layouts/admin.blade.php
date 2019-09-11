@@ -26,7 +26,7 @@
 
 <body>
     <header class="shadow">
-        <nav class="navbar navbar-expand-md navbar-light" style="background-color: #e3f2fd;">
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
             <div class="container-fluid">
                 <a class="navbar-brand pt-0" href="{{ url('/admin/user') }}">
                     <img src="{{asset('images/logo-dash.png')}}" alt="" width="270" height="25">
