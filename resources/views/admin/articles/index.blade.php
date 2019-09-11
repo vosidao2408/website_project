@@ -1,5 +1,7 @@
 @extends('layouts.admin')
 
+@section('title','Dashboard bài viết')
+
 @section('content')
 <div class="container-fluid">
     <h1>Articles</h1>

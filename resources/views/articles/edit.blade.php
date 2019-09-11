@@ -22,6 +22,8 @@
 @section('content')
 
 <div class="container">
+    <h3 class="text-center" style="font-weight:bold">Sửa Bài Viết</h3>
+    <hr>
     @if (session('status'))
     <div class="alert alert-danger">
         {{ session('status') }}

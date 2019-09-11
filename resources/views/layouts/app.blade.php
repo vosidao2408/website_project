@@ -35,9 +35,9 @@
     <main>
         <div class="container-fluid">
             <div class="d-flex">
-                <div id="boxing" class="col-2 d-none d-md-block"></div>
+                <div id="boxing" class="col-2 d-none d-md-block"  style="background-image: url('{{asset('images/addbantro.png')}}')"></div>
                 @yield('content')
-                <div id="boxing" class="col-2 d-none d-md-block"></div>
+                <div id="boxing" class="col-2 d-none d-md-block" style="background-image: url('{{asset('images/addbantro.png')}}')"></div>
             </div>
         </div>
     </main>

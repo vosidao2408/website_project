@@ -41,7 +41,7 @@
                                 <strong>{{$row->user->name}}</strong>
                             </span>
                         </div>
-                        <div class="ml-4 text-dark text-content content-post">{{$row->content}}</div>
+                        <div class="ml-4 text-dark text-content content-post index-search">{{$row->content}}</div>
                         <p class="ml-4 text-primary text-info-small">
                             <small>Address: {{$row->address}}</small>
                         </p>

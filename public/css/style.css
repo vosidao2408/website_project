@@ -190,12 +190,13 @@ div.search-bar, nav.navbar-intop {
     margin-top: 5px;
     height: 78vh;
     border: 1px;
-    color: black;
     box-sizing: border-box;
     position: sticky;
     top: 10px;
     display: block;
-    background-color: cyan;
+    background-position: center;
+    background-repeat: no-repeat; 
+    background-size: 100% 100%;
 }
 
 p.text-info-small {
@@ -219,16 +220,6 @@ button.btn-user-post {
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-}
-@media only screen and (max-width: 992px) {
-    .carousel-images {
-        height: 400px;
-    }
-}
-@media only screen and (max-width: 567px) {
-    .carousel-images {
-        height: 260px;
-    }
 }
 
 li.nav-item.text-navbar {
@@ -292,4 +283,20 @@ tr.table-bottom:hover {
 }
 tr.table-top:hover + tr.table-bottom {
     visibility: visible;
+}
+@media only screen and (max-width: 992px) {
+    .carousel-images {
+        height: 400px;
+    }
+    li.nav-item.text-navbar {
+        padding-bottom: 0;
+    }
+    li.nav-item.text-navbar:hover {
+        border-bottom: none;
+    }
+}
+@media only screen and (max-width: 567px) {
+    .carousel-images {
+        height: 260px;
+    }
 }

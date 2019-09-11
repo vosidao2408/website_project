@@ -1,4 +1,4 @@
-<nav class="navbar-intop navbar navbar-expand-md navbar-light">
+<nav class="navbar-intop navbar navbar-expand-lg navbar-light">
     <div class="container-fluid">
         <a class="navbar-brand pt-0" href="{{ url('/index') }}">
         <img src="{{asset('images/logo.png')}}" alt="" width="230" height="25">

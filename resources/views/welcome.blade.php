@@ -19,7 +19,7 @@
     <script src="{{ asset('js/solid.js') }}"></script>
     <style>
         body {
-            background-image: url('https://images.unsplash.com/photo-1552863045-991883e6f59b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=889&q=80');
+            background-image: url('{{asset('images/backgroundhome.jpg')}}');
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-size: cover;

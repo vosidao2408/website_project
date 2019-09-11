@@ -83,9 +83,9 @@
     <main class="mt-5">
         <div class="container">
             <div class="d-flex">
-                <div class="col-1 d-none d-md-block">{{-- quang cao --}}</div>
+                <div id="boxing" class="col-2 d-none d-md-block"  style="background-image: url('{{asset('images/addbantro.png')}}')"></div>
                 @yield('content')
-                <div class="col-1 d-none d-md-block">{{-- quang cao --}}</div>
+                <div id="boxing" class="col-2 d-none d-md-block"  style="background-image: url('{{asset('images/addbantro.png')}}')"></div>
             </div>
         </div>
     </main>
@@ -100,9 +100,6 @@
             </div>
         </div>
     </footer>
-    <script>
-    </script>
-
 </body>
 
 </html>

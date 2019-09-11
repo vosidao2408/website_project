@@ -126,8 +126,6 @@
         </div>
     </footer>
     @stack('javascript')
-    @stack('ckeditor')
-    @stack('select2')
     <script>
     </script>
 

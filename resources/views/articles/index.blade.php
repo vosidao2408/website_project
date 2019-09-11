@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title','Xem bài viết')
+@section('title','Trang cá nhân')
 
 @section('css')
 

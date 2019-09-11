@@ -1,5 +1,7 @@
 @extends('layouts.admin')
 
+@section('title','Dashboard bài viết')
+
 @section('css')
 <link rel="stylesheet" href="{{asset('css/select2.min.css')}}">
 @endsection
@@ -55,7 +57,7 @@
 </div>
 @endsection
 
-@push('select2')
+@push('javascript')
 <script src="{{asset('js/select2.min.js')}}"></script>
 <script>
     $('.js-example-basic-single').select2();

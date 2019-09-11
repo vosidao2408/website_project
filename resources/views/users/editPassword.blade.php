@@ -18,6 +18,8 @@
 
 @section('content')
 <div class="my-2 container">
+        <h3 class="text-center" style="font-weight:bold">Đổi Mật Khẩu</h3>
+        <hr>
         @if (session('status'))
         <div class="alert alert-danger">
             {{ session('status') }}

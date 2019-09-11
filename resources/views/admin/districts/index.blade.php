@@ -1,5 +1,7 @@
 @extends('layouts.admin')
 
+@section('title','Dashboard quận')
+
 @section('content')
 <div class="container-fluid">
     <h1>Districts</h1>
