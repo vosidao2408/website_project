@@ -16,7 +16,8 @@
                     <tr class="text-center">
                         <th>#</th>
                         <th>Tiêu Đề</th>
-                        <th>Nội Dung</th>
+                        <th>Địa Chỉ</th>
+                        <th>Liên Lạc</th>
                         <th>Trạng Thái</th>
                         <th>Thao Tác</th>
                     </tr>
@@ -26,7 +27,8 @@
                     <tr class="text-center">
                         <th>{{$article->id}}</th>
                         <td>{{$article->title}}</td>
-                        <td>{!!$article->content!!}</td>
+                        <td>{{$article->address}}, {{$article->district->name}}</td>
+                        <td>{{$article->contact}}</td>
                         <td>{{$article->status}}</td>
                         <td class="d-flex justify-content-around align-items-center">
                             <form action="{{route('article.show', $article->slug)}}" method="get">
